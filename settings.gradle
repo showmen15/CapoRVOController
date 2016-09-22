@@ -1,0 +1,4 @@
+rootProject.name = 'CapoVOController'
+include 'controller'
+include 'visualization'
+

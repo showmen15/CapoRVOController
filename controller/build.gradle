@@ -1,0 +1,29 @@
+group 'CapoVOController'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+
+sourceCompatibility = JavaVersion.VERSION_1_8
+
+repositories {
+    mavenCentral()
+}
+
+jar {
+    from {
+        configurations.compile.collect {
+            it.isDirectory() ? it : zipTree(it)
+        }
+    }
+    manifest {
+        attributes 'Main-Class': 'pl.agh.capo.Main'
+    }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile 'com.google.code.gson:gson:2.5'
+    compile 'com.rabbitmq:amqp-client:3.6.0'
+    compile 'log4j:log4j:1.2.17'
+    compile 'com.vividsolutions:jts:1.13'
+}

@@ -1,0 +1,15 @@
+group 'CapoVOController'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+
+sourceCompatibility = JavaVersion.VERSION_1_8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile project(':controller')
+    compile 'com.google.code.gson:gson:2.5'
+}

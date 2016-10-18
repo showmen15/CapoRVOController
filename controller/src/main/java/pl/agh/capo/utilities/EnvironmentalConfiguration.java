@@ -2,7 +2,7 @@ package pl.agh.capo.utilities;
 
 public class EnvironmentalConfiguration {
 
-    private static final boolean SIMULATION = false;
+    private static final boolean SIMULATION = true;
 
     // RabbitMQ connection leads
     public static final String ADDRESS = SIMULATION ? "127.0.0.1" : "192.168.2.101";
@@ -27,10 +27,10 @@ public class EnvironmentalConfiguration {
     public static final double RECIPROCITY_FACTOR_BEHIND = 3.0;
 
     // Multiplier of half robot diameter
-    public static final double WALL_COLLISION_MARGIN_FACTOR = 2.3;
+    public static final double WALL_COLLISION_MARGIN_FACTOR = 1.6;
 
     // Radius used to find VO
-    public static final double VO_ROBOT_RADIUS = 3 * ROBOT_DIAMETER;
+    public static final double VO_ROBOT_RADIUS = 1.6 * ROBOT_DIAMETER;
 
     // Minimum distance which allow robots to turn near each other,
     // Additional area of VO - not quite consistent with definition
@@ -39,10 +39,4 @@ public class EnvironmentalConfiguration {
     // Multiplier of max speed during selecting velocity in pure VO solution
     public static final double MIN_SPEED_FACTOR = 0.2;
 
-
-
-
-
-    // Tries of selecting velocity in pure VO solution
-    // public static final int TRIES_COUNT = 500;
 }

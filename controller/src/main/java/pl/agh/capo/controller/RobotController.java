@@ -105,7 +105,7 @@ public class RobotController implements Runnable {
 //            System.out.println("OP V: X " + optimalVelocity.getX() + ", Y " + optimalVelocity.getY());
             setVelocity(optimalVelocity);
         }
-        robot.setVelocity(motionModel.getVelocityLeft(), motionModel.getVelocityRight());
+        robot.setVelocity(motionModel.getVelocityLeft(), motionModel.getVelocityRight());        
         publishState(collide, createCollisionFreeState(optimalVelocity));
     }
 

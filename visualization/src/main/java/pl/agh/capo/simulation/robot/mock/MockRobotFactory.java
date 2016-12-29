@@ -46,7 +46,7 @@ public class MockRobotFactory {
         }
         return robotControllers;
     }
-
+    
     private static List<Destination> parseDestinationList(String[] robotData) {
         int index = 2;
         List<Destination> destinationList = new ArrayList<>();

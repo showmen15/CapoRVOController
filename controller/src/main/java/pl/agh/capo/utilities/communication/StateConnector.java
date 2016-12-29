@@ -30,7 +30,7 @@ public abstract class StateConnector {
         factory.setUsername(EnvironmentalConfiguration.USERNAME);
         factory.setPassword(EnvironmentalConfiguration.PASSWORD);
 
-        Connection connection = factory.newConnection();
+        Connection connection = factory.newConnection();   
         channel = connection.createChannel();
         channel.exchangeDeclare(EnvironmentalConfiguration.CHANNEL_NAME, "fanout");
     }

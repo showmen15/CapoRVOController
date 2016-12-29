@@ -12,7 +12,7 @@ public class EnvironmentalConfiguration {
 
     // Empirically selected values to control robots
     // Units consisted with International System of Units
-    public static final double ROBOT_DIAMETER = 0.3;
+    public static final double ROBOT_DIAMETER = 0.4;
     public static final double ROBOT_WHEELS_HALF_DISTANCE = 0.14;
     public static final double ROBOT_MAX_SPEED = 0.5;
     public static final double PREF_ROBOT_SPEED = ROBOT_MAX_SPEED / 2.0;
@@ -39,4 +39,10 @@ public class EnvironmentalConfiguration {
     // Multiplier of max speed during selecting velocity in pure VO solution
     public static final double MIN_SPEED_FACTOR = 0.2;
 
+
+
+
+
+    // Tries of selecting velocity in pure VO solution
+    // public static final int TRIES_COUNT = 500;
 }

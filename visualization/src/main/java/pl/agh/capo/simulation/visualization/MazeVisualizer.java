@@ -3,6 +3,7 @@ package pl.agh.capo.simulation.visualization;
 import com.google.gson.Gson;
 import pl.agh.capo.utilities.communication.StateReceivedCallback;
 import pl.agh.capo.utilities.maze.MazeMap;
+import pl.agh.capo.utilities.maze.helper.MazeType;
 import pl.agh.capo.utilities.state.State;
 import pl.agh.capo.simulation.robot.RobotManager;
 
@@ -32,7 +33,7 @@ public class MazeVisualizer extends JFrame implements StateReceivedCallback {
         return instance;
     }
 
-    public void open() {
+    public void open() throws FileNotFoundException {
         setJMenuBar(createMenuBar());
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         mazePanel = new MazePanel();
@@ -41,20 +42,38 @@ public class MazeVisualizer extends JFrame implements StateReceivedCallback {
         setVisible(true);
         setResizable(false);
 
-        // TODO: usunąć, ale teraz wybiera domyslne
-        try {
-            mazeMap = //MazeType.NARROW_PASS.getMazeMap();
-                    new Gson().fromJson(new FileReader(new File("C:\\Users\\Ucash\\Desktop\\cross.roson")), MazeMap.class);
-            mazePanel.setMaze(mazeMap);
-//            File robotConfig = new File("C:\\Users\\Ucash\\Documents\\mgr\\CAPOcontroller\\CAPOvisualization\\src\\main\\resources\\robots.csv");
-//            RobotManager robotManager = new RobotManager(robotConfig, mazeMap);
-//        } catch (Exception e) {
+//        mazeMap = new Gson().fromJson(new FileReader(new File("C:\\Users\\Szymon\\git\\CapoVOController\\src\\main\\resources\\MazeRoboLabEmptyMapWithGate.roson")), MazeMap.class);
+
+        
+        mazeMap = new Gson().fromJson(new FileReader(new File("D:\\Desktop\\Mapy\\ok\\OtwartaPrzestrze�5x5m.roson")), MazeMap.class);
+
+        mazePanel.setMaze(mazeMap);
+		File robotConfig = new File("D:\\Desktop\\Config.csv");
+		RobotManager robotManager = new RobotManager(robotConfig, mazeMap);
+		//} catch (Exception e) {
 //            CATCH THEM ALL!!!
-//        }
-        } catch (FileNotFoundException e) {
+      //}
+    }
+    
+    
+    public void open(String sMapPath) {
+        setJMenuBar(createMenuBar());
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        mazePanel = new MazePanel();
+        setContentPane(createSplitPanel());
+        setSize(FRAME_SIZE);
+        setVisible(true);
+        setResizable(false);
+
+        try {
+            mazeMap =  new Gson().fromJson(new FileReader(new File(sMapPath)), MazeMap.class);
+            mazePanel.setMaze(mazeMap);
+        } 
+        catch (FileNotFoundException e) {
             e.printStackTrace();
         }
     }
+    
 
     private JMenuBar createMenuBar() {
 

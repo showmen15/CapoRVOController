@@ -4,6 +4,8 @@ import pl.agh.capo.utilities.maze.MazeMap;
 import pl.agh.capo.utilities.state.State;
 import pl.agh.capo.controller.RobotController;
 import pl.agh.capo.robot.IRobotManager;
+import pl.agh.capo.simulation.ConnectMSSQLServer;
+import pl.agh.capo.simulation.SingleRun;
 import pl.agh.capo.simulation.robot.mock.MockRobotFactory;
 
 import java.io.File;
@@ -58,10 +60,19 @@ public class RobotManager implements IRobotManager {
     }
 
     private void printResult() {
+    	
+    	ConnectMSSQLServer log = new ConnectMSSQLServer();
+    	
         StringBuilder sb = new StringBuilder();
         for (int id : result.keySet()) {
-            sb.append(String.format("%d;%d;%d\n", id, result.get(id), result.get(id) * RobotController.MOVE_ROBOT_PERIOD_IN_MS));
+        	
+        	  sb.append(String.format("%d;%d;%d\n", id, result.get(id), result.get(id) * RobotController.MOVE_ROBOT_PERIOD_IN_MS));
+        	
+        	log.SaveResult(SingleRun.configure,id,result.get(id), result.get(id) * RobotController.MOVE_ROBOT_PERIOD_IN_MS);
+        	
+          
         }
         System.out.print(sb.toString());
+        System.exit(1);
     }
 }

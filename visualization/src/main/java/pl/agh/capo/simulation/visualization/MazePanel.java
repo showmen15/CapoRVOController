@@ -61,7 +61,7 @@ class MazePanel extends JPanel {
         drawCoordinateGrid(g2);
         drawGates(g2, map.getGates(), Color.cyan);
         drawWalls(g2, map.getWalls(), Color.gray);
-//        drawVelocityObstacles(g2, 2,1);
+//        drawVelocityObstacles(g2, 0,1);
 //        drawVelocityObstacles(g2, 0, 2);
 //        drawVelocityObstacles(g2, 0, 3);
         drawStates(g2);

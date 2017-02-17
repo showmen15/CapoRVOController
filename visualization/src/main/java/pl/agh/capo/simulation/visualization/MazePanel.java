@@ -61,7 +61,24 @@ class MazePanel extends JPanel {
         drawCoordinateGrid(g2);
         drawGates(g2, map.getGates(), Color.cyan);
         drawWalls(g2, map.getWalls(), Color.gray);
-//        drawVelocityObstacles(g2, 0,1);
+        
+        
+        
+      //  drawVelocityObstacles(g2, 0,8,Color.yellow);
+//        drawVelocityObstacles(g2, 8,0,Color.green);
+//        
+//        
+//        int index = 0;
+//        
+//        for(int i = 0; i < 13; i++)
+//        {
+//        
+//        	
+//        }
+        
+        
+        // drawVelocityObstacles(g2, 8,0);
+        
 //        drawVelocityObstacles(g2, 0, 2);
 //        drawVelocityObstacles(g2, 0, 3);
         drawStates(g2);
@@ -84,11 +101,25 @@ class MazePanel extends JPanel {
         drawPoint(g2, state.getDestination());
         g2.setColor(Color.RED);
         g2.draw(new Line2D.Double(
-                normalizeCoordinate(state.getLocation().getX(), minX),
+        		normalizeCoordinate(state.getLocation().getX(), minX),
                 normalizeCoordinate(state.getLocation().getY(), minY),
                 normalizeCoordinate(state.getLocation().getX() + state.getVelocity().getX(), minX),
                 normalizeCoordinate(state.getLocation().getY() + state.getVelocity().getY(), minY)
         ));
+        
+        double poX =  normalizeCoordinate(state.getLocation().getX() + state.getVelocity().getX(), minX);
+        double poY = normalizeCoordinate(state.getLocation().getY() + state.getVelocity().getY(), minY);
+        
+        double pozX =  Math.round( state.getVelocity().getX()*1000.0)/1000.0; 
+        double pozY =  Math.round(state.getVelocity().getY()*1000.0)/1000.0; 
+        
+        g2.drawString(" X: " + pozX + " Y: " + pozY, (float) poX -3, (float) poY -3);
+        
+        int x = (int) normalizeCoordinate(state.getLocation().getX(), minX) + 20;
+        int y = (int) normalizeCoordinate(state.getLocation().getY(), minY) + 20;
+        String tempFear = String.format("%.2f", state.getRobotFearFactor()); //  Double.toString();
+        
+        g2.drawString(tempFear,x, y);
     }
 
     private void drawPoint(Graphics2D g2, Point point) {
@@ -181,7 +212,7 @@ class MazePanel extends JPanel {
         }
     }
 
-    private void drawVelocityObstacles(Graphics2D g2, int robot1, int robot2) {
+    private void drawVelocityObstacles(Graphics2D g2, int robot1, int robot2,Color col) {
         State first = robotStates.get(robot1);
         State second = robotStates.get(robot2);
         if (first == null || second == null){
@@ -196,6 +227,7 @@ class MazePanel extends JPanel {
                 .setSecondRobotCenter(second.getLocation())
                 .setFirstRobotVelocity(first.getVelocity())
                 .setSecondRobotVelocity(first.getVelocity());
+        
         VelocityObstacles vo;
         try {
             vo = vob.buildReciprocalVelocityObstacles();
@@ -203,10 +235,13 @@ class MazePanel extends JPanel {
             return;
         }
 
-        g2.setColor(Color.yellow);
-        for (double x = -px; x < mazeSize - px; x += 0.05) {
-            for (double y = -py; y < mazeSize - py; y += 0.05) {
-                if (vo.inside(new Velocity(x, y))) {
+        g2.setColor(col);
+        for (double x = -px; x < mazeSize - px; x += 0.05) 
+        {
+            for (double y = -py; y < mazeSize - py; y += 0.05) 
+            {
+                if (vo.inside(new Velocity(x, y))) 
+                {
                     double dx = normalizeCoordinate(x + px, minX);
                     double dy = normalizeCoordinate(y + py, minY);
                     g2.draw(new Ellipse2D.Double(dx, dy, 1, 1));

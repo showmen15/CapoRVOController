@@ -64,7 +64,7 @@ public class MockRobotFactory {
                                                             MazeMap mazeMap, List<Destination> destinationList, IRobotManager manager) {
         Destination start = destinationList.get(0);
         MockRobot mockRobot = new MockRobot(maxVelocity, new Location(start.getX(), start.getY(), direction));
-        RobotController capoController = new RobotController(id, destinationList, mazeMap, mockRobot, manager, CollisionFreeVelocityType.RIGHT_HAND);
+        RobotController capoController = new RobotController(id, destinationList, mazeMap, mockRobot, manager, EnvironmentalConfiguration.COLLISIONFREEVELOCITYMETHOD);
         return capoController;
     }
 }

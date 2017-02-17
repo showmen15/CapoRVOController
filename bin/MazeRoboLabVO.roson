@@ -1,0 +1,389 @@
+{
+  "name": "",
+  "timeout": 0,
+  "walls": [
+    {
+      "type": "wall",
+      "id": "Wall149",
+      "width": 0.1,
+      "height": 0.3,
+      "color": "80003366",
+      "from": {
+        "x": 0.0,
+        "y": 2.9
+      },
+      "to": {
+        "x": 0.8,
+        "y": 2.9
+      }
+    },
+    {
+      "type": "wall",
+      "id": "Wall151",
+      "width": 0.1,
+      "height": 0.3,
+      "color": "80003366",
+      "from": {
+        "x": 1.5,
+        "y": 2.9
+      },
+      "to": {
+        "x": 3.4,
+        "y": 2.9
+      }
+    },
+    {
+      "type": "wall",
+      "id": "Wall162",
+      "width": 0.1,
+      "height": 1.0,
+      "color": "80003366",
+      "from": {
+        "x": 0.0,
+        "y": 3.7
+      },
+      "to": {
+        "x": 0.0,
+        "y": 4.9
+      }
+    },
+    {
+      "type": "wall",
+      "id": "Wall163",
+      "width": 0.1,
+      "height": 1.0,
+      "color": "80003366",
+      "from": {
+        "x": 0.0,
+        "y": 4.9
+      },
+      "to": {
+        "x": 3.0,
+        "y": 4.9
+      }
+    },
+    {
+      "type": "wall",
+      "id": "Wall164",
+      "width": 0.1,
+      "height": 1.0,
+      "color": "80003366",
+      "from": {
+        "x": 3.0,
+        "y": 3.7
+      },
+      "to": {
+        "x": 3.0,
+        "y": 4.9
+      }
+    },
+    {
+      "type": "wall",
+      "id": "Wall165",
+      "width": 0.1,
+      "height": 1.0,
+      "color": "80003366",
+      "from": {
+        "x": 1.5,
+        "y": 3.7
+      },
+      "to": {
+        "x": 3.0,
+        "y": 3.7
+      }
+    },
+    {
+      "type": "wall",
+      "id": "Wall174",
+      "width": 0.1,
+      "height": 1.0,
+      "color": "80003366",
+      "from": {
+        "x": 0.7,
+        "y": 0.0
+      },
+      "to": {
+        "x": 0.7,
+        "y": 0.4
+      }
+    },
+    {
+      "type": "wall",
+      "id": "Wall175",
+      "width": 0.1,
+      "height": 1.0,
+      "color": "80003366",
+      "from": {
+        "x": 0.0,
+        "y": 0.0
+      },
+      "to": {
+        "x": 0.7,
+        "y": 0.0
+      }
+    },
+    {
+      "type": "wall",
+      "id": "Wall176",
+      "width": 0.1,
+      "height": 1.0,
+      "color": "80003366",
+      "from": {
+        "x": 0.0,
+        "y": 0.0
+      },
+      "to": {
+        "x": 0.0,
+        "y": 2.9
+      }
+    },
+    {
+      "type": "wall",
+      "id": "Wall183",
+      "width": 0.1,
+      "height": 1.0,
+      "color": "80003366",
+      "from": {
+        "x": 2.3,
+        "y": 0.4
+      },
+      "to": {
+        "x": 2.3,
+        "y": 2.9
+      }
+    },
+    {
+      "type": "wall",
+      "id": "Wall184",
+      "width": 0.1,
+      "height": 1.0,
+      "color": "80003366",
+      "from": {
+        "x": 0.7,
+        "y": 0.4
+      },
+      "to": {
+        "x": 2.3,
+        "y": 0.4
+      }
+    },
+    {
+      "type": "wall",
+      "id": "Wall185",
+      "width": 0.1,
+      "height": 1.0,
+      "color": "80003366",
+      "from": {
+        "x": 0.0,
+        "y": 3.7
+      },
+      "to": {
+        "x": 0.8,
+        "y": 3.7
+      }
+    },
+    {
+      "type": "wall",
+      "id": "Wall186",
+      "width": 0.1,
+      "height": 1.0,
+      "color": "80003366",
+      "from": {
+        "x": 3.4,
+        "y": 2.9
+      },
+      "to": {
+        "x": 3.4,
+        "y": 3.35
+      }
+    },
+    {
+      "type": "wall",
+      "id": "Wall187",
+      "width": 0.1,
+      "height": 1.0,
+      "color": "80003366",
+      "from": {
+        "x": 3.0,
+        "y": 3.35
+      },
+      "to": {
+        "x": 3.4,
+        "y": 3.35
+      }
+    },
+    {
+      "type": "wall",
+      "id": "Wall188",
+      "width": 0.1,
+      "height": 1.0,
+      "color": "80003366",
+      "from": {
+        "x": 3.0,
+        "y": 3.3
+      },
+      "to": {
+        "x": 3.0,
+        "y": 3.7
+      }
+    },
+    {
+      "type": "wall",
+      "id": "Wall189",
+      "width": 0.1,
+      "height": 1.0,
+      "color": "80003366",
+      "from": {
+        "x": 0.0,
+        "y": 2.9
+      },
+      "to": {
+        "x": 0.0,
+        "y": 3.7
+      }
+    }
+  ],
+  "gates": [],
+  "spaces": [
+    {
+      "type": "space",
+      "id": "Space192",
+      "kind": "room",
+      "name": null,
+      "function": null,
+      "expectedPersonCount": 1,
+      "area": 2.695,
+      "diameter": 3.701351104664349,
+      "searched": 0
+    }
+  ],
+  "nodes": [
+    {
+      "type": "node",
+      "id": "Node193",
+      "kind": "spaceNode",
+      "position": {
+        "x": 1.2739148936170213,
+        "y": 2.7298297872340425
+      }
+    }
+  ],
+  "robots": [
+    {
+      "type": "robot",
+      "id": "Robot8",
+      "kind": "robot",
+      "location": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0,
+        "alpha": 0.0001
+      },
+      "target": {
+        "x": 0.0,
+        "y": 0.0
+      }
+    }
+  ],
+  "victims": [],
+  "space-walls": [
+    {
+      "type": "space-wall",
+      "spaceId": "Space192",
+      "wallId": "Wall149"
+    },
+    {
+      "type": "space-wall",
+      "spaceId": "Space192",
+      "wallId": "Wall151"
+    },
+    {
+      "type": "space-wall",
+      "spaceId": "Space192",
+      "wallId": "Wall174"
+    },
+    {
+      "type": "space-wall",
+      "spaceId": "Space192",
+      "wallId": "Wall175"
+    },
+    {
+      "type": "space-wall",
+      "spaceId": "Space192",
+      "wallId": "Wall176"
+    },
+    {
+      "type": "space-wall",
+      "spaceId": "Space192",
+      "wallId": "Wall162"
+    },
+    {
+      "type": "space-wall",
+      "spaceId": "Space192",
+      "wallId": "Wall163"
+    },
+    {
+      "type": "space-wall",
+      "spaceId": "Space192",
+      "wallId": "Wall164"
+    },
+    {
+      "type": "space-wall",
+      "spaceId": "Space192",
+      "wallId": "Wall165"
+    },
+    {
+      "type": "space-wall",
+      "spaceId": "Space192",
+      "wallId": "Wall183"
+    },
+    {
+      "type": "space-wall",
+      "spaceId": "Space192",
+      "wallId": "Wall184"
+    },
+    {
+      "type": "space-wall",
+      "spaceId": "Space192",
+      "wallId": "Wall185"
+    },
+    {
+      "type": "space-wall",
+      "spaceId": "Space192",
+      "wallId": "Wall186"
+    },
+    {
+      "type": "space-wall",
+      "spaceId": "Space192",
+      "wallId": "Wall187"
+    },
+    {
+      "type": "space-wall",
+      "spaceId": "Space192",
+      "wallId": "Wall188"
+    },
+    {
+      "type": "space-wall",
+      "spaceId": "Space192",
+      "wallId": "Wall189"
+    }
+  ],
+  "space-gates": [],
+  "space-nodes": [
+    {
+      "type": "space-node",
+      "spaceId": "Space192",
+      "nodeId": "Node193"
+    }
+  ],
+  "space-robots": [
+    {
+      "type": "space-robot",
+      "spaceId": "Space192",
+      "robotId": "Robot8"
+    }
+  ],
+  "space-victims": [],
+  "gate-nodes": [],
+  "node-nodes": []
+}

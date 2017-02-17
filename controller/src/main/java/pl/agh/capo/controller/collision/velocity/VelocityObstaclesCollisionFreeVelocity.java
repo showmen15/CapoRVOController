@@ -12,8 +12,8 @@ import java.util.Map;
 
 public class VelocityObstaclesCollisionFreeVelocity extends AbstractCollisionFreeVelocity {
 
-    public VelocityObstaclesCollisionFreeVelocity(Map<Integer, State> states, WallCollisionDetector wallCollisionDetector, Location location, Velocity velocity) {
-        super(states, wallCollisionDetector, location, velocity);
+    public VelocityObstaclesCollisionFreeVelocity(Map<Integer, State> states, WallCollisionDetector wallCollisionDetector, Location location, Velocity velocity,int robotId) {
+        super(states, wallCollisionDetector, location, velocity,robotId);
     }
 
     @Override
@@ -51,19 +51,41 @@ public class VelocityObstaclesCollisionFreeVelocity extends AbstractCollisionFre
         Velocity bestVelocity = null;
         double minDist = Double.MAX_VALUE;
         double minAngleTo = Double.MAX_VALUE;
-        for (double y = EnvironmentalConfiguration.PREF_ROBOT_SPEED / 2; y >= -EnvironmentalConfiguration.PREF_ROBOT_SPEED / 2; y -= step) {
-            double maxX = Math.sqrt((EnvironmentalConfiguration.PREF_ROBOT_SPEED * EnvironmentalConfiguration.PREF_ROBOT_SPEED) - (y * y)) / 2;
-            for (double x = maxX; x >= -maxX; x -= step) {
+        
+//        isVelocityCollisionFree(new Velocity(2, 3));
+        
+//        double z = EnvironmentalConfiguration.PREF_ROBOT_SPEED / 2;
+//        
+//        if(z < -EnvironmentalConfiguration.PREF_ROBOT_SPEED / 2)
+//        {
+//        
+//        	isVelocityCollisionFree(new Velocity(2, 3));
+//        }
+        double maxX; 
+        double y;
+        double x;
+        
+        for (y = EnvironmentalConfiguration.PREF_ROBOT_SPEED / 2; y >= -EnvironmentalConfiguration.PREF_ROBOT_SPEED / 2; y -= step) 
+        {
+            maxX = Math.sqrt((EnvironmentalConfiguration.PREF_ROBOT_SPEED * EnvironmentalConfiguration.PREF_ROBOT_SPEED) - (y * y)) / 2;
+        
+            for (x = maxX; x >= -maxX; x -= step) 
+            {
                 Velocity v = new Velocity(x + velocity.getX(), y + velocity.getY());
                 double tmpDist = v.distance(velocity);
                 double angleTo = v.toVector2D().angleTo(velocity.toVector2D());
                 double speed = v.getSpeed();
-                if (isVelocityCollisionFree(v)) {
-                    if (isVelocityBetter(minDist, tmpDist, speed)) {
+                
+                if (isVelocityCollisionFree(v)) 
+                {
+                    if (isVelocityBetter(minDist, tmpDist, speed)) 
+                    {
                         bestVelocity = v;
                         minDist = tmpDist;
                         minAngleTo = angleTo;
-                    } else if (tmpDist - minDist < 0.01 && minAngleTo > angleTo) {
+                    } 
+                    else if (tmpDist - minDist < 0.01 && minAngleTo > angleTo) 
+                    {
                         bestVelocity = v;
                         minDist = tmpDist;
                         minAngleTo = angleTo;
@@ -71,8 +93,13 @@ public class VelocityObstaclesCollisionFreeVelocity extends AbstractCollisionFre
                 }
             }
         }
-        if (bestVelocity == null) {
-            return new Velocity(-velocity.getX(), -velocity.getY());
+        if (bestVelocity == null) 
+        {
+          
+        	// isVelocityCollisionFree(new Velocity(2, 3));
+        	return new Velocity(-velocity.getX(), -velocity.getY());
+            
+           
         }
         return bestVelocity;
     }

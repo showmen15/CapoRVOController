@@ -8,6 +8,7 @@ public class State implements Serializable {
     private Location location;
     private Velocity velocity;
     private boolean finished;
+    private double robotFearFactor;
 
     // To pl.agh.capo.simulation.visualization only:
     private Point destination;
@@ -20,6 +21,7 @@ public class State implements Serializable {
         this.velocity = velocity;
         this.destination = destination;
         this.finished = false;
+        this.robotFearFactor = 0.0;
     }
 
     public static State createFinished(int robotId){
@@ -55,5 +57,13 @@ public class State implements Serializable {
 
     private void setRobotId(int robotId) {
         this.robotId = robotId;
+    }
+    
+    public double getRobotFearFactor(){
+    	return robotFearFactor;
+    }
+    
+    public void setRobotFearFactor(double robotFearFactor){
+    	this.robotFearFactor =  robotFearFactor;
     }
 }

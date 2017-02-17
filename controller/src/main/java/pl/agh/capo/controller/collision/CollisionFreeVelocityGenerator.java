@@ -25,18 +25,27 @@ public class CollisionFreeVelocityGenerator implements StateReceivedCallback {
     }
 
     public AbstractCollisionFreeVelocity createCollisionFreeState(Location location, Velocity velocity){
-        return collisionFreeVelocityType.create(states, wallCollisionDetector, location, velocity);
+        return collisionFreeVelocityType.create(states, wallCollisionDetector, location, velocity,robotId);
     }
 
     @Override
     public void handle(State state) {
-        if (state.getRobotId() == robotId) {
+        if (state.getRobotId() == robotId) 
+        {
             return;
         }
-        if (state.isFinished()){
+        if (state.isFinished())
+        {
             states.remove(state.getRobotId());
-        } else {
+        } 
+        else 
+        {
             states.put(state.getRobotId(), state);
         }
+    }
+    
+    public Map<Integer, State> GetStates()
+    {
+    	return states;
     }
 }

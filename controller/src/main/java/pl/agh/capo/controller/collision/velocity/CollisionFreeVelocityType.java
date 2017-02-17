@@ -11,16 +11,23 @@ public enum CollisionFreeVelocityType {
 
     RIGHT_HAND {
         @Override
-        public AbstractCollisionFreeVelocity create(Map<Integer, State> states, WallCollisionDetector wallCollisionDetector, Location location, Velocity velocity) {
-            return new RightSideCollisionFreeVelocity(states, wallCollisionDetector, location, velocity);
+        public AbstractCollisionFreeVelocity create(Map<Integer, State> states, WallCollisionDetector wallCollisionDetector, Location location, Velocity velocity,int robotId) {
+            return new RightSideCollisionFreeVelocity(states, wallCollisionDetector, location, velocity,robotId);
         }
     },
     VELOCITY_OBSTACLES {
         @Override
-        public AbstractCollisionFreeVelocity create(Map<Integer, State> states, WallCollisionDetector wallCollisionDetector, Location location, Velocity velocity) {
-            return new VelocityObstaclesCollisionFreeVelocity(states, wallCollisionDetector, location, velocity);
+        public AbstractCollisionFreeVelocity create(Map<Integer, State> states, WallCollisionDetector wallCollisionDetector, Location location, Velocity velocity,int robotId) {
+            return new VelocityObstaclesCollisionFreeVelocity(states, wallCollisionDetector, location, velocity,robotId);
         }
-    };
+    },
+    	
+	RECIPROCAL_VELOCITY_OBSTACLES{
+    	   @Override
+           public AbstractCollisionFreeVelocity create(Map<Integer, State> states, WallCollisionDetector wallCollisionDetector, Location location, Velocity velocity,int robotId) {
+               return new ReciprocalVelocityObstaclesCollisionFreeVelocity(states, wallCollisionDetector, location, velocity,robotId);
+           }
+	};
 
-    public abstract AbstractCollisionFreeVelocity create(Map<Integer, State> states, WallCollisionDetector wallCollisionDetector, Location location, Velocity velocity);
+    public abstract AbstractCollisionFreeVelocity create(Map<Integer, State> states, WallCollisionDetector wallCollisionDetector, Location location, Velocity velocity,int robotId);
 }

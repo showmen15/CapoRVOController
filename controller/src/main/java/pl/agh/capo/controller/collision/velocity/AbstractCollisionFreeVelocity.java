@@ -21,14 +21,16 @@ public abstract class AbstractCollisionFreeVelocity {
     protected final WallCollisionDetector wallCollisionDetector;
     protected final Location location;
     protected final Velocity velocity;
+    protected final int RobotID; 
 
     protected List<VelocityObstacles> velocityObstaclesList;
 
-    public AbstractCollisionFreeVelocity(Map<Integer, State> states, WallCollisionDetector wallCollisionDetector, Location location, Velocity velocity) {
+    public AbstractCollisionFreeVelocity(Map<Integer, State> states, WallCollisionDetector wallCollisionDetector, Location location, Velocity velocity,int robotId) {
         this.states = states;
         this.location = location;
         this.velocity = velocity;
         this.wallCollisionDetector = wallCollisionDetector;
+        this.RobotID = robotId;
         buildVelocityObstacles();
     }
 
@@ -59,11 +61,14 @@ public abstract class AbstractCollisionFreeVelocity {
     }
 
     protected boolean isVelocityCollisionFree(Velocity velocity) {
-        for (VelocityObstacles vo : velocityObstaclesList) {
-            if (vo.inside(velocity)) {
+        for (VelocityObstacles vo : velocityObstaclesList) 
+        {
+            if (vo.inside(velocity)) 
+            {
                 return false;
             }
         }
+        
         return wallCollisionDetector.collisionFree(location, velocity);
     }
 

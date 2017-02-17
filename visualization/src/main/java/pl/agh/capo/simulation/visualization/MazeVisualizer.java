@@ -45,7 +45,9 @@ public class MazeVisualizer extends JFrame implements StateReceivedCallback {
 //        mazeMap = new Gson().fromJson(new FileReader(new File("C:\\Users\\Szymon\\git\\CapoVOController\\src\\main\\resources\\MazeRoboLabEmptyMapWithGate.roson")), MazeMap.class);
 
         
-        mazeMap = new Gson().fromJson(new FileReader(new File("D:\\Desktop\\Mapy\\ok\\OtwartaPrzestrzeñ5x5m.roson")), MazeMap.class);
+        //mazeMap = new Gson().fromJson(new FileReader(new File("D:\\Desktop\\Mapy\\ok\\OtwartaPrzestrzeñ5x5m.roson")), MazeMap.class);
+
+        mazeMap = new Gson().fromJson(new FileReader(new File("D:\\Desktop\\Map.json")), MazeMap.class);
 
         mazePanel.setMaze(mazeMap);
 		File robotConfig = new File("D:\\Desktop\\Config.csv");

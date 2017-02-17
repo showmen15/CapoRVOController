@@ -56,6 +56,16 @@ public class RobotMotionModel {
     public double getAngularVelocity() {
         return (velocityLeft - velocityRight) / (2 * EnvironmentalConfiguration.ROBOT_WHEELS_HALF_DISTANCE);
     }
+    
+    public double getSumVelocityLeftRight()
+    {
+    	return 0.2; //(velocityLeft + velocityRight);
+    }
+    
+    public double getSubVelocityLeftRight()
+    {
+    	return 0.2; //(velocityLeft - velocityRight);
+    }
 
     public double getArcRadius() {
         if (velocityLeft == velocityRight) {
@@ -87,11 +97,48 @@ public class RobotMotionModel {
     }
 
     public Location calculateLocationAfterTimeInMillisecond(int deltaTime) {
-        double radius = getArcRadius();
+    	 
+    	
+    	
+    	double radius = getArcRadius();
+         if (Double.isNaN(radius)) {
+             return calculateLocationAfterTimeMovingStraight(deltaTime / 1000.0);
+         }
+         else
+         {
+        	// location.setDirection(-1.57);
+        	 
+        	 Location loc = calculateLocationAfterTimeTurning(radius, deltaTime / 1000.0);
+        	 //loc.setDirection(1.57);
+        	 
+        	 return loc;
+         }
+    	
+    	//return new Location(0, 0 , 0);
+    	
+    	/*double X, Y, alfaNew, Alfa;
+       double wheelTrack = 0.2;
+       
+       Alfa = location.getDirection();
+       X = location.getX();
+       Y = location.getY();
+       
+       alfaNew = (((getSubVelocityLeftRight()) * deltaTime) / wheelTrack); 
+    	
+		X += (wheelTrack * (getSumVelocityLeftRight())) / (2*(getSubVelocityLeftRight())) * (Math.sin(alfaNew + Alfa) - Math.sin(Alfa));
+		Y -= (wheelTrack * (getSumVelocityLeftRight())) / (2*(getSubVelocityLeftRight())) * (Math.cos(alfaNew + Alfa) - Math.cos(Alfa));
+
+		Alfa += alfaNew;
+    	
+    	
+    	return new Location(X, Y , Alfa );
+         */
+    	/* double radius = getArcRadius();
         if (Double.isNaN(radius)) {
             return calculateLocationAfterTimeMovingStraight(deltaTime / 1000.0);
         }
         return calculateLocationAfterTimeTurning(radius, deltaTime / 1000.0);
+        */
     }
 
     private Location calculateLocationAfterTimeTurning(double radius, double deltaTime) {

@@ -16,8 +16,17 @@ public class Location extends Point implements Serializable {
     public double getDirection() {
         return direction;
     }
+    
+    public void setDirection(double Direction) {
+        direction = Direction;
+    }
 
     public Vector2D getUnitVector(){
         return new Vector2D(Math.cos(direction), Math.sin(direction));
     }
+    
+    public double getDistance(Location l)
+	{
+		return Math.sqrt((this.getX() - l.getX()) * (this.getX() - l.getX()) + (this.getY() - l.getY()) * (this.getY() - l.getY()));
+	}
 }

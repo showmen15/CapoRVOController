@@ -1,6 +1,7 @@
 package pl.agh.capo.simulation.robot.mock;
 
 import pl.agh.capo.utilities.state.Location;
+import pl.agh.capo.utilities.EnvironmentalConfiguration;
 import pl.agh.capo.utilities.RobotMotionModel;
 import pl.agh.capo.robot.IRobot;
 
@@ -28,10 +29,21 @@ public class MockRobot implements IRobot {
 
     private void performMove() {
         synchronized (motionModel) {
-            long currentMilliseconds = System.currentTimeMillis();
+            if(EnvironmentalConfiguration.SIMULATION)
+            {
+            	long currentMilliseconds = System.currentTimeMillis();
+                int deltaTime = EnvironmentalConfiguration.SIMULATION_TIME_STEP_IN_MS;
+                motionModel.performMoveByTimeInMilliseconds(deltaTime);
+                lastMilliseconds = currentMilliseconds;
+            }
+            else
+            {
+            
+        	long currentMilliseconds = System.currentTimeMillis();
             int deltaTime = (int)(currentMilliseconds - lastMilliseconds);
             motionModel.performMoveByTimeInMilliseconds(deltaTime);
             lastMilliseconds = currentMilliseconds;
+            }
         }
     }
 }

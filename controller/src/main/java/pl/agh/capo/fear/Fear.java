@@ -16,7 +16,6 @@ import pl.agh.capo.utilities.state.State;
 public class Fear {
 
 	public static final double MAXOBSERVATIONDISTANCE = 1.0;  //do sprawdzenia
-	public static final boolean ACTIVEFEARFACTORGATE = false; //do zabudowania 
 
 	private int currentRobotID;
 	private ArrayList<Vector3D> GatesList;

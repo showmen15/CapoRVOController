@@ -18,7 +18,6 @@ import pl.agh.capo.fear.Fear;
 import pl.agh.capo.utilities.RobotMotionModel;
 import pl.agh.capo.robot.IRobot;
 import pl.agh.capo.robot.IRobotManager;
-import pl.agh.capo.rvo.RVO;
 
 import java.util.List;
 import java.util.concurrent.Executors;
@@ -27,14 +26,15 @@ import java.util.concurrent.TimeUnit;
 
 public class RobotController implements Runnable {
 
-	RVO rvRobot0 = new RVO("0;0&-1;0&-1;0&-1;0&-1;0&-1;0&-1;0&-0,9540817;-0,2093081&-0,9527367;-0,2090131&-0,9512725;-0,2086918&-0,949675;-0,2083413&-0,9479278;-0,207958&-0,9460126;-0,2075379&-0,9439081;-0,2070762&-0,9415896;-0,2065675&-0,9390286;-0,2060057&-0,9361919;-0,2053834&-0,9330411;-0,2046922&-0,9295307;-0,2039221&-0,9256081;-0,2030615&-0,9212111;-0,2020968&-0,916267;-0,2010113&-0,9881673;0,1533803&-0,9881673;0,1533803&-0,9881672;0,1533803&-0,9881672;0,1533803&-0,9881672;0,1533803&-0,9881672;0,1533803&-0,9881672;0,1533803&-0,9881673;0,1533803&-0,9881672;0,1533803&-0,9881672;0,1533803&-0,9881672;0,1533803&-0,9881672;0,1533803&-0,9881672;0,1533802&-0,9881672;0,1533802&-0,9881673;0,1533802&-0,9881673;0,1533802&-0,9881673;0,1533802&");
+	//RVO rvRobot0 = new RVO("0;0&-1;0&-1;0&-1;0&-1;0&-1;0&-1;0&-0,9540817;-0,2093081&-0,9527367;-0,2090131&-0,9512725;-0,2086918&-0,949675;-0,2083413&-0,9479278;-0,207958&-0,9460126;-0,2075379&-0,9439081;-0,2070762&-0,9415896;-0,2065675&-0,9390286;-0,2060057&-0,9361919;-0,2053834&-0,9330411;-0,2046922&-0,9295307;-0,2039221&-0,9256081;-0,2030615&-0,9212111;-0,2020968&-0,916267;-0,2010113&-0,9881673;0,1533803&-0,9881673;0,1533803&-0,9881672;0,1533803&-0,9881672;0,1533803&-0,9881672;0,1533803&-0,9881672;0,1533803&-0,9881672;0,1533803&-0,9881673;0,1533803&-0,9881672;0,1533803&-0,9881672;0,1533803&-0,9881672;0,1533803&-0,9881672;0,1533803&-0,9881672;0,1533802&-0,9881672;0,1533802&-0,9881673;0,1533802&-0,9881673;0,1533802&-0,9881673;0,1533802&");
 	
-	RVO rvRobot8 = new RVO("0;0&1;-1,224606E-16&1;-1,224606E-16&1;-1,224606E-16&1;-1,224606E-16&1;-1,224606E-16&1;-1,224606E-16&0,9540817;0,2093081&0,9527367;0,2090131&0,9512725;0,2086918&0,949675;0,2083413&0,9479278;0,207958&0,9460126;0,2075379&0,9439081;0,2070762&0,9415896;0,2065675&0,9390286;0,2060057&0,9361919;0,2053834&0,9330411;0,2046922&0,9295307;0,2039221&0,9256081;0,2030615&0,9212111;0,2020968&0,916267;0,2010113&0,9881673;-0,1533803&0,9881673;-0,1533803&0,9881672;-0,1533803&0,9881672;-0,1533803&0,9881672;-0,1533803&0,9881672;-0,1533803&0,9881672;-0,1533803&0,9881673;-0,1533803&0,9881672;-0,1533803&0,9881672;-0,1533803&0,9881672;-0,1533803&0,9881672;-0,1533803&0,9881672;-0,1533802&0,9881672;-0,1533802&0,9881673;-0,1533802&0,9881673;-0,1533802&0,9881673;-0,1533802&");
+	//RVO rvRobot8 = new RVO("0;0&1;-1,224606E-16&1;-1,224606E-16&1;-1,224606E-16&1;-1,224606E-16&1;-1,224606E-16&1;-1,224606E-16&0,9540817;0,2093081&0,9527367;0,2090131&0,9512725;0,2086918&0,949675;0,2083413&0,9479278;0,207958&0,9460126;0,2075379&0,9439081;0,2070762&0,9415896;0,2065675&0,9390286;0,2060057&0,9361919;0,2053834&0,9330411;0,2046922&0,9295307;0,2039221&0,9256081;0,2030615&0,9212111;0,2020968&0,916267;0,2010113&0,9881673;-0,1533803&0,9881673;-0,1533803&0,9881672;-0,1533803&0,9881672;-0,1533803&0,9881672;-0,1533803&0,9881672;-0,1533803&0,9881672;-0,1533803&0,9881673;-0,1533803&0,9881672;-0,1533803&0,9881672;-0,1533803&0,9881672;-0,1533803&0,9881672;-0,1533803&0,9881672;-0,1533802&0,9881672;-0,1533802&0,9881673;-0,1533802&0,9881673;-0,1533802&0,9881673;-0,1533802&");
 	
 	
 	private final Logger logger = Logger.getLogger(RobotController.class);
 
-	public static final int MOVE_ROBOT_PERIOD_IN_MS = 200;
+    public static final int MOVE_ROBOT_SIMULATION_IN_MS = EnvironmentalConfiguration.SIMULATION_TIME_STEP_IN_MS;
+    public static final int MOVE_ROBOT_PERIOD_IN_MS = EnvironmentalConfiguration.SIMULATION_SLEEP_BETWEEN_TIME_STEP_IN_MS;
 	private static final int MONITOR_SENSOR_PERIOD_IN_MS = (int) (MOVE_ROBOT_PERIOD_IN_MS * 1.5);
 
 	private final IRobot robot;
@@ -101,26 +101,58 @@ public class RobotController implements Runnable {
 	            stop();
 	            return;
 	        }
+	        
 	        Velocity optimalVelocity = findOptimalToDestinationVelocity();
 	        setToDestinationVelocity(optimalVelocity, destinationDistance);
-
+	        
+	        boolean collide = false;
+	        State collisionFreeState;
+	        double fearfactor = 0.0;
+        
 	        AbstractCollisionFreeVelocity collisionFreeVelocity = collisionFreeVelocityGenerator.createCollisionFreeState(motionModel.getLocation(), optimalVelocity);
-	        
-	        boolean collide = !collisionFreeVelocity.isCurrentVelocityCollisionFree();
-	        
-	        if (collide) {
-	            optimalVelocity = collisionFreeVelocity.get();
-	            
-	            System.out.println("Robot: " + robotId + " X: " + String.format("%.5f", optimalVelocity.getX())  + "Y: " + String.format("%.5f",optimalVelocity.getY()));
-	            setVelocity(optimalVelocity);
+	        collide = !collisionFreeVelocity.isCurrentVelocityCollisionFree();
+
+	        if(EnvironmentalConfiguration.FEAR)
+	    		{
+	    			fearfactor = fear.CalculateFearFactor(collisionFreeVelocityGenerator.GetStates(),robotLocation);
+	    			boolean avoidCollision = false;
+	    			
+	    			if (collide)
+	    				avoidCollision = fear.HaveAvoidCollision(collisionFreeVelocityGenerator.GetStates(), fearfactor);
+	    			
+	    			if (avoidCollision) 
+	    			{
+	    				collide = true;
+	    				
+	    				optimalVelocity = collisionFreeVelocity.get();
+			            setVelocity(optimalVelocity);			    				
+	    			}
+	    			else
+	    				collide = false;
+	    		}
+	        else
+	        {
+		        if (collide) 
+		        {
+		            optimalVelocity = collisionFreeVelocity.get();
+		            setVelocity(optimalVelocity);
+		        }	
 	        }
 	        
+	        robot.setVelocity(motionModel.getVelocityLeft(), motionModel.getVelocityRight());  
 	        
+	        collisionFreeState = createCollisionFreeState(optimalVelocity);
+	        collisionFreeState.setRobotFearFactor(fearfactor);
 	        
-	        robot.setVelocity(motionModel.getVelocityLeft(), motionModel.getVelocityRight());        
-	        publishState(collide, createCollisionFreeState(optimalVelocity));
+	        publishState(collide, collisionFreeState);
 	}
-		
+	
+    //  System.out.println("Robot: " + robotId + " X: " + String.format("%.5f", motionModel.getVelocityLeft())  + "Y: " + String.format("%.5f",motionModel.getVelocityRight()));
+
+	
+    //  System.out.println("Robot: " + robotId + " X: " + String.format("%.5f", optimalVelocity.getX())  + "Y: " + String.format("%.5f",optimalVelocity.getY()));
+	
+	
 //		Velocity optimalVelocity = findOptimalToDestinationVelocity();
 //				
 //		

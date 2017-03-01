@@ -113,7 +113,7 @@ class MazePanel extends JPanel {
         double pozX =  Math.round( state.getVelocity().getX()*1000.0)/1000.0; 
         double pozY =  Math.round(state.getVelocity().getY()*1000.0)/1000.0; 
         
-        g2.drawString(" X: " + pozX + " Y: " + pozY, (float) poX -3, (float) poY -3);
+   //     g2.drawString(" X: " + pozX + " Y: " + pozY, (float) poX -3, (float) poY -3);
         
         int x = (int) normalizeCoordinate(state.getLocation().getX(), minX) + 20;
         int y = (int) normalizeCoordinate(state.getLocation().getY(), minY) + 20;

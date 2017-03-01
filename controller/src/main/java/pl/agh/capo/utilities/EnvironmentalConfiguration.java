@@ -4,7 +4,7 @@ import pl.agh.capo.controller.collision.velocity.CollisionFreeVelocityType;
 
 public class EnvironmentalConfiguration {
 
-    private static final boolean SIMULATION = true;
+    public static final boolean SIMULATION = true;
 
     // RabbitMQ connection leads
     public static final String ADDRESS = SIMULATION ? "127.0.0.1" : "192.168.2.101";
@@ -12,12 +12,14 @@ public class EnvironmentalConfiguration {
     public static final String PASSWORD = SIMULATION ?"guest" : "panda";
     public static final String CHANNEL_NAME = "capoRobotState";
 
-
+    public static final int SIMULATION_TIME_STEP_IN_MS = 200; 
+    public static final int SIMULATION_SLEEP_BETWEEN_TIME_STEP_IN_MS = 50;  //SIMULATION_TIME_STEP_IN_MS;
+        
     // Empirically selected values to control robots
     // Units consisted with International System of Units
-    public static final double ROBOT_DIAMETER = 0.3;
+    public static final double ROBOT_DIAMETER = 0.3;//0.3;
     public static final double ROBOT_WHEELS_HALF_DISTANCE = 0.14;
-    public static final double ROBOT_MAX_SPEED = 1.0;  //zaczynaja sie jaja od 1.0
+    public static final double ROBOT_MAX_SPEED = 0.5;//0.5  //zaczynaja sie jaja od 1.0
     public static final double PREF_ROBOT_SPEED = ROBOT_MAX_SPEED / 2.0;
 
     // Multiplier of angle to desired velocity (used to perform turning)
@@ -48,14 +50,12 @@ public class EnvironmentalConfiguration {
     public static final double MIN_SPEED_FACTOR = 0.2;
 
 
+    public static CollisionFreeVelocityType COLLISIONFREEVELOCITYMETHOD = CollisionFreeVelocityType.RECIPROCAL_VELOCITY_OBSTACLES;
     
     
+    public static boolean FEAR = true; 
     
-
-    public static final CollisionFreeVelocityType COLLISIONFREEVELOCITYMETHOD = CollisionFreeVelocityType.RECIPROCAL_VELOCITY_OBSTACLES;
-    
-    
-    public static final boolean FEAR = false; //na potrzeby testu
+    public static boolean ACTIVEFEARFACTORGATE = false;
     
     // Tries of selecting velocity in pure VO solution
     // public static final int TRIES_COUNT = 500;

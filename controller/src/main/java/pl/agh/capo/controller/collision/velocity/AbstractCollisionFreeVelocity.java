@@ -18,7 +18,7 @@ public abstract class AbstractCollisionFreeVelocity {
     protected final Logger logger = Logger.getLogger(AbstractCollisionFreeVelocity.class);
 
     protected final Map<Integer, State> states;
-    protected final WallCollisionDetector wallCollisionDetector;
+    public final WallCollisionDetector wallCollisionDetector;
     protected final Location location;
     protected final Velocity velocity;
     protected final int RobotID; 

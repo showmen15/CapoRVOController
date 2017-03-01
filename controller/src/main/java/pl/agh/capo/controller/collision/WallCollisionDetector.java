@@ -50,4 +50,9 @@ public class WallCollisionDetector {
         }
         return true;
     }
+    
+    public ArrayList<LineSegment> getWallLineSegments()
+    {
+    	return wallLineSegments;
+    }
 }

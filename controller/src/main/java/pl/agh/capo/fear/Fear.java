@@ -1,49 +1,62 @@
 package pl.agh.capo.fear;
 
-import java.awt.List;
-import java.util.ArrayList;
-import java.util.Map;
+import java.util.*;
 
 import com.vividsolutions.jts.math.Vector2D;
 import com.vividsolutions.jts.math.Vector3D;
 
-import pl.agh.capo.utilities.maze.MazeMap;
+import pl.agh.capo.utilities.EnvironmentalConfiguration;
 import pl.agh.capo.utilities.state.Location;
 import pl.agh.capo.utilities.state.State;
+import pl.agh.capo.utilities.maze.*;
 
 
 
 public class Fear {
 
-	public static final double MAXOBSERVATIONDISTANCE = 1.0;  //do sprawdzenia
+	public static final double MAXOBSERVATIONDISTANCE = 0.5;  //do sprawdzenia
 
 	private int currentRobotID;
 	private ArrayList<Vector3D> GatesList;
 	private double RobotFearFactor;
 
-	public Fear(int robotId, MazeMap mazeMap) {
+	public Fear(int robotId,List<Gate> gates) throws Exception  {
 		currentRobotID = robotId;
 		GatesList = new ArrayList<Vector3D>();
 		
 		RobotFearFactor = 1.0 + 0.01 * (double) robotId;
+			
+		if(gates.size() > 1)		
+			throw new Exception("Fear Za duzo drzwi!!!");
+		else if(gates.size() == 1)
+		{
+			double centX =  0.0;
+			double centY = 0.0; 
+			
+			if(gates.get(0).getFrom().getX() == gates.get(0).getTo().getX())
+			{
+				centX = gates.get(0).getFrom().getX();
+				centY = (gates.get(0).getFrom().getY() + gates.get(0).getTo().getY()) / 2;
+			}
+			else
+			{
+				centX = (gates.get(0).getFrom().getX() + gates.get(0).getTo().getX()) / 2;											
+				centY = gates.get(0).getFrom().getY();
+			}
 		
-		if(existsGate(mazeMap))
-			GatesList.add(new Vector3D(2.5, 2.5, -Math.PI / 2));
+			GatesList.add(new Vector3D(centX, centY, -Math.PI / 2));
+		
+		}		
 	}
-	
-	private boolean existsGate(MazeMap mazeMap)
-	{
-		return true;
-	}
-	
+
 	private double calculateFearFactor(Map<Integer, State> states,Location robotLocation, int robotId)
 	{
 		double robotFearFactor = calculateFearFactorOryginal(states, robotLocation, robotId);
 
 		double gateFearFactor = 1.0;
 		
-		//if(ACTIVEFEARFACTORGATE && (GatesList.size() == 1))
-		//	gateFearFactor = calculateFearFactorGate2(robotLocation, robotId, GatesList);
+		if(EnvironmentalConfiguration.ACTIVEFEARFACTORGATE && (GatesList.size() == 1))
+			gateFearFactor = calculateFearFactorGate2(robotLocation, robotId, GatesList);
 
 		return robotFearFactor * gateFearFactor;
 	}	

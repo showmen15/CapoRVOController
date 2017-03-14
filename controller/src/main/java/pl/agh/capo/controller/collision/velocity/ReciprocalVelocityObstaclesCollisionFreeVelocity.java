@@ -15,7 +15,7 @@ import com.vividsolutions.jts.geom.LineSegment;
 
 public class ReciprocalVelocityObstaclesCollisionFreeVelocity extends AbstractCollisionFreeVelocity {
 
-	///////////////// Blocks ////////////////////////
+	/////////////// Blocks //////////////////////// Nie testowane
 //	private static double neighborDist = 15.0f;
 //	private static int maxNeighbors = 10;
 //	private static double timeHorizon = 5.0f; // 2.0 //2.5
@@ -25,17 +25,51 @@ public class ReciprocalVelocityObstaclesCollisionFreeVelocity extends AbstractCo
 //	private static Vector2 velocityRVO = new Vector2(0.0f, 0.0f);
 //	public static double timeStep = 0.25f;
 
-	//////////////////// CAPO /////////////////////////
-	 private static double neighborDist = 1.3f;
-	 private static int maxNeighbors = 1000;
-	 private static double timeHorizon = 2.7f; //2.0 //2.5
-	 private static double timeHorizonObst = 0.0f;
+	//////////////////// CAPO ///////////////////////// Nie testowane
+//	 private static double neighborDist = 2.3f;
+//	 private static int maxNeighbors = 30;
+//	 private static double timeHorizon = 2.7f; //2.0 //2.5
+//	 private static double timeHorizonObst = 0.5f; //0.0
+//	 private static double radius = 0.3f;
+//	 private static double maxSpeed = 0.25f; //0.25 //0.2
+//	 private static Vector2 velocityRVO = new Vector2(0.0f, 0.0f);
+//	 public static double timeStep = 0.2f;
+
+	
+	///////////// PrzypadkiDlaOkregu12 ////////////////////////
+//	private static double neighborDist = 15.0f;
+//	private static int maxNeighbors = 10;
+//	private static double timeHorizon = 5.0f; // 2.0 //2.5
+//	private static double timeHorizonObst = 5.0f;
+//	private static double radius = 0.3f;
+//	private static double maxSpeed = 0.2f; // 0.25 //0.2
+//	private static Vector2 velocityRVO = new Vector2(0.0f, 0.0f);
+//	public static double timeStep = 0.25f;
+	
+	
+	//////////////////// CAPO dla PrzejœciePrzezDrzwi  /////////////////////////
+	private static double neighborDist = 2.3f;
+	private static int maxNeighbors = 30;
+	private static double timeHorizon = 2.7f; 
+	private static double timeHorizonObst = 1.5f;
+	
 	 private static double radius = 0.3f;
-	 private static double maxSpeed = 0.25f; //0.25 //0.2
+	 private static double maxSpeed = 0.25f; 
 	 private static Vector2 velocityRVO = new Vector2(0.0f, 0.0f);
 	 public static double timeStep = 0.2f;
 
-	//////////////////// Circle ////////////////////
+	 
+//		//////////////////// CAPO dla otwarta przestrzen 7x5 /////////////////////////
+//	private static double neighborDist = 15.0f;
+//	private static int maxNeighbors = 10;
+//	private static double timeHorizon = 5.0f; // 2.0 //2.5
+//	private static double timeHorizonObst = 5.0f;
+//	 private static double radius = 0.3f;
+//	 private static double maxSpeed = 0.25f; //0.25 //0.2
+//	 private static Vector2 velocityRVO = new Vector2(0.0f, 0.0f);
+//	 public static double timeStep = 0.2f;
+//	 
+	//////////////////// Circle //////////////////// Nie testowane
 	// private static double neighborDist = 15.0f;
 	// private static int maxNeighbors = 10;
 	// private static double timeHorizon = 10.0f;
@@ -82,7 +116,8 @@ public class ReciprocalVelocityObstaclesCollisionFreeVelocity extends AbstractCo
 			
 			CurrentAgent.update();
 		}
-		
+		else
+			CurrentAgent.velocity_ = new Vector2(velocity.getX(), velocity.getY());
 		
 		
 		// currentAgent = createAgent(RobotID);
@@ -110,11 +145,11 @@ public class ReciprocalVelocityObstaclesCollisionFreeVelocity extends AbstractCo
 		CurrentAgent.prefVelocity_ = currentVelocity;
 
 		/* Perturb a little to avoid deadlocks due to perfect symmetry. */
-//		double angle = (double) random.nextDouble() * 2.0f * (double) Math.PI;
-//		double dist = (double) random.nextDouble() * 0.0001f;
-//
-//		CurrentAgent.prefVelocity_ = Vector2.OpAddition(CurrentAgent.prefVelocity_,
-//				Vector2.OpMultiply(dist, new Vector2((double) Math.cos(angle), (double) Math.sin(angle))));
+		double angle = (double) random.nextDouble() * 2.0f * (double) Math.PI;
+		double dist = (double) random.nextDouble() * 0.0001f;
+
+		CurrentAgent.prefVelocity_ = Vector2.OpAddition(CurrentAgent.prefVelocity_,
+				Vector2.OpMultiply(dist, new Vector2((double) Math.cos(angle), (double) Math.sin(angle))));
 	}
 
 	private void initObstacle() {

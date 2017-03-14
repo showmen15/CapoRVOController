@@ -5,6 +5,7 @@ import org.apache.log4j.Logger;
 import pl.agh.capo.utilities.EnvironmentalConfiguration;
 import pl.agh.capo.utilities.communication.StateCollector;
 import pl.agh.capo.utilities.communication.StatePublisher;
+import pl.agh.capo.utilities.maze.Gate;
 import pl.agh.capo.utilities.maze.MazeMap;
 import pl.agh.capo.utilities.state.Destination;
 import pl.agh.capo.utilities.state.Location;
@@ -71,8 +72,12 @@ public class RobotController implements Runnable {
 		stateCollector = StateCollector.createAndEstablishConnection(collisionFreeVelocityGenerator);
 		statePublisher = StatePublisher.createAndEstablishConnection();
 		setPath(destinationList);
-		
-		fear = new Fear(robotId, mazeMap);
+	
+		try {
+			fear = new Fear(robotId,mazeMap.getGates());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	public void setPath(List<Destination> destinationList) {
@@ -132,14 +137,17 @@ public class RobotController implements Runnable {
 	    		}
 	        else
 	        {
-		        if (collide) 
-		        {
-		            optimalVelocity = collisionFreeVelocity.get();
-		            setVelocity(optimalVelocity);
-		        }	
+		        //if (collide) 
+		        //{
+	        	//fearfactor = 7.7;  
+	        	optimalVelocity = collisionFreeVelocity.get();
+		         setVelocity(optimalVelocity);
+		        //}	
 	        }
 	        
 	        robot.setVelocity(motionModel.getVelocityLeft(), motionModel.getVelocityRight());  
+	        
+	        
 	        
 	        collisionFreeState = createCollisionFreeState(optimalVelocity);
 	        collisionFreeState.setRobotFearFactor(fearfactor);

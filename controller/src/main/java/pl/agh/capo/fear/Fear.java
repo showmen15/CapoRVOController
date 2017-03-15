@@ -10,11 +10,10 @@ import pl.agh.capo.utilities.state.Location;
 import pl.agh.capo.utilities.state.State;
 import pl.agh.capo.utilities.maze.*;
 
-
-
 public class Fear {
 
-	public static final double MAXOBSERVATIONDISTANCE = 0.5;  //do sprawdzenia
+	public static final double MAXOBSERVATIONDISTANCE = EnvironmentalConfiguration.MAX_OBSERVATION_DISTANCE_FF;
+	public static final double RL = EnvironmentalConfiguration.RL_CP;
 
 	private int currentRobotID;
 	private ArrayList<Vector3D> GatesList;
@@ -109,7 +108,7 @@ public class Fear {
 	private double psi2(Vector2D gateCenterPoint, Vector2D robotPosition)
 	{
 		double distanceGateRobot = getDistance(gateCenterPoint, robotPosition);
-		double Rl = 1.0;
+		double Rl = RL;
 		double result;
 
 		if (distanceGateRobot <= Rl)

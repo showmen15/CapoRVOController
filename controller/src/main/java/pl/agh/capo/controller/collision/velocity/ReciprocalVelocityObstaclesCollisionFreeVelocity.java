@@ -15,60 +15,69 @@ import com.vividsolutions.jts.geom.LineSegment;
 
 public class ReciprocalVelocityObstaclesCollisionFreeVelocity extends AbstractCollisionFreeVelocity {
 
+	private static double neighborDist = EnvironmentalConfiguration.NEIGHBOR_DIST;
+	private static int maxNeighbors = EnvironmentalConfiguration.MAX_NEIGHBORS;
+	private static double timeHorizon = EnvironmentalConfiguration.TIME_HORIZON;
+	private static double timeHorizonObst = EnvironmentalConfiguration.TIME_HORIZON_OBST;
+
+	private static double radius = EnvironmentalConfiguration.RADIUS;
+	private static double maxSpeed = EnvironmentalConfiguration.MAX_SPEED;
+
+	private static Vector2 velocityRVO = new Vector2(0.0f, 0.0f);
+	private static double timeStep = EnvironmentalConfiguration.TIME_STEP;
+
 	/////////////// Blocks //////////////////////// Nie testowane
-//	private static double neighborDist = 15.0f;
-//	private static int maxNeighbors = 10;
-//	private static double timeHorizon = 5.0f; // 2.0 //2.5
-//	private static double timeHorizonObst = 5.0f;
-//	private static double radius = 2.0f;
-//	private static double maxSpeed = 2.0f; // 0.25 //0.2
-//	private static Vector2 velocityRVO = new Vector2(0.0f, 0.0f);
-//	public static double timeStep = 0.25f;
+	// private static double neighborDist = 15.0f;
+	// private static int maxNeighbors = 10;
+	// private static double timeHorizon = 5.0f; // 2.0 //2.5
+	// private static double timeHorizonObst = 5.0f;
+	// private static double radius = 2.0f;
+	// private static double maxSpeed = 2.0f; // 0.25 //0.2
+	// private static Vector2 velocityRVO = new Vector2(0.0f, 0.0f);
+	// public static double timeStep = 0.25f;
 
 	//////////////////// CAPO ///////////////////////// Nie testowane
-//	 private static double neighborDist = 2.3f;
-//	 private static int maxNeighbors = 30;
-//	 private static double timeHorizon = 2.7f; //2.0 //2.5
-//	 private static double timeHorizonObst = 0.5f; //0.0
-//	 private static double radius = 0.3f;
-//	 private static double maxSpeed = 0.25f; //0.25 //0.2
-//	 private static Vector2 velocityRVO = new Vector2(0.0f, 0.0f);
-//	 public static double timeStep = 0.2f;
+	// private static double neighborDist = 2.3f;
+	// private static int maxNeighbors = 30;
+	// private static double timeHorizon = 2.7f; //2.0 //2.5
+	// private static double timeHorizonObst = 0.5f; //0.0
+	// private static double radius = 0.3f;
+	// private static double maxSpeed = 0.25f; //0.25 //0.2
+	// private static Vector2 velocityRVO = new Vector2(0.0f, 0.0f);
+	// public static double timeStep = 0.2f;
 
-	
 	///////////// PrzypadkiDlaOkregu12 ////////////////////////
-//	private static double neighborDist = 15.0f;
-//	private static int maxNeighbors = 10;
-//	private static double timeHorizon = 5.0f; // 2.0 //2.5
-//	private static double timeHorizonObst = 5.0f;
-//	private static double radius = 0.3f;
-//	private static double maxSpeed = 0.2f; // 0.25 //0.2
-//	private static Vector2 velocityRVO = new Vector2(0.0f, 0.0f);
-//	public static double timeStep = 0.25f;
-	
-	
-	//////////////////// CAPO dla PrzejœciePrzezDrzwi  /////////////////////////
-	private static double neighborDist = 2.3f;
-	private static int maxNeighbors = 30;
-	private static double timeHorizon = 2.7f; 
-	private static double timeHorizonObst = 1.5f;
-	
-	 private static double radius = 0.3f;
-	 private static double maxSpeed = 0.25f; 
-	 private static Vector2 velocityRVO = new Vector2(0.0f, 0.0f);
-	 public static double timeStep = 0.2f;
+	// private static double neighborDist = 15.0f;
+	// private static int maxNeighbors = 10;
+	// private static double timeHorizon = 5.0f; // 2.0 //2.5
+	// private static double timeHorizonObst = 5.0f;
+	// private static double radius = 0.3f;
+	// private static double maxSpeed = 0.2f; // 0.25 //0.2
+	// private static Vector2 velocityRVO = new Vector2(0.0f, 0.0f);
+	// public static double timeStep = 0.25f;
 
-	 
-//		//////////////////// CAPO dla otwarta przestrzen 7x5 /////////////////////////
-//	private static double neighborDist = 15.0f;
-//	private static int maxNeighbors = 10;
-//	private static double timeHorizon = 5.0f; // 2.0 //2.5
-//	private static double timeHorizonObst = 5.0f;
-//	 private static double radius = 0.3f;
-//	 private static double maxSpeed = 0.25f; //0.25 //0.2
-//	 private static Vector2 velocityRVO = new Vector2(0.0f, 0.0f);
-//	 public static double timeStep = 0.2f;
-//	 
+	//////////////////// CAPO dla PrzejœciePrzezDrzwi /////////////////////////
+	// private static double neighborDist = 2.3f;
+	// private static int maxNeighbors = 30;
+	// private static double timeHorizon = 2.7f;
+	// private static double timeHorizonObst = 1.5f;
+	//
+	// private static double radius = 0.3f;
+	// private static double maxSpeed = 0.25f;
+	// private static Vector2 velocityRVO = new Vector2(0.0f, 0.0f);
+	// public static double timeStep = 0.2f;
+
+	// //////////////////// CAPO dla otwarta przestrzen 7x5
+	// /////////////////////////
+	// private static double neighborDist = 15.0f;
+	// private static int maxNeighbors = 10;
+	// private static double timeHorizon = 5.0f; // 2.0 //2.5
+	// private static double timeHorizonObst = 5.0f;
+	// private static double radius = 0.3f;
+	// private static double maxSpeed = 0.25f; //0.25 //0.2
+	// private static Vector2 velocityRVO = new Vector2(0.0f, 0.0f);
+	// public static double timeStep = 0.2f;
+	//
 	//////////////////// Circle //////////////////// Nie testowane
 	// private static double neighborDist = 15.0f;
 	// private static int maxNeighbors = 10;
@@ -100,45 +109,23 @@ public class ReciprocalVelocityObstaclesCollisionFreeVelocity extends AbstractCo
 		List<Agent> agents = getAgents();
 		random = new Random();
 		CurrentAgent = createAgent(RobotID);
-		
+
 		if (agents.size() > 0) {
 
 			CurrentAgent.position_ = new Vector2(location.getX(), location.getY());
 			setAgentPrefVelocity(new Vector2(velocity.getX(), velocity.getY()));
-			
+
 			agents_ = agents;
 			kdTree_ = new KdTree();
 			kdTree_.buildAgentTree(agents_);
 			kdTree_.buildObstacleTree(obstacles_);
 
 			CurrentAgent.computeNeighbors(kdTree_); // Simulator.Instance.agents_[agentNo].computeNeighbors();
-			CurrentAgent.computeNewVelocity(); // Simulator.Instance.agents_[agentNo].computeNewVelocity();	
-			
+			CurrentAgent.computeNewVelocity(); // Simulator.Instance.agents_[agentNo].computeNewVelocity();
+
 			CurrentAgent.update();
-		}
-		else
+		} else
 			CurrentAgent.velocity_ = new Vector2(velocity.getX(), velocity.getY());
-		
-		
-		// currentAgent = createAgent(RobotID);
-		//
-		// Vector2 currentLocation = new Vector2(location.getX(),
-		// location.getY());
-		// Vector2 currentVelocity = new
-		// Vector2(velocity.getX(),velocity.getY());
-		//
-		// List<Agent> tmpAgents = getAgents();
-		//
-		// double rangeSq = RVOMath.sqr(currentAgent.timeHorizonObst_ *
-		// currentAgent.maxSpeed_ + currentAgent.radius_);
-		// List<Obstacle> tmpObstacle = new ArrayList<Obstacle>();
-		// //getObstacles(currentLocation,rangeSq);
-		//
-		// currentAgent.position_ = currentLocation;
-		// currentAgent.prefVelocity_ = currentVelocity;
-		//
-		// currentAgent.computeNeighbors(tmpAgents, tmpObstacle);
-		// currentAgent.computeNewVelocity();
 	}
 
 	private void setAgentPrefVelocity(Vector2 currentVelocity) {
@@ -156,31 +143,29 @@ public class ReciprocalVelocityObstaclesCollisionFreeVelocity extends AbstractCo
 		obstacles_ = new ArrayList<Obstacle>();
 		List<Vector2> vert;
 
-		for (LineSegment wall : this.wallCollisionDetector.getWallLineSegments()) 
-		{
-			vert = createObstacle(wall.p0.x,wall.p0.y,wall.p1.x,wall.p1.y);
+		for (LineSegment wall : this.wallCollisionDetector.getWallLineSegments()) {
+			vert = createObstacle(wall.p0.x, wall.p0.y, wall.p1.x, wall.p1.y);
 			addObstacle(vert);
 		}
 	}
 
-	   private  List<Vector2> createObstacle(double x_begin,double y_begin,double x_end, double y_end)
-       {
-           double x_max = Math.max(x_begin, x_end);
-           double y_max = Math.max(y_begin, y_end);
+	private List<Vector2> createObstacle(double x_begin, double y_begin, double x_end, double y_end) {
+		double x_max = Math.max(x_begin, x_end);
+		double y_max = Math.max(y_begin, y_end);
 
-           double x_min = Math.min(x_begin, x_end);
-           double y_min = Math.min(y_begin, y_end);
+		double x_min = Math.min(x_begin, x_end);
+		double y_min = Math.min(y_begin, y_end);
 
-           List<Vector2> temp = new ArrayList<Vector2>();
-           
-           temp.add(new Vector2(x_min, y_max));
-           temp.add(new Vector2(x_min, y_min));
-           temp.add(new Vector2(x_max, y_min));
-           temp.add(new Vector2(x_max, y_max));
-           
-           return temp;
-       }
-	
+		List<Vector2> temp = new ArrayList<Vector2>();
+
+		temp.add(new Vector2(x_min, y_max));
+		temp.add(new Vector2(x_min, y_min));
+		temp.add(new Vector2(x_max, y_min));
+		temp.add(new Vector2(x_max, y_max));
+
+		return temp;
+	}
+
 	@Override
 	public boolean isCurrentVelocityCollisionFree() {
 
@@ -279,104 +264,4 @@ public class ReciprocalVelocityObstaclesCollisionFreeVelocity extends AbstractCo
 
 		return obstacleNo;
 	}
-
-	// /*public int addObstacle(List<Vector2> vertices)
-	// {
-	//
-	//
-	// if (vertices.size() < 2)
-	// {
-	// return -1;
-	// }
-	//
-	// int obstacleNo = walls.Count;
-	//
-	// for (int i = 0; i < vertices.Count; ++i)
-	// {
-	// Obstacle obstacle = new Obstacle();
-	// obstacle.point_ = vertices[i];
-	//
-	// if (i != 0)
-	// {
-	// obstacle.previous_ = walls[walls.Count - 1];
-	// obstacle.previous_.next_ = obstacle;
-	// }
-	//
-	// if (i == vertices.Count - 1)
-	// {
-	// obstacle.next_ = walls[obstacleNo];
-	// obstacle.next_.previous_ = obstacle;
-	// }
-	//
-	// obstacle.direction_ = RVOMath.normalize(vertices[(i == vertices.Count - 1
-	// ? 0 : i + 1)] - vertices[i]);
-	//
-	// if (vertices.Count == 2)
-	// {
-	// obstacle.convex_ = true;
-	// }
-	// else
-	// {
-	// obstacle.convex_ = (RVOMath.leftOf(vertices[(i == 0 ? vertices.Count - 1
-	// : i - 1)], vertices[i], vertices[(i == vertices.Count - 1 ? 0 : i + 1)])
-	// >= 0.0f);
-	// }
-	//
-	// obstacle.id_ = walls.Count;
-	// walls.Add(obstacle);
-	//
-	// if (i == 0)
-	// obstacles.Add(obstacle);
-	// }
-	//
-	// return obstacleNo;
-	// }*/
-	//
-	// private List<Obstacle> getObstacles(Vector2 currentlocation, double
-	// rangeSq)
-	// {
-	// List<Obstacle> temp = new ArrayList<Obstacle>();
-	// List<Obstacle> walls = getWalls();
-	//
-	// for (int i = 0; i < walls.size(); i++)
-	//
-	// {
-	// Obstacle obstacle1 = walls.get(i);
-	// Obstacle obstacle2 = obstacle1.next_;
-	//
-	// double agentLeftOfLine = RVOMath.leftOf(obstacle1.point_,
-	// obstacle2.point_, currentlocation);
-	//
-	//
-	// double distSqLine = RVOMath.sqr(agentLeftOfLine) /
-	// RVOMath.absSq(Vector2.OpSubtraction(obstacle2.point_, obstacle1.point_));
-	//
-	// if (distSqLine < rangeSq)
-	// {
-	// if (agentLeftOfLine < 0.0f)
-	// {
-	// temp.add(walls.get(i));
-	//
-	// }
-	// }
-	//
-	// }
-	//
-	// return temp;
-	// }
-	//
-	// private List<Obstacle> getWalls()
-	// {
-	// return null;
-	// }
-	//
-	//// private double round(double r)
-	//// {
-	//// return r;
-	//// /*if(Math.abs(r) < 0.000001)
-	//// return 0;
-	//// else
-	//// return Math.round(r * 10000000.0) / 10000000.0;*/
-	//// }
-
 }

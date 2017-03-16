@@ -114,36 +114,45 @@ public class RobotController implements Runnable {
 	        State collisionFreeState;
 	        double fearfactor = 0.0;
         
-	        AbstractCollisionFreeVelocity collisionFreeVelocity = collisionFreeVelocityGenerator.createCollisionFreeState(motionModel.getLocation(), optimalVelocity);
-	        collide = !collisionFreeVelocity.isCurrentVelocityCollisionFree();
+			if (EnvironmentalConfiguration.FEAR) {
+				
+				fearfactor = fear.CalculateFearFactor(collisionFreeVelocityGenerator.GetStates(), robotLocation);
+				
+			    AbstractCollisionFreeVelocity collisionFreeVelocity = collisionFreeVelocityGenerator.createCollisionFreeState(motionModel.getLocation(), optimalVelocity, fearfactor);
+				collide = !collisionFreeVelocity.isCurrentVelocityCollisionFree();
+				
+				optimalVelocity = collisionFreeVelocity.get();
+				setVelocity(optimalVelocity);
+				
+				
+				
+				//AbstractCollisionFreeVelocity collisionFreeVelocity = collisionFreeVelocityGenerator.createCollisionFreeState(motionModel.getLocation(), optimalVelocity);
+				
+				//collide = !collisionFreeVelocity.isCurrentVelocityCollisionFree();
 
-	        if(EnvironmentalConfiguration.FEAR)
-	    		{
-	    			fearfactor = fear.CalculateFearFactor(collisionFreeVelocityGenerator.GetStates(),robotLocation);
-	    			boolean avoidCollision = false;
-	    			
-	    			if (collide)
-	    				avoidCollision = fear.HaveAvoidCollision(collisionFreeVelocityGenerator.GetStates(), fearfactor);
-	    			
-	    			if (avoidCollision) 
-	    			{
-	    				collide = true;
-	    				
-	    				optimalVelocity = collisionFreeVelocity.get();
-			            setVelocity(optimalVelocity);			    				
-	    			}
-	    			else
-	    				collide = false;
-	    		}
-	        else
-	        {
-		        //if (collide) 
-		        //{
-	        	//fearfactor = 7.7;  
-	        	optimalVelocity = collisionFreeVelocity.get();
-		         setVelocity(optimalVelocity);
-		        //}	
-	        }
+				//fearfactor = fear.CalculateFearFactor(collisionFreeVelocityGenerator.GetStates(), robotLocation);
+				//boolean avoidCollision = false;
+
+				//if (collide)
+				//	avoidCollision = fear.HaveAvoidCollision(collisionFreeVelocityGenerator.GetStates(), fearfactor);
+
+				//if (avoidCollision) {
+				//	collide = true;
+
+				//	optimalVelocity = collisionFreeVelocity.get();
+				//	setVelocity(optimalVelocity);
+				//} 
+				//else
+				//	collide = false;
+			} 
+			else 
+			{
+				AbstractCollisionFreeVelocity collisionFreeVelocity = collisionFreeVelocityGenerator.createCollisionFreeState(motionModel.getLocation(), optimalVelocity);
+				collide = !collisionFreeVelocity.isCurrentVelocityCollisionFree();
+
+				optimalVelocity = collisionFreeVelocity.get();
+				setVelocity(optimalVelocity);
+			}
 	        
 	        robot.setVelocity(motionModel.getVelocityLeft(), motionModel.getVelocityRight());  
 	        

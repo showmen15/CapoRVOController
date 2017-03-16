@@ -26,13 +26,13 @@ public class SingleRun {
 		switch (configure.ID_Program) {
 
 		case 0: // FearFactorBase
-			EnvironmentalConfiguration.COLLISIONFREEVELOCITYMETHOD = CollisionFreeVelocityType.RECIPROCAL_VELOCITY_OBSTACLES;
+			EnvironmentalConfiguration.COLLISIONFREEVELOCITYMETHOD = CollisionFreeVelocityType.RECIPROCAL_VELOCITY_OBSTACLES_FEAR_FACTOR;
 			EnvironmentalConfiguration.FEAR = true;
 			EnvironmentalConfiguration.ACTIVEFEARFACTORGATE = false;
 			break;
 
 		case 1: // FearFactorWithPassageThroughTheDoor
-			EnvironmentalConfiguration.COLLISIONFREEVELOCITYMETHOD = CollisionFreeVelocityType.RECIPROCAL_VELOCITY_OBSTACLES;
+			EnvironmentalConfiguration.COLLISIONFREEVELOCITYMETHOD = CollisionFreeVelocityType.RECIPROCAL_VELOCITY_OBSTACLES_FEAR_FACTOR;
 			EnvironmentalConfiguration.FEAR = true;
 			EnvironmentalConfiguration.ACTIVEFEARFACTORGATE = true;
 			break;

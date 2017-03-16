@@ -10,6 +10,7 @@ repositories {
 }
 
 dependencies {
+	compile fileTree(include: ['*.jar'], dir: 'libs')
     compile project(':controller')
     compile 'com.google.code.gson:gson:2.5'
 }

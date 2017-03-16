@@ -16,7 +16,7 @@ public class RightSideCollisionFreeVelocity extends AbstractCollisionFreeVelocit
     public RightSideCollisionFreeVelocity(Map<Integer, State> states, WallCollisionDetector wallCollisionDetector, Location location, Velocity velocity,int robotId) {
         super(states, wallCollisionDetector, location, velocity,robotId);
     }
-
+    
     @Override
     protected void buildVelocityObstacles() {
         velocityObstaclesList = new ArrayList<>();
@@ -28,6 +28,11 @@ public class RightSideCollisionFreeVelocity extends AbstractCollisionFreeVelocit
         });
     }
 
+    @Override
+	protected void buildVelocityObstacles(double currentRobotFearFactor) {
+    	
+    }
+    
     @Override
     protected Velocity findBestCollisionFreeVelocity() {
         double alpha = Math.atan2(velocity.getY(), velocity.getX());

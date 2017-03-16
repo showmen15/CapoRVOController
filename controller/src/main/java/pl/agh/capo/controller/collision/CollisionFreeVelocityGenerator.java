@@ -28,6 +28,10 @@ public class CollisionFreeVelocityGenerator implements StateReceivedCallback {
         return collisionFreeVelocityType.create(states, wallCollisionDetector, location, velocity,robotId);
     }
 
+    public AbstractCollisionFreeVelocity createCollisionFreeState(Location location, Velocity velocity,double currentRobotFearFactor){
+        return collisionFreeVelocityType.create(states, wallCollisionDetector, location, velocity,robotId,currentRobotFearFactor);
+    }
+    
     @Override
     public void handle(State state) {
         if (state.getRobotId() == robotId) 

@@ -26,6 +26,10 @@ public class VelocityObstaclesCollisionFreeVelocity extends AbstractCollisionFre
             }
         });
     }
+    
+	@Override
+	protected void buildVelocityObstacles(double currentRobotFearFactor) {		
+	}
 
    /* @Override
     protected Velocity findBestCollisionFreeVelocity() {

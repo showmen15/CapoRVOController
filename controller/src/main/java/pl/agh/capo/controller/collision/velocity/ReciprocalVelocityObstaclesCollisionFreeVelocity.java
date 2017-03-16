@@ -102,11 +102,27 @@ public class ReciprocalVelocityObstaclesCollisionFreeVelocity extends AbstractCo
 		super(states, wallCollisionDetector, location, velocity, robotId);
 	}
 
+	public ReciprocalVelocityObstaclesCollisionFreeVelocity(Map<Integer, State> states, WallCollisionDetector wallCollisionDetector, Location location, Velocity velocity, int robotId, double currentRobotFearFactor) {
+
+		super(states, wallCollisionDetector, location, velocity, robotId,currentRobotFearFactor);
+	}
+
 	@Override
 	protected void buildVelocityObstacles() {
-
-		initObstacle();
 		List<Agent> agents = getAgents();
+		buildReciprocalVelocityObstacles(agents);
+	}
+	
+	@Override
+	protected void buildVelocityObstacles(double currentRobotFearFactor) {
+		
+		List<Agent> agents = getAgents(currentRobotFearFactor);
+		buildReciprocalVelocityObstacles(agents);
+	}
+	
+	private void buildReciprocalVelocityObstacles(List<Agent> agents)
+	{
+		initObstacle();
 		random = new Random();
 		CurrentAgent = createAgent(RobotID);
 
@@ -202,6 +218,18 @@ public class ReciprocalVelocityObstaclesCollisionFreeVelocity extends AbstractCo
 
 		for (State state : states.values())
 			temp.add(createAgent(state));
+
+		return temp;
+	}
+	
+	private List<Agent> getAgents(double currentRobotFearFactor) {
+		List<Agent> temp = new ArrayList<Agent>();
+
+		for (State state : states.values())
+		{
+			if(state.getRobotFearFactor() >= currentRobotFearFactor)
+				temp.add(createAgent(state));			
+		}
 
 		return temp;
 	}

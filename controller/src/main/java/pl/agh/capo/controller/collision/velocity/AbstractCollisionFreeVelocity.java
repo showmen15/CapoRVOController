@@ -33,6 +33,15 @@ public abstract class AbstractCollisionFreeVelocity {
         this.RobotID = robotId;
         buildVelocityObstacles();
     }
+    
+    public AbstractCollisionFreeVelocity(Map<Integer, State> states, WallCollisionDetector wallCollisionDetector, Location location, Velocity velocity,int robotId, double currentRobotFearFactor) {
+        this.states = states;
+        this.location = location;
+        this.velocity = velocity;
+        this.wallCollisionDetector = wallCollisionDetector;
+        this.RobotID = robotId;
+        buildVelocityObstacles(currentRobotFearFactor);
+    }
 
     public boolean isCurrentVelocityCollisionFree() {
         return isVelocityCollisionFree(velocity);
@@ -43,6 +52,8 @@ public abstract class AbstractCollisionFreeVelocity {
     }
 
     protected abstract void buildVelocityObstacles();
+    
+    protected abstract void buildVelocityObstacles(double currentRobotFearFactor);
 
     protected abstract Velocity findBestCollisionFreeVelocity();
 

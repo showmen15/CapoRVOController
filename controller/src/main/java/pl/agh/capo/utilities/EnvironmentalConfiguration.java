@@ -46,7 +46,7 @@ public class EnvironmentalConfiguration {
 	// Multiplier of max speed during selecting velocity in pure VO solution
 	public static final double MIN_SPEED_FACTOR = 0.2;
 
-	public static CollisionFreeVelocityType COLLISIONFREEVELOCITYMETHOD = CollisionFreeVelocityType.RECIPROCAL_VELOCITY_OBSTACLES;
+	public static CollisionFreeVelocityType COLLISIONFREEVELOCITYMETHOD = CollisionFreeVelocityType.RECIPROCAL_VELOCITY_OBSTACLES_FEAR_FACTOR;
 
 	public static boolean FEAR = (1 == 1);
 

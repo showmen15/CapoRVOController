@@ -24,7 +24,7 @@ public class MazeVisualizer extends JFrame implements StateReceivedCallback {
 
     private MazePanel mazePanel;
     private MazeMap mazeMap;
-
+    
     private MazeVisualizer() {
         super("CAPO SIMULATION");
     }
@@ -34,7 +34,7 @@ public class MazeVisualizer extends JFrame implements StateReceivedCallback {
     }
 
     public void open() throws FileNotFoundException {
-        setJMenuBar(createMenuBar());
+    	setJMenuBar(createMenuBar());
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         mazePanel = new MazePanel();
         setContentPane(createSplitPanel());
@@ -58,7 +58,11 @@ public class MazeVisualizer extends JFrame implements StateReceivedCallback {
     }
     
     
-    public void open(String sMapPath) {
+    public void open(String sMapPath, String sMathodAndCaseName) {
+    	
+    	if(sMathodAndCaseName != null && sMathodAndCaseName.length() > 0)    	
+    		setTitle(sMathodAndCaseName);
+    	
         setJMenuBar(createMenuBar());
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         mazePanel = new MazePanel();

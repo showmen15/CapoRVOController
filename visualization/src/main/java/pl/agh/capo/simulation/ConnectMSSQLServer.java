@@ -184,7 +184,7 @@ public class ConnectMSSQLServer {
 
 			conn = createNewConnection();
 
-			String SQL = "SELECT ID_Case, ID_Program, ID_Trials, ID_Map, Map, ID_Config, ConfigFile FROM dbo.TaskConfig WHERE ID_Case = "
+			String SQL = "SELECT ID_Case, ID_Program, ID_Trials, ID_Map, Map, ID_Config, ConfigFile, Name_Program, Name_Map, Name_Config FROM dbo.TaskConfig WHERE ID_Case = "
 					+ ID_Case;
 
 			stmt = conn.createStatement();
@@ -198,6 +198,10 @@ public class ConnectMSSQLServer {
 				result.Map = rs.getString("Map");
 				result.ID_Config = rs.getInt("ID_Config");
 				result.ConfigFile = rs.getString("ConfigFile");
+				
+				result.Name_Program = rs.getString("Name_Program");
+				result.Name_Map =  rs.getString("Name_Map");
+				result.Name_Config = rs.getString("Name_Config");
 			}
 
 		} catch (SQLException e) {

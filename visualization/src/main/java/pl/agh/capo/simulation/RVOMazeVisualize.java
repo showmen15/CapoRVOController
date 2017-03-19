@@ -23,7 +23,7 @@ public class RVOMazeVisualize {
 
 		TaskConfig configure = log.GetTaskConfig(Integer.parseInt(args[0]));
 		String sCaseName = "Algorytm: " + configure.Name_Program + " Mapa: " + configure.Name_Map
-				+ " Ustawienie robotów: " + configure.Name_Config;
+				+ " Konfiguracja: " + configure.Name_Config;
 
 		try {
 			Files.write(Paths.get(mapPath), configure.Map.getBytes(), StandardOpenOption.CREATE,

@@ -53,52 +53,93 @@ public class SingleRun {
 			throw new IOException("Nieprawidlowe dane wejsciowe");
 		}
 
+		switch (configure.ID_Program) // Config AlgoritmSettings
+		{
 
-		//Tylko do testow
-//		switch (configure.ID_Program) // Config AlgoritmSettings
-//		{
-//
-//		case 0: // FearFactorBase
-//		case 1: // FearFactorWithPassageThroughTheDoor
-//		case 2: // RVOBase
-//			switch (configure.ID_Map) {
-//			case 10: // OtwartaPrzestrzeñ7x5m.roson
-//			case 12: // Pojedyncze Roboty OtwartaPrzestrzeñ 7x5m.roson
-//
-//				EnvironmentalConfiguration.NEIGHBOR_DIST = 15.0f;
-//				EnvironmentalConfiguration.MAX_NEIGHBORS = 10;
-//				EnvironmentalConfiguration.TIME_HORIZON = 5.0f; // 2.0 //2.5
-//				EnvironmentalConfiguration.TIME_HORIZON_OBST = 5.0f;
-//
-//				EnvironmentalConfiguration.RADIUS = 0.3f;
-//				EnvironmentalConfiguration.MAX_SPEED = 0.25f; // 0.25 //0.2
-//				EnvironmentalConfiguration.TIME_STEP = 0.2f;
-//				break;
-//
-//			case 11: // PrzejœciePrzezDrzwi7x5.roson
-//
-//				EnvironmentalConfiguration.NEIGHBOR_DIST = 2.3f;
-//				EnvironmentalConfiguration.MAX_NEIGHBORS = 30;
-//				EnvironmentalConfiguration.TIME_HORIZON = 2.7f;
-//				EnvironmentalConfiguration.TIME_HORIZON_OBST = 1.5f;
-//
-//				EnvironmentalConfiguration.RADIUS = 0.3f;
-//				EnvironmentalConfiguration.MAX_SPEED = 0.25f;
-//				EnvironmentalConfiguration.TIME_STEP = 0.2f;
-//				break;
-//
-//			default:
-//				throw new Exception("Algorytm nie skonfigurowany!!!!");
-//
-//			}
-//			break;
-//		case 3: // RVOWithRightHand
-//
-//			break;
-//		default:
-//			throw new IOException("Nieprawidlowe dane wejsciowe");
-//
-//		}
+		case 0: // FearFactorBase
+		case 1: // FearFactorWithPassageThroughTheDoor
+		case 2: // RVOBase
+			switch (configure.ID_Map) {
+			case 10: // OtwartaPrzestrzeñ7x5m.roson
+
+				EnvironmentalConfiguration.NEIGHBOR_DIST = 2.0f;
+				EnvironmentalConfiguration.MAX_NEIGHBORS = 10;
+				EnvironmentalConfiguration.TIME_HORIZON = 3.0f;
+				EnvironmentalConfiguration.TIME_HORIZON_OBST = 5.0f;
+
+				EnvironmentalConfiguration.RADIUS = 0.3f;
+				EnvironmentalConfiguration.MAX_SPEED = 0.25f;
+				EnvironmentalConfiguration.TIME_STEP = 0.2f;
+
+				EnvironmentalConfiguration.MAX_OBSERVATION_DISTANCE_FF = 2.0;
+				EnvironmentalConfiguration.RL_CP = 1.0;
+				break;
+
+			case 12: // Pojedyncze Roboty OtwartaPrzestrzeñ 7x5m.roson
+
+				EnvironmentalConfiguration.NEIGHBOR_DIST = 2.0f;
+				EnvironmentalConfiguration.MAX_NEIGHBORS = 10;
+				EnvironmentalConfiguration.TIME_HORIZON = 3.0f;
+				EnvironmentalConfiguration.TIME_HORIZON_OBST = 5.0f;
+
+				EnvironmentalConfiguration.RADIUS = 0.3f;
+				EnvironmentalConfiguration.MAX_SPEED = 0.25f;
+				EnvironmentalConfiguration.TIME_STEP = 0.2f;
+
+				EnvironmentalConfiguration.MAX_OBSERVATION_DISTANCE_FF = 2.0;
+				EnvironmentalConfiguration.RL_CP = 1.0;
+				break;
+
+			case 11: // PrzejœciePrzezDrzwi7x5.roson
+
+				EnvironmentalConfiguration.NEIGHBOR_DIST = 2.4f;
+				EnvironmentalConfiguration.MAX_NEIGHBORS = 30;
+				EnvironmentalConfiguration.TIME_HORIZON = 2.7f;
+				EnvironmentalConfiguration.TIME_HORIZON_OBST = 1.5f;
+
+				EnvironmentalConfiguration.RADIUS = 0.3f;
+				EnvironmentalConfiguration.MAX_SPEED = 0.25f;
+				EnvironmentalConfiguration.TIME_STEP = 0.2f;
+
+				EnvironmentalConfiguration.MAX_OBSERVATION_DISTANCE_FF = 2.0;
+				EnvironmentalConfiguration.RL_CP = 1.0;
+				break;
+				
+			default:
+				throw new Exception("Algorytm nie skonfigurowany!!!!");
+
+			}
+			break;
+		case 3: // RVOWithRightHand
+
+			switch (configure.ID_Map) {
+			case 10: // OtwartaPrzestrzeñ7x5m.roson
+			case 12: // Pojedyncze Roboty OtwartaPrzestrzeñ 7x5m.roson
+			case 11: // PrzejœciePrzezDrzwi7x5.roson
+				EnvironmentalConfiguration.ROBOT_DIAMETER = 0.3;
+				EnvironmentalConfiguration.ROBOT_WHEELS_HALF_DISTANCE = 0.14;
+				EnvironmentalConfiguration.ROBOT_MAX_SPEED = 0.5;
+				EnvironmentalConfiguration.PREF_ROBOT_SPEED = EnvironmentalConfiguration.ROBOT_MAX_SPEED / 2.0;
+				EnvironmentalConfiguration.ANGULAR_VELOCITY_FACTOR = 3.0;
+				EnvironmentalConfiguration.RECIPROCITY_FACTOR_OPPOSITE = 5.0;
+				EnvironmentalConfiguration.RECIPROCITY_FACTOR_PRIMARY = 1.0;
+				EnvironmentalConfiguration.RECIPROCITY_FACTOR_SUBORDINATED = 10.0;
+				EnvironmentalConfiguration.RECIPROCITY_FACTOR_BEHIND = 3.0;
+				EnvironmentalConfiguration.WALL_COLLISION_MARGIN_FACTOR = 1.6;
+				EnvironmentalConfiguration.VO_ROBOT_RADIUS = 1.6 * EnvironmentalConfiguration.ROBOT_DIAMETER;
+				EnvironmentalConfiguration.ACCEPTABLE_RADIUS = 1 * EnvironmentalConfiguration.VO_ROBOT_RADIUS;
+				EnvironmentalConfiguration.MIN_SPEED_FACTOR = 0.2;
+				break;
+				
+			default:
+				throw new Exception("Algorytm nie skonfigurowany!!!!");
+
+			}
+			break;
+		default:
+			throw new IOException("Nieprawidlowe dane wejsciowe");
+
+		}
 	}
 
 	public static void main(String[] args) throws Exception {

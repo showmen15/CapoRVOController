@@ -124,6 +124,11 @@ public class RobotController implements Runnable {
 				optimalVelocity = collisionFreeVelocity.get();
 				setVelocity(optimalVelocity);
 				
+				if(fear.EmergencyStop(collisionFreeVelocityGenerator.GetStates(), robotLocation, optimalVelocity, fearfactor))
+				{
+					optimalVelocity = new Velocity(0, 0);				
+					setVelocity(optimalVelocity);
+				}
 				
 				
 				//AbstractCollisionFreeVelocity collisionFreeVelocity = collisionFreeVelocityGenerator.createCollisionFreeState(motionModel.getLocation(), optimalVelocity);

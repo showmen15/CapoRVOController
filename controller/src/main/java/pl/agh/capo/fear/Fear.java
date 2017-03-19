@@ -8,6 +8,7 @@ import com.vividsolutions.jts.math.Vector3D;
 import pl.agh.capo.utilities.EnvironmentalConfiguration;
 import pl.agh.capo.utilities.state.Location;
 import pl.agh.capo.utilities.state.State;
+import pl.agh.capo.utilities.state.Velocity;
 import pl.agh.capo.utilities.maze.*;
 
 public class Fear {
@@ -155,6 +156,26 @@ public class Fear {
 			   if(currentFearFactor < current.getRobotFearFactor())
 				   return true;						
 		}
+		
+		return false;
+	}
+	
+	
+	public Boolean EmergencyStop(Map<Integer, State> states,Location robotLocation,Velocity optimalVelocity, double currentRobotFF)
+	{
+		double minDistance = 1.2 * EnvironmentalConfiguration.ROBOT_DIAMETER;
+		
+		for (State current : states.values())
+		{
+			if(current.getRobotId() == currentRobotID)
+				continue;
+			else
+			{
+				if((robotLocation.getDistance(current.getLocation()) <= minDistance) && (currentRobotFF > current.getRobotFearFactor())) 
+					return true;
+			}
+
+		}		
 		
 		return false;
 	}

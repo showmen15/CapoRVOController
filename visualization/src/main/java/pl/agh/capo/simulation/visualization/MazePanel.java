@@ -24,8 +24,8 @@ class MazePanel extends JPanel {
 
     private final static Color[] ROBOT_COLORS = new Color[]{Color.black, Color.blue, Color.cyan, Color.green, Color.magenta, Color.orange, Color.pink, Color.yellow};
 
-    private final static double MAZE_SIZE = 500.0;
-    private final static double START_MAZE_COORDINATE = 50.0;
+    public static double MAZE_SIZE = 500.0;
+    public static double START_MAZE_COORDINATE = 5.0;
 
     private MazeMap map;
     private HashMap<Integer, State> robotStates = new HashMap<>();

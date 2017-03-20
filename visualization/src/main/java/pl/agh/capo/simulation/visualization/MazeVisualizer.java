@@ -63,14 +63,18 @@ public class MazeVisualizer extends JFrame implements StateReceivedCallback {
     	if(sMathodAndCaseName != null && sMathodAndCaseName.length() > 0)    	
     		setTitle(sMathodAndCaseName);
     	
-        setJMenuBar(createMenuBar());
+        //setJMenuBar(createMenuBar());
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         mazePanel = new MazePanel();
         setContentPane(createSplitPanel());
-        setSize(FRAME_SIZE);
+        //setSize(FRAME_SIZE);
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
         setVisible(true);
-        setResizable(false);
-
+        setResizable(true);
+        repaint();
+                
+        mazePanel.MAZE_SIZE =  Math.min(this.getWidth(), this.getHeight()) -  (35 + mazePanel.START_MAZE_COORDINATE); 
+      
         try {
             mazeMap =  new Gson().fromJson(new FileReader(new File(sMapPath)), MazeMap.class);
             mazePanel.setMaze(mazeMap);
@@ -139,10 +143,14 @@ public class MazeVisualizer extends JFrame implements StateReceivedCallback {
     }
 
     private JSplitPane createSplitPanel() {
-        JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, mazePanel, new Panel());
-        splitPane.setDividerSize(5);
-        splitPane.setDividerLocation(SPLIT_DIVIDER_LOCATION);
-        splitPane.setEnabled(false);
+    	
+    	 JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, mazePanel,null);
+        //JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, mazePanel, new Panel());
+       // splitPane.setDividerSize(0);
+        
+       // splitPane.setDividerSize(5);
+       // splitPane.setDividerLocation(SPLIT_DIVIDER_LOCATION);
+       // splitPane.setEnabled(true);
         return splitPane;
     }
 

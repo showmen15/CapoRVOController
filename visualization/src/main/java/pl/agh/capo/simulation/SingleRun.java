@@ -105,6 +105,36 @@ public class SingleRun {
 				EnvironmentalConfiguration.RL_CP = 1.0;
 				break;
 				
+			case 13: //W¹skiKorytarz7x5m.roson
+				
+				EnvironmentalConfiguration.NEIGHBOR_DIST = 2.4f;
+				EnvironmentalConfiguration.MAX_NEIGHBORS = 30;
+				EnvironmentalConfiguration.TIME_HORIZON = 2.7f;
+				EnvironmentalConfiguration.TIME_HORIZON_OBST = 2.5f;
+
+				EnvironmentalConfiguration.RADIUS = 0.3f;
+				EnvironmentalConfiguration.MAX_SPEED = 0.25f;
+				EnvironmentalConfiguration.TIME_STEP = 0.2f;
+
+				EnvironmentalConfiguration.MAX_OBSERVATION_DISTANCE_FF = 2.0;
+				EnvironmentalConfiguration.RL_CP = 1.0;
+				break;
+				
+			case 14: //W¹skiePrzejœcieMijankaNowa
+				
+				EnvironmentalConfiguration.NEIGHBOR_DIST = 2.4f;
+				EnvironmentalConfiguration.MAX_NEIGHBORS = 30;
+				EnvironmentalConfiguration.TIME_HORIZON = 2.7f;
+				EnvironmentalConfiguration.TIME_HORIZON_OBST = 2.5f;
+
+				EnvironmentalConfiguration.RADIUS = 0.3f;
+				EnvironmentalConfiguration.MAX_SPEED = 0.25f;
+				EnvironmentalConfiguration.TIME_STEP = 0.2f;
+
+				EnvironmentalConfiguration.MAX_OBSERVATION_DISTANCE_FF = 2.0;
+				EnvironmentalConfiguration.RL_CP = 1.0;
+				break;
+				
 			default:
 				throw new Exception("Algorytm nie skonfigurowany!!!!");
 
@@ -116,6 +146,8 @@ public class SingleRun {
 			case 10: // OtwartaPrzestrzeñ7x5m.roson
 			case 12: // Pojedyncze Roboty OtwartaPrzestrzeñ 7x5m.roson
 			case 11: // PrzejœciePrzezDrzwi7x5.roson
+			case 13: //W¹skiKorytarz7x5m.roson
+			case 14: //W¹skiePrzejœcieMijankaNowa
 				EnvironmentalConfiguration.ROBOT_DIAMETER = 0.3;
 				EnvironmentalConfiguration.ROBOT_WHEELS_HALF_DISTANCE = 0.14;
 				EnvironmentalConfiguration.ROBOT_MAX_SPEED = 0.5;

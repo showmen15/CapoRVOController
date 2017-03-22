@@ -13,7 +13,7 @@ public class EnvironmentalConfiguration {
 	public static  String CHANNEL_NAME = "capoRobotState";
 
 	public static  int SIMULATION_TIME_STEP_IN_MS = 200;
-	public static  int SIMULATION_SLEEP_BETWEEN_TIME_STEP_IN_MS = 3; // SIMULATION_TIME_STEP_IN_MS;
+	public static  int SIMULATION_SLEEP_BETWEEN_TIME_STEP_IN_MS = 50; // SIMULATION_TIME_STEP_IN_MS;
 
 	// Empirically selected values to control robots
 	// Units consisted with International System of Units
@@ -23,7 +23,7 @@ public class EnvironmentalConfiguration {
 	public static  double PREF_ROBOT_SPEED = ROBOT_MAX_SPEED / 2.0;
 
 	// Multiplier of angle to desired velocity (used to perform turning)
-	public static  double ANGULAR_VELOCITY_FACTOR = 3.0;
+	public static  double ANGULAR_VELOCITY_FACTOR = 3.0; 
 
 	// Max speed multiplier determining collision free zone in Free right side
 	// solution
@@ -46,9 +46,9 @@ public class EnvironmentalConfiguration {
 	// Multiplier of max speed during selecting velocity in pure VO solution
 	public static  double MIN_SPEED_FACTOR = 0.2;
 
-	public static CollisionFreeVelocityType COLLISIONFREEVELOCITYMETHOD = CollisionFreeVelocityType.RIGHT_HAND;
+	public static CollisionFreeVelocityType COLLISIONFREEVELOCITYMETHOD = CollisionFreeVelocityType.RECIPROCAL_VELOCITY_OBSTACLES_FEAR_FACTOR;
 
-	public static boolean FEAR = (1 == 0);
+	public static boolean FEAR = (1 == 1);
 
 	public static boolean ACTIVEFEARFACTORGATE = false;
 
@@ -83,10 +83,10 @@ public class EnvironmentalConfiguration {
 
 	
 	//OtwartaPrzestrzeñ7x5m.roson
-	public static double NEIGHBOR_DIST = 2.4f; //2.0  
+	public static double NEIGHBOR_DIST = 2.4f; //2.4f;  //2.0  
 	public static int MAX_NEIGHBORS = 30;
 	public static double TIME_HORIZON = 2.7f; 
-	public static double TIME_HORIZON_OBST = 1.5f;
+	public static double TIME_HORIZON_OBST = 2.5f;
 
 	public static double RADIUS = 0.3f;
 	public static double MAX_SPEED = 0.25f;

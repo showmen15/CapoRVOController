@@ -17,7 +17,7 @@ import java.io.FileReader;
 
 public class MazeVisualizer extends JFrame implements StateReceivedCallback {
 
-	private static boolean IS_MAX_MODE = false;
+	private static boolean IS_MAX_MODE = true;
 
 	private static final Dimension FRAME_SIZE = new Dimension(800, 660);
 	private static final int SPLIT_DIVIDER_LOCATION = 600;

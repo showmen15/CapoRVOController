@@ -94,7 +94,10 @@ public class RobotController implements Runnable {
 	}
 
 	private void controlRobot() {
-		  sensorReadCounter++;
+		try
+		{
+		
+		sensorReadCounter++;
 	        Location robotLocation = robot.getRobotLocation();
 	        if (robotLocation == null) {
 	            robot.setVelocity(0.0, 0.0);
@@ -113,7 +116,7 @@ public class RobotController implements Runnable {
 	        boolean collide = false;
 	        State collisionFreeState;
 	        double fearfactor = 0.0;
-        
+        	        
 			if (EnvironmentalConfiguration.FEAR) {
 				
 				fearfactor = fear.CalculateFearFactor(collisionFreeVelocityGenerator.GetStates(), robotLocation);
@@ -167,6 +170,12 @@ public class RobotController implements Runnable {
 	        collisionFreeState.setRobotFearFactor(fearfactor);
 	        
 	        publishState(collide, collisionFreeState);
+	        
+		}
+		catch(Exception ex)
+		{
+			ex.printStackTrace();
+		}
 	}
 	
     //  System.out.println("Robot: " + robotId + " X: " + String.format("%.5f", motionModel.getVelocityLeft())  + "Y: " + String.format("%.5f",motionModel.getVelocityRight()));

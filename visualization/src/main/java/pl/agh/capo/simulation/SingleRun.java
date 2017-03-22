@@ -60,6 +60,25 @@ public class SingleRun {
 		case 1: // FearFactorWithPassageThroughTheDoor
 		case 2: // RVOBase
 			switch (configure.ID_Map) {
+			case 9: // BenchmarkCircle
+
+				EnvironmentalConfiguration.NEIGHBOR_DIST = 15.0f;
+				EnvironmentalConfiguration.MAX_NEIGHBORS = 10;
+				EnvironmentalConfiguration.TIME_HORIZON = 10.0f;
+				EnvironmentalConfiguration.TIME_HORIZON_OBST = 10.0f;
+
+				EnvironmentalConfiguration.RADIUS = 1.5f;
+				EnvironmentalConfiguration.MAX_SPEED = 2.0f;
+				EnvironmentalConfiguration.TIME_STEP = 0.25f;
+
+				EnvironmentalConfiguration.ROBOT_DIAMETER = 1.5;
+				EnvironmentalConfiguration.ROBOT_WHEELS_HALF_DISTANCE = 1.5/2;
+				EnvironmentalConfiguration.ROBOT_MAX_SPEED = 2.0;
+				
+				EnvironmentalConfiguration.MAX_OBSERVATION_DISTANCE_FF = 2.0;
+				EnvironmentalConfiguration.RL_CP = 1.0;
+				break;
+					
 			case 10: // OtwartaPrzestrzeñ7x5m.roson
 
 				EnvironmentalConfiguration.NEIGHBOR_DIST = 2.0f;
@@ -134,6 +153,21 @@ public class SingleRun {
 				EnvironmentalConfiguration.MAX_OBSERVATION_DISTANCE_FF = 2.0;
 				EnvironmentalConfiguration.RL_CP = 1.0;
 				break;
+			
+			case 15: //Skrzy¿owanieRównorzêdneNowe
+				
+				EnvironmentalConfiguration.NEIGHBOR_DIST = 2.4f;
+				EnvironmentalConfiguration.MAX_NEIGHBORS = 30;
+				EnvironmentalConfiguration.TIME_HORIZON = 2.7f;
+				EnvironmentalConfiguration.TIME_HORIZON_OBST = 2.5f;
+
+				EnvironmentalConfiguration.RADIUS = 0.3f;
+				EnvironmentalConfiguration.MAX_SPEED = 0.25f;
+				EnvironmentalConfiguration.TIME_STEP = 0.2f;
+
+				EnvironmentalConfiguration.MAX_OBSERVATION_DISTANCE_FF = 2.0;
+				EnvironmentalConfiguration.RL_CP = 1.0;
+				break;	
 				
 			default:
 				throw new Exception("Algorytm nie skonfigurowany!!!!");
@@ -143,11 +177,18 @@ public class SingleRun {
 		case 3: // RVOWithRightHand
 
 			switch (configure.ID_Map) {
+			case 9: // BenchmarkCircle
+				EnvironmentalConfiguration.ROBOT_DIAMETER = 1.5;
+				EnvironmentalConfiguration.ROBOT_WHEELS_HALF_DISTANCE = 1.5/2;
+				EnvironmentalConfiguration.ROBOT_MAX_SPEED = 2.0;
+				break;
+				
 			case 10: // OtwartaPrzestrzeñ7x5m.roson
 			case 12: // Pojedyncze Roboty OtwartaPrzestrzeñ 7x5m.roson
 			case 11: // PrzejœciePrzezDrzwi7x5.roson
 			case 13: //W¹skiKorytarz7x5m.roson
 			case 14: //W¹skiePrzejœcieMijankaNowa
+			case 15: //Skrzy¿owanieRównorzêdneNowe
 				EnvironmentalConfiguration.ROBOT_DIAMETER = 0.3;
 				EnvironmentalConfiguration.ROBOT_WHEELS_HALF_DISTANCE = 0.14;
 				EnvironmentalConfiguration.ROBOT_MAX_SPEED = 0.5;

@@ -1,6 +1,7 @@
 package pl.agh.capo.utilities;
 
 import pl.agh.capo.controller.collision.velocity.CollisionFreeVelocityType;
+import pl.agh.capo.controller.collision.velocity.FearMutationType;
 
 public class EnvironmentalConfiguration {
 
@@ -48,7 +49,7 @@ public class EnvironmentalConfiguration {
 
 	public static CollisionFreeVelocityType COLLISIONFREEVELOCITYMETHOD = CollisionFreeVelocityType.RECIPROCAL_VELOCITY_OBSTACLES_FEAR_FACTOR;
 
-	public static boolean FEAR = (1 == 1);
+	public static FearMutationType ALGORITHM_FEAR_IMPLEMENTATION = FearMutationType.FEAR_ORIGINAL;
 
 	public static boolean ACTIVEFEARFACTORGATE = false;
 

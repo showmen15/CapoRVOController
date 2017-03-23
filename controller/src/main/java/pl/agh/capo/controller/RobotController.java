@@ -15,6 +15,7 @@ import pl.agh.capo.controller.collision.CollisionFreeVelocityGenerator;
 import pl.agh.capo.controller.collision.WallCollisionDetector;
 import pl.agh.capo.controller.collision.velocity.AbstractCollisionFreeVelocity;
 import pl.agh.capo.controller.collision.velocity.CollisionFreeVelocityType;
+import pl.agh.capo.controller.collision.velocity.FearMutationType;
 import pl.agh.capo.fear.Fear;
 import pl.agh.capo.utilities.RobotMotionModel;
 import pl.agh.capo.robot.IRobot;
@@ -117,7 +118,7 @@ public class RobotController implements Runnable {
 	        State collisionFreeState;
 	        double fearfactor = 0.0;
         	        
-			if (EnvironmentalConfiguration.FEAR) {
+			if (EnvironmentalConfiguration.ALGORITHM_FEAR_IMPLEMENTATION == FearMutationType.FEAR_ORIGINAL) {
 				
 				fearfactor = fear.CalculateFearFactor(collisionFreeVelocityGenerator.GetStates(), robotLocation);
 				
@@ -132,28 +133,29 @@ public class RobotController implements Runnable {
 					optimalVelocity = new Velocity(0, 0);				
 					setVelocity(optimalVelocity);
 				}
-				
-				
-				//AbstractCollisionFreeVelocity collisionFreeVelocity = collisionFreeVelocityGenerator.createCollisionFreeState(motionModel.getLocation(), optimalVelocity);
-				
-				//collide = !collisionFreeVelocity.isCurrentVelocityCollisionFree();
+			}
+			else if(EnvironmentalConfiguration.ALGORITHM_FEAR_IMPLEMENTATION == FearMutationType.FEAR_SINGLE_FIRST)
+			{
+				AbstractCollisionFreeVelocity collisionFreeVelocity = collisionFreeVelocityGenerator.createCollisionFreeState(motionModel.getLocation(), optimalVelocity);
+				collide = !collisionFreeVelocity.isCurrentVelocityCollisionFree();
 
-				//fearfactor = fear.CalculateFearFactor(collisionFreeVelocityGenerator.GetStates(), robotLocation);
-				//boolean avoidCollision = false;
+				fearfactor = fear.CalculateFearFactor(collisionFreeVelocityGenerator.GetStates(), robotLocation);
+				boolean avoidCollision = false;
 
-				//if (collide)
-				//	avoidCollision = fear.HaveAvoidCollision(collisionFreeVelocityGenerator.GetStates(), fearfactor);
+				if (collide)
+					avoidCollision = fear.HaveAvoidCollision(collisionFreeVelocityGenerator.GetStates(), fearfactor);
 
-				//if (avoidCollision) {
-				//	collide = true;
+				if (avoidCollision) 
+				{
+					collide = true;
 
-				//	optimalVelocity = collisionFreeVelocity.get();
-				//	setVelocity(optimalVelocity);
-				//} 
-				//else
-				//	collide = false;
-			} 
-			else 
+					optimalVelocity = collisionFreeVelocity.get();
+					setVelocity(optimalVelocity);
+				} 
+				else
+					collide = false;
+			}
+			else if(EnvironmentalConfiguration.ALGORITHM_FEAR_IMPLEMENTATION == FearMutationType.NONE) 
 			{
 				AbstractCollisionFreeVelocity collisionFreeVelocity = collisionFreeVelocityGenerator.createCollisionFreeState(motionModel.getLocation(), optimalVelocity);
 				collide = !collisionFreeVelocity.isCurrentVelocityCollisionFree();

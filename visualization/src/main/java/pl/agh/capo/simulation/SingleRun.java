@@ -13,6 +13,7 @@ import com.google.gson.JsonIOException;
 import com.google.gson.JsonSyntaxException;
 
 import pl.agh.capo.controller.collision.velocity.CollisionFreeVelocityType;
+import pl.agh.capo.controller.collision.velocity.FearMutationType;
 import pl.agh.capo.simulation.robot.RobotManager;
 import pl.agh.capo.utilities.EnvironmentalConfiguration;
 import pl.agh.capo.utilities.maze.MazeMap;
@@ -27,25 +28,25 @@ public class SingleRun {
 
 		case 0: // FearFactorBase
 			EnvironmentalConfiguration.COLLISIONFREEVELOCITYMETHOD = CollisionFreeVelocityType.RECIPROCAL_VELOCITY_OBSTACLES_FEAR_FACTOR;
-			EnvironmentalConfiguration.FEAR = true;
+			EnvironmentalConfiguration.ALGORITHM_FEAR_IMPLEMENTATION = FearMutationType.FEAR_ORIGINAL;
 			EnvironmentalConfiguration.ACTIVEFEARFACTORGATE = false;
 			break;
 
 		case 1: // FearFactorWithPassageThroughTheDoor
 			EnvironmentalConfiguration.COLLISIONFREEVELOCITYMETHOD = CollisionFreeVelocityType.RECIPROCAL_VELOCITY_OBSTACLES_FEAR_FACTOR;
-			EnvironmentalConfiguration.FEAR = true;
+			EnvironmentalConfiguration.ALGORITHM_FEAR_IMPLEMENTATION = FearMutationType.FEAR_ORIGINAL;
 			EnvironmentalConfiguration.ACTIVEFEARFACTORGATE = true;
 			break;
 
 		case 2: // RVOBase
 			EnvironmentalConfiguration.COLLISIONFREEVELOCITYMETHOD = CollisionFreeVelocityType.RECIPROCAL_VELOCITY_OBSTACLES;
-			EnvironmentalConfiguration.FEAR = false;
+			EnvironmentalConfiguration.ALGORITHM_FEAR_IMPLEMENTATION = FearMutationType.NONE;
 			EnvironmentalConfiguration.ACTIVEFEARFACTORGATE = false;
 			break;
 
 		case 3: // RVOWithRightHand
 			EnvironmentalConfiguration.COLLISIONFREEVELOCITYMETHOD = CollisionFreeVelocityType.RIGHT_HAND;
-			EnvironmentalConfiguration.FEAR = false;
+			EnvironmentalConfiguration.ALGORITHM_FEAR_IMPLEMENTATION = FearMutationType.NONE;
 			EnvironmentalConfiguration.ACTIVEFEARFACTORGATE = false;
 			break;
 

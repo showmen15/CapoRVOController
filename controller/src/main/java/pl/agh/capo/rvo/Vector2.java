@@ -40,8 +40,8 @@ package pl.agh.capo.rvo;
 //ORIGINAL LINE: public struct Vector2
 public final class Vector2
 {
-	public double x_;
-	public double y_;
+	public float x_;
+	public float y_;
 
 	/**
 	 * <summary>Constructs and initializes a two-dimensional vector from the
@@ -56,7 +56,7 @@ public final class Vector2
 	{
 	}
 
-	public Vector2(double x, double y)
+	public Vector2(float x, float y)
 	{
 		x_ = x;
 		y_ = y;
@@ -79,7 +79,7 @@ public final class Vector2
 	 *
 	 * <returns>The x-coordinate of the two-dimensional vector.</returns>
 	 */
-	public double x()
+	public float x()
 	{
 		return x_;
 	}
@@ -90,7 +90,7 @@ public final class Vector2
 	 *
 	 * <returns>The y-coordinate of the two-dimensional vector.</returns>
 	 */
-	public double y()
+	public float y()
 	{
 		return y_;
 	}
@@ -105,7 +105,7 @@ public final class Vector2
 	 * <param name="vector1">The first two-dimensional vector.</param>
 	 * <param name="vector2">The second two-dimensional vector.</param>
 	 */
-	public static double OpMultiply(Vector2 vector1, Vector2 vector2)
+	public static float OpMultiply(Vector2 vector1, Vector2 vector2)
 	{
 		return vector1.x_ * vector2.x_ + vector1.y_ * vector2.y_;
 	}
@@ -120,7 +120,7 @@ public final class Vector2
 	 * <param name="scalar">The scalar value.</param>
 	 * <param name="vector">The two-dimensional vector.</param>
 	 */
-	public static Vector2 OpMultiply(double scalar, Vector2 vector)
+	public static Vector2 OpMultiply(float scalar, Vector2 vector)
 	{
 		return pl.agh.capo.rvo.Vector2.OpMultiply(vector.clone(), scalar);
 	}
@@ -135,7 +135,7 @@ public final class Vector2
 	 * <param name="vector">The two-dimensional vector.</param>
 	 * <param name="scalar">The scalar value.</param>
 	 */
-	public static Vector2 OpMultiply(Vector2 vector, double scalar)
+	public static Vector2 OpMultiply(Vector2 vector, float scalar)
 	{
 		return new Vector2(vector.x_ * scalar, vector.y_ * scalar);
 	}
@@ -150,7 +150,7 @@ public final class Vector2
 	 * <param name="vector">The two-dimensional vector.</param>
 	 * <param name="scalar">The scalar value.</param>
 	 */
-	public static Vector2 OpDivision(Vector2 vector, double scalar)
+	public static Vector2 OpDivision(Vector2 vector, float scalar)
 	{
 		return new Vector2(vector.x_ / scalar, vector.y_ / scalar);
 	}

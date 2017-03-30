@@ -17,29 +17,32 @@ public abstract class AbstractCollisionFreeVelocity {
 
     protected final Logger logger = Logger.getLogger(AbstractCollisionFreeVelocity.class);
 
-    protected final Map<Integer, State> states;
-    public final WallCollisionDetector wallCollisionDetector;
-    protected final Location location;
-    protected final Velocity velocity;
-    protected final int RobotID; 
+    protected Map<Integer, State> states;
+    protected WallCollisionDetector wallCollisionDetector;
+    protected Location location;
+    protected Velocity velocity;
+    protected int RobotID; 
 
     protected List<VelocityObstacles> velocityObstaclesList;
 
-    public AbstractCollisionFreeVelocity(Map<Integer, State> states, WallCollisionDetector wallCollisionDetector, Location location, Velocity velocity,int robotId) {
-        this.states = states;
+    public AbstractCollisionFreeVelocity(Map<Integer, State> states,WallCollisionDetector wallCollisionDetector, int robotId)
+    {
+    	 this.states = states;
+         this.wallCollisionDetector = wallCollisionDetector;
+         this.RobotID = robotId;
+    }
+    
+    public void buildVelocityObstacles(Location location, Velocity velocity)
+    {
         this.location = location;
-        this.velocity = velocity;
-        this.wallCollisionDetector = wallCollisionDetector;
-        this.RobotID = robotId;
+        this.velocity = velocity;  
         buildVelocityObstacles();
     }
     
-    public AbstractCollisionFreeVelocity(Map<Integer, State> states, WallCollisionDetector wallCollisionDetector, Location location, Velocity velocity,int robotId, double currentRobotFearFactor) {
-        this.states = states;
+    public void buildVelocityObstacles( Location location, Velocity velocity, double currentRobotFearFactor)
+    {
         this.location = location;
-        this.velocity = velocity;
-        this.wallCollisionDetector = wallCollisionDetector;
-        this.RobotID = robotId;
+        this.velocity = velocity;  
         buildVelocityObstacles(currentRobotFearFactor);
     }
 

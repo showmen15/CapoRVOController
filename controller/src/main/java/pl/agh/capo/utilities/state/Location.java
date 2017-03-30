@@ -29,4 +29,14 @@ public class Location extends Point implements Serializable {
 	{
 		return Math.sqrt((this.getX() - l.getX()) * (this.getX() - l.getX()) + (this.getY() - l.getY()) * (this.getY() - l.getY()));
 	}
+    
+    public void setX(double X)
+    {
+      super.setX(X);
+    }
+    
+    public void setY(double Y)
+    {
+    	super.setY(Y);
+    }
 }

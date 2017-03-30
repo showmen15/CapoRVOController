@@ -41,8 +41,8 @@ import java.util.AbstractMap.SimpleEntry;
  */
 public class Agent
 {
-	public List<Map.Entry<Double, Agent>> agentNeighbors_ = new ArrayList<Map.Entry<Double, Agent>>();
-	public List<Map.Entry<Double, Obstacle>> obstacleNeighbors_ = new ArrayList<Map.Entry<Double, Obstacle>>();
+	public List<Map.Entry<Float, Agent>> agentNeighbors_ = new ArrayList<Map.Entry<Float, Agent>>();
+	public List<Map.Entry<Float, Obstacle>> obstacleNeighbors_ = new ArrayList<Map.Entry<Float, Obstacle>>();
 	public List<Line> orcaLines_ = new ArrayList<Line>();
 
 	public Vector2 position_ = new Vector2();
@@ -50,15 +50,15 @@ public class Agent
 	public Vector2 velocity_ = new Vector2();
 	public int id_ = 0;
 	public int maxNeighbors_ = 0;
-	public double maxSpeed_ = 0.0f;
-	public double neighborDist_ = 0.0f;
-	public double radius_ = 0.0f;
-	public double timeHorizon_ = 0.0f;
-	public double timeHorizonObst_ = 0.0f;
+	public float maxSpeed_ = 0.0f;
+	public float neighborDist_ = 0.0f;
+	public float radius_ = 0.0f;
+	public float timeHorizon_ = 0.0f;
+	public float timeHorizonObst_ = 0.0f;
 
 	public Vector2 newVelocity_ = new Vector2();
 	
-	public double timeStep_;
+	public float timeStep_;
 
 
 	  public Boolean IsCollide()
@@ -72,7 +72,7 @@ public class Agent
 	public final void  computeNeighbors(KdTree kdTree_)
     {
         obstacleNeighbors_.clear();
-        double rangeSq = RVOMath.sqr(timeHorizonObst_ * maxSpeed_ + radius_);
+        float rangeSq = RVOMath.sqr(timeHorizonObst_ * maxSpeed_ + radius_);
         kdTree_.computeObstacleNeighbors(this, rangeSq);
 
         agentNeighbors_.clear();
@@ -81,7 +81,7 @@ public class Agent
         {
             rangeSq = RVOMath.sqr(neighborDist_);
                        
-            RefObject<Double> tempRef_rangeSq = new RefObject<Double>(rangeSq);
+            RefObject<Float> tempRef_rangeSq = new RefObject<Float>(rangeSq);
 			kdTree_.computeAgentNeighbors(this, tempRef_rangeSq);
 			rangeSq = tempRef_rangeSq.argValue;		
         }
@@ -94,7 +94,7 @@ public class Agent
 	{
 		orcaLines_.clear();
 
-		double invTimeHorizonObst = 1.0f / timeHorizonObst_;
+		float invTimeHorizonObst = 1.0f / timeHorizonObst_;
 
 		/* Create obstacle ORCA lines. */
 		for (int i = 0; i < obstacleNeighbors_.size(); ++i)
@@ -128,14 +128,14 @@ public class Agent
 			}
 
 			/* Not yet covered. Check for collisions. */
-			double distSq1 = RVOMath.absSq(relativePosition1.clone());
-			double distSq2 = RVOMath.absSq(relativePosition2.clone());
+			float distSq1 = RVOMath.absSq(relativePosition1.clone());
+			float distSq2 = RVOMath.absSq(relativePosition2.clone());
 
-			double radiusSq = RVOMath.sqr(radius_);
+			float radiusSq = RVOMath.sqr(radius_);
 
 			Vector2 obstacleVector = Vector2.OpSubtraction(obstacle2.point_ , obstacle1.point_);			
-			double s = Vector2.OpMultiply(Vector2.OpUnaryNegation(relativePosition1) , obstacleVector) / RVOMath.absSq(obstacleVector);
-			double distSqLine = RVOMath.absSq( Vector2.OpSubtraction(Vector2.OpUnaryNegation(relativePosition1),Vector2.OpMultiply(s, obstacleVector.clone())));
+			float s = Vector2.OpMultiply(Vector2.OpUnaryNegation(relativePosition1) , obstacleVector) / RVOMath.absSq(obstacleVector);
+			float distSqLine = RVOMath.absSq( Vector2.OpSubtraction(Vector2.OpUnaryNegation(relativePosition1),Vector2.OpMultiply(s, obstacleVector.clone())));
 			
 			Line line = new Line();
 
@@ -199,7 +199,7 @@ public class Agent
 
 				obstacle2 = obstacle1;
 
-				double leg1 = RVOMath.sqrt(distSq1 - radiusSq);
+				float leg1 = RVOMath.sqrt(distSq1 - radiusSq);
 				leftLegDirection = Vector2.OpDivision(new Vector2(relativePosition1.x() * leg1 - relativePosition1.y() * radius_, relativePosition1.x() * radius_ + relativePosition1.y() * leg1), distSq1);
 				rightLegDirection = Vector2.OpDivision(new Vector2(relativePosition1.x() * leg1 + relativePosition1.y() * radius_, -relativePosition1.x() * radius_ + relativePosition1.y() * leg1), distSq1);
 			}
@@ -217,7 +217,7 @@ public class Agent
 
 				obstacle1 = obstacle2;
 
-				double leg2 = RVOMath.sqrt(distSq2 - radiusSq);
+				float leg2 = RVOMath.sqrt(distSq2 - radiusSq);
 				leftLegDirection = Vector2.OpDivision(new Vector2(relativePosition2.x() * leg2 - relativePosition2.y() * radius_, relativePosition2.x() * radius_ + relativePosition2.y() * leg2), distSq2);
 				rightLegDirection = Vector2.OpDivision(new Vector2(relativePosition2.x() * leg2 + relativePosition2.y() * radius_, -relativePosition2.x() * radius_ + relativePosition2.y() * leg2) , distSq2);
 			}
@@ -226,7 +226,7 @@ public class Agent
 				/* Usual situation. */
 				if (obstacle1.convex_)
 				{
-					double leg1 = RVOMath.sqrt(distSq1 - radiusSq);
+					float leg1 = RVOMath.sqrt(distSq1 - radiusSq);
 					leftLegDirection = Vector2.OpDivision(new Vector2(relativePosition1.x() * leg1 - relativePosition1.y() * radius_, relativePosition1.x() * radius_ + relativePosition1.y() * leg1), distSq1);
 				}
 				else
@@ -237,7 +237,7 @@ public class Agent
 
 				if (obstacle2.convex_)
 				{
-					double leg2 = RVOMath.sqrt(distSq2 - radiusSq);
+					float leg2 = RVOMath.sqrt(distSq2 - radiusSq);
 					rightLegDirection = Vector2.OpDivision(new Vector2(relativePosition2.x() * leg2 + relativePosition2.y() * radius_, -relativePosition2.x() * radius_ + relativePosition2.y() * leg2), distSq2);
 				}
 				else
@@ -281,10 +281,10 @@ public class Agent
 
 			/* Check if current velocity is projected on cutoff circles. */
 			
-			double t = obstacle1 == obstacle2 ? 0.5f : (Vector2.OpMultiply((Vector2.OpSubtraction(velocity_ , leftCutOff)), cutOffVector)) / RVOMath.absSq(cutOffVector);
+			float t = obstacle1 == obstacle2 ? 0.5f : (Vector2.OpMultiply((Vector2.OpSubtraction(velocity_ , leftCutOff)), cutOffVector)) / RVOMath.absSq(cutOffVector);
 						
-			double tLeft = pl.agh.capo.rvo.Vector2.OpMultiply(pl.agh.capo.rvo.Vector2.OpSubtraction(velocity_, leftCutOff.clone()), leftLegDirection.clone());
-			double tRight = pl.agh.capo.rvo.Vector2.OpMultiply(pl.agh.capo.rvo.Vector2.OpSubtraction(velocity_, rightCutOff.clone()), rightLegDirection.clone());
+			float tLeft = pl.agh.capo.rvo.Vector2.OpMultiply(pl.agh.capo.rvo.Vector2.OpSubtraction(velocity_, leftCutOff.clone()), leftLegDirection.clone());
+			float tRight = pl.agh.capo.rvo.Vector2.OpMultiply(pl.agh.capo.rvo.Vector2.OpSubtraction(velocity_, rightCutOff.clone()), rightLegDirection.clone());
 
 			if ((t < 0.0f && tLeft < 0.0f) || (obstacle1 == obstacle2 && tLeft < 0.0f && tRight < 0.0f))
 			{
@@ -313,9 +313,9 @@ public class Agent
 			 * Project on left leg, right leg, or cut-off line, whichever is
 			 * closest to velocity.
 			 */
-			double distSqCutoff = (t < 0.0f || t > 1.0f || obstacle1 == obstacle2) ? Float.POSITIVE_INFINITY : RVOMath.absSq(pl.agh.capo.rvo.Vector2.OpSubtraction(velocity_, pl.agh.capo.rvo.Vector2.OpAddition(leftCutOff.clone(), pl.agh.capo.rvo.Vector2.OpMultiply(t, cutOffVector.clone()))));
-			double distSqLeft = tLeft < 0.0f ? Float.POSITIVE_INFINITY : RVOMath.absSq(pl.agh.capo.rvo.Vector2.OpSubtraction(velocity_, pl.agh.capo.rvo.Vector2.OpAddition(leftCutOff.clone(), pl.agh.capo.rvo.Vector2.OpMultiply(tLeft, leftLegDirection.clone()))));
-			double distSqRight = tRight < 0.0f ? Float.POSITIVE_INFINITY : RVOMath.absSq(pl.agh.capo.rvo.Vector2.OpSubtraction(velocity_, pl.agh.capo.rvo.Vector2.OpAddition(rightCutOff.clone(), pl.agh.capo.rvo.Vector2.OpMultiply(tRight, rightLegDirection.clone()))));
+			float distSqCutoff = (t < 0.0f || t > 1.0f || obstacle1 == obstacle2) ? Float.POSITIVE_INFINITY : RVOMath.absSq(pl.agh.capo.rvo.Vector2.OpSubtraction(velocity_, pl.agh.capo.rvo.Vector2.OpAddition(leftCutOff.clone(), pl.agh.capo.rvo.Vector2.OpMultiply(t, cutOffVector.clone()))));
+			float distSqLeft = tLeft < 0.0f ? Float.POSITIVE_INFINITY : RVOMath.absSq(pl.agh.capo.rvo.Vector2.OpSubtraction(velocity_, pl.agh.capo.rvo.Vector2.OpAddition(leftCutOff.clone(), pl.agh.capo.rvo.Vector2.OpMultiply(tLeft, leftLegDirection.clone()))));
+			float distSqRight = tRight < 0.0f ? Float.POSITIVE_INFINITY : RVOMath.absSq(pl.agh.capo.rvo.Vector2.OpSubtraction(velocity_, pl.agh.capo.rvo.Vector2.OpAddition(rightCutOff.clone(), pl.agh.capo.rvo.Vector2.OpMultiply(tRight, rightLegDirection.clone()))));
 
 			if (distSqCutoff <= distSqLeft && distSqCutoff <= distSqRight)
 			{
@@ -355,7 +355,7 @@ public class Agent
 
 		int numObstLines = orcaLines_.size();
 
-		double invTimeHorizon = 1.0f / timeHorizon_;
+		float invTimeHorizon = 1.0f / timeHorizon_;
 
 		/* Create agent ORCA lines. */
 		for (int i = 0; i < agentNeighbors_.size(); ++i)
@@ -364,9 +364,9 @@ public class Agent
 
 			Vector2 relativePosition = Vector2.OpSubtraction(other.position_ , position_);
 			Vector2 relativeVelocity = Vector2.OpSubtraction(velocity_ , other.velocity_);
-			double distSq = RVOMath.absSq(relativePosition.clone());
-			double combinedRadius = radius_ + other.radius_;
-			double combinedRadiusSq = RVOMath.sqr(combinedRadius);
+			float distSq = RVOMath.absSq(relativePosition.clone());
+			float combinedRadius = radius_ + other.radius_;
+			float combinedRadiusSq = RVOMath.sqr(combinedRadius);
 
 			Line line = new Line();
 			Vector2 u = new Vector2();
@@ -377,13 +377,13 @@ public class Agent
 				Vector2 w = pl.agh.capo.rvo.Vector2.OpSubtraction(relativeVelocity.clone(), pl.agh.capo.rvo.Vector2.OpMultiply(invTimeHorizon, relativePosition.clone()));
 
 				/* Vector from cutoff center to relative velocity. */
-				double wLengthSq = RVOMath.absSq(w.clone());
-				double dotProduct1 = pl.agh.capo.rvo.Vector2.OpMultiply(w.clone(), relativePosition.clone());
+				float wLengthSq = RVOMath.absSq(w.clone());
+				float dotProduct1 = pl.agh.capo.rvo.Vector2.OpMultiply(w.clone(), relativePosition.clone());
 
 				if (dotProduct1 < 0.0f && RVOMath.sqr(dotProduct1) > combinedRadiusSq * wLengthSq)
 				{
 					/* Project on cut-off circle. */
-					double wLength = RVOMath.sqrt(wLengthSq);
+					float wLength = RVOMath.sqrt(wLengthSq);
 					Vector2 unitW = pl.agh.capo.rvo.Vector2.OpDivision(w.clone(), wLength);
 
 					line.direction = new Vector2(unitW.y(), -unitW.x());
@@ -392,7 +392,7 @@ public class Agent
 				else
 				{
 					/* Project on legs. */
-					double leg = RVOMath.sqrt(distSq - combinedRadiusSq);
+					float leg = RVOMath.sqrt(distSq - combinedRadiusSq);
 
 					if (RVOMath.det(relativePosition.clone(), w.clone()) > 0.0f)
 					{
@@ -405,19 +405,19 @@ public class Agent
 						line.direction = Vector2.OpDivision(Vector2.OpUnaryNegation(new Vector2(relativePosition.x() * leg + relativePosition.y() * combinedRadius, -relativePosition.x() * combinedRadius + relativePosition.y() * leg)) , distSq);
 					}
 
-					double dotProduct2 = pl.agh.capo.rvo.Vector2.OpMultiply(relativeVelocity.clone(), line.direction);
+					float dotProduct2 = pl.agh.capo.rvo.Vector2.OpMultiply(relativeVelocity.clone(), line.direction);
 					u = pl.agh.capo.rvo.Vector2.OpSubtraction(Vector2.OpMultiply(dotProduct2 , line.direction), relativeVelocity.clone());
 				}
 			}
 			else
 			{
 				/* Collision. Project on cut-off circle of time timeStep. */
-				double invTimeStep = 1.0f / timeStep_;
+				float invTimeStep = 1.0f / timeStep_;
 
 				/* Vector from cutoff center to relative velocity. */
 				Vector2 w = pl.agh.capo.rvo.Vector2.OpSubtraction(relativeVelocity.clone(), pl.agh.capo.rvo.Vector2.OpMultiply(invTimeStep, relativePosition.clone()));
 
-				double wLength = RVOMath.abs(w.clone());
+				float wLength = RVOMath.abs(w.clone());
 				Vector2 unitW = pl.agh.capo.rvo.Vector2.OpDivision(w.clone(), wLength);
 
 				line.direction = new Vector2(unitW.y(), -unitW.x());
@@ -447,18 +447,18 @@ public class Agent
 	 * <param name="agent">A pointer to the agent to be inserted.</param>
 	 * <param name="rangeSq">The squared range around this agent.</param>
 	 */
-	public final void insertAgentNeighbor(Agent agent,RefObject<Double> rangeSq)
+	public final void insertAgentNeighbor(Agent agent,RefObject<Float> rangeSq)
 	{
 		if (this.id_ != agent.id_)
 		{
-			double distSq = RVOMath.absSq(Vector2.OpSubtraction(position_ , agent.position_));
+			float distSq = RVOMath.absSq(Vector2.OpSubtraction(position_ , agent.position_));
 			
 			
 			if (distSq < rangeSq.argValue)
 			{
 				if (agentNeighbors_.size() < maxNeighbors_)
 				{				
-					agentNeighbors_.add( new SimpleEntry<Double, Agent>(distSq, agent));
+					agentNeighbors_.add( new SimpleEntry<Float, Agent>(distSq, agent));
 				}
 
 				int i = agentNeighbors_.size() - 1;
@@ -469,7 +469,7 @@ public class Agent
 					--i;
 				}
 
-				agentNeighbors_.set(i, new SimpleEntry<Double, Agent>(distSq, agent));
+				agentNeighbors_.set(i, new SimpleEntry<Float, Agent>(distSq, agent));
 
 				if (agentNeighbors_.size() == maxNeighbors_)
 				{
@@ -487,15 +487,15 @@ public class Agent
 	 * inserted.</param>
 	 * <param name="rangeSq">The squared range around this agent.</param>
 	 */
-	public final void insertObstacleNeighbor(Obstacle obstacle, double rangeSq)
+	public final void insertObstacleNeighbor(Obstacle obstacle, float rangeSq)
 	{
 		Obstacle nextObstacle = obstacle.next_;
 
-		double distSq = RVOMath.distSqPointLineSegment(obstacle.point_.clone(), nextObstacle.point_.clone(), position_.clone());
+		float distSq = RVOMath.distSqPointLineSegment(obstacle.point_.clone(), nextObstacle.point_.clone(), position_.clone());
 
 		if (distSq < rangeSq)
 		{
-			obstacleNeighbors_.add(new SimpleEntry<Double, Obstacle>(distSq, obstacle));
+			obstacleNeighbors_.add(new SimpleEntry<Float, Obstacle>(distSq, obstacle));
 
 			int i = obstacleNeighbors_.size() - 1;
 
@@ -504,7 +504,7 @@ public class Agent
 				obstacleNeighbors_.set(i, obstacleNeighbors_.get(i - 1));
 				--i;
 			}
-			obstacleNeighbors_.set(i, new SimpleEntry<Double, Obstacle>(distSq, obstacle));
+			obstacleNeighbors_.set(i, new SimpleEntry<Float, Obstacle>(distSq, obstacle));
 		}
 	}
 
@@ -534,10 +534,10 @@ public class Agent
 	 * <param name="result">A reference to the result of the linear program.
 	 * </param>
 	 */
-	private boolean linearProgram1(List<Line> lines, int lineNo, double radius, Vector2 optVelocity, boolean directionOpt, RefObject<Vector2> result)
+	private boolean linearProgram1(List<Line> lines, int lineNo, float radius, Vector2 optVelocity, boolean directionOpt, RefObject<Vector2> result)
 	{
-		double dotProduct = Vector2.OpMultiply(lines.get(lineNo).point , lines.get(lineNo).direction);
-		double discriminant = RVOMath.sqr(dotProduct) + RVOMath.sqr(radius) - RVOMath.absSq(lines.get(lineNo).point.clone());
+		float dotProduct = Vector2.OpMultiply(lines.get(lineNo).point , lines.get(lineNo).direction);
+		float discriminant = RVOMath.sqr(dotProduct) + RVOMath.sqr(radius) - RVOMath.absSq(lines.get(lineNo).point.clone());
 
 		if (discriminant < 0.0f)
 		{
@@ -545,14 +545,14 @@ public class Agent
 			return false;
 		}
 
-		double sqrtDiscriminant = RVOMath.sqrt(discriminant);
-		double tLeft = -dotProduct - sqrtDiscriminant;
-		double tRight = -dotProduct + sqrtDiscriminant;
+		float sqrtDiscriminant = RVOMath.sqrt(discriminant);
+		float tLeft = -dotProduct - sqrtDiscriminant;
+		float tRight = -dotProduct + sqrtDiscriminant;
 
 		for (int i = 0; i < lineNo; ++i)
 		{
-			double denominator = RVOMath.det(lines.get(lineNo).direction.clone(), lines.get(i).direction.clone());
-			double numerator = RVOMath.det(lines.get(i).direction.clone(),  Vector2.OpSubtraction(lines.get(lineNo).point , lines.get(i).point));
+			float denominator = RVOMath.det(lines.get(lineNo).direction.clone(), lines.get(i).direction.clone());
+			float numerator = RVOMath.det(lines.get(i).direction.clone(),  Vector2.OpSubtraction(lines.get(lineNo).point , lines.get(i).point));
 
 			if (RVOMath.fabs(denominator) <= RVOMath.RVO_EPSILON)
 			{
@@ -565,7 +565,7 @@ public class Agent
 				continue;
 			}
 
-			double t = numerator / denominator;
+			float t = numerator / denominator;
 
 			if (denominator >= 0.0f)
 			{
@@ -601,7 +601,7 @@ public class Agent
 		else
 		{
 			/* Optimize closest point. */
-			double t = pl.agh.capo.rvo.Vector2.OpMultiply(lines.get(lineNo).direction, pl.agh.capo.rvo.Vector2.OpSubtraction(optVelocity.clone(), lines.get(lineNo).point));
+			float t = pl.agh.capo.rvo.Vector2.OpMultiply(lines.get(lineNo).direction, pl.agh.capo.rvo.Vector2.OpSubtraction(optVelocity.clone(), lines.get(lineNo).point));
 
 			if (t < tLeft)
 			{
@@ -635,7 +635,7 @@ public class Agent
 	 * <param name="result">A reference to the result of the linear program.
 	 * </param>
 	 */
-	private int linearProgram2(List<Line> lines, double radius, Vector2 optVelocity, boolean directionOpt, RefObject<Vector2> result)
+	private int linearProgram2(List<Line> lines, float radius, Vector2 optVelocity, boolean directionOpt, RefObject<Vector2> result)
 	{
 		if (directionOpt)
 		{
@@ -686,9 +686,9 @@ public class Agent
 	 * <param name="result">A reference to the result of the linear program.
 	 * </param>
 	 */
-	private void linearProgram3(List<Line> lines, int numObstLines, int beginLine, double radius, RefObject<Vector2> result)
+	private void linearProgram3(List<Line> lines, int numObstLines, int beginLine, float radius, RefObject<Vector2> result)
 	{
-		double distance = 0.0f;
+		float distance = 0.0f;
 
 		for (int i = beginLine; i < lines.size(); ++i)
 		{
@@ -705,7 +705,7 @@ public class Agent
 				{
 					Line line = new Line();
 
-					double determinant = RVOMath.det(lines.get(i).direction.clone(), lines.get(j).direction.clone());
+					float determinant = RVOMath.det(lines.get(i).direction.clone(), lines.get(j).direction.clone());
 
 					if (RVOMath.fabs(determinant) <= RVOMath.RVO_EPSILON)
 					{
@@ -737,7 +737,7 @@ public class Agent
 					 * This should in principle not happen. The result is by
 					 * definition already in the feasible region of this
 					 * linear program. If it fails, it is due to small
-					 * doubleing point error, and the current result is kept.
+					 * floating point error, and the current result is kept.
 					 */
 					result.argValue = tempResult.clone();
 				}

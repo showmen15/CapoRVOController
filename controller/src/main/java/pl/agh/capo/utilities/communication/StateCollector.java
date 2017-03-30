@@ -12,6 +12,8 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectInputStream;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.concurrent.TimeoutException;
 
 public class StateCollector extends StateConnector {
@@ -53,11 +55,15 @@ public class StateCollector extends StateConnector {
             public void handleDelivery(String consumerTag, Envelope envelope, AMQP.BasicProperties properties, byte[] body) throws IOException {
                 if (stateReceivedCallback == null) {
                     return;
-                }
+                }                
                 ByteArrayInputStream bis = new ByteArrayInputStream(body);
                 ObjectInput in = new ObjectInputStream(bis);
                 try {
+               	
                     State state = (State) in.readObject();
+                    
+                    System.out.println("State robot : " + state.getRobotId() + " "  + LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.n")));
+                    
                     stateReceivedCallback.handle(state);
                 } catch (ClassNotFoundException e) {
                     logger.debug("[RABBIT] Error parsing message");

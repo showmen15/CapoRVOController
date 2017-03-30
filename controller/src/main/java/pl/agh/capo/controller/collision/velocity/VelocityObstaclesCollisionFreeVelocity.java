@@ -12,8 +12,8 @@ import java.util.Map;
 
 public class VelocityObstaclesCollisionFreeVelocity extends AbstractCollisionFreeVelocity {
 
-    public VelocityObstaclesCollisionFreeVelocity(Map<Integer, State> states, WallCollisionDetector wallCollisionDetector, Location location, Velocity velocity,int robotId) {
-        super(states, wallCollisionDetector, location, velocity,robotId);
+    public VelocityObstaclesCollisionFreeVelocity(Map<Integer, State> states, WallCollisionDetector wallCollisionDetector, int robotId) {
+        super(states, wallCollisionDetector, robotId);
     }
 
     @Override

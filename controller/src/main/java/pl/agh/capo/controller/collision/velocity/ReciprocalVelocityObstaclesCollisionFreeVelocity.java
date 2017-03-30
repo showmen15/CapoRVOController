@@ -8,6 +8,8 @@ import pl.agh.capo.utilities.state.Velocity;
 
 import pl.agh.capo.rvo.*;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.AbstractMap.SimpleEntry;
 
@@ -95,16 +97,16 @@ public class ReciprocalVelocityObstaclesCollisionFreeVelocity extends AbstractCo
 	private Agent CurrentAgent;
 
 	private Random random;
+	
+	private  double CurrentRobotFearFactor;
 
-	public ReciprocalVelocityObstaclesCollisionFreeVelocity(Map<Integer, State> states,
-			WallCollisionDetector wallCollisionDetector, Location location, Velocity velocity, int robotId) {
+	public ReciprocalVelocityObstaclesCollisionFreeVelocity(Map<Integer, State> states,WallCollisionDetector wallCollisionDetector, int robotId) {
 
-		super(states, wallCollisionDetector, location, velocity, robotId);
-	}
-
-	public ReciprocalVelocityObstaclesCollisionFreeVelocity(Map<Integer, State> states, WallCollisionDetector wallCollisionDetector, Location location, Velocity velocity, int robotId, double currentRobotFearFactor) {
-
-		super(states, wallCollisionDetector, location, velocity, robotId,currentRobotFearFactor);
+		super(states, wallCollisionDetector,robotId);	
+		
+		random = new Random();
+		initObstacle();
+		CurrentAgent = createAgent(RobotID);
 	}
 
 	@Override
@@ -121,15 +123,11 @@ public class ReciprocalVelocityObstaclesCollisionFreeVelocity extends AbstractCo
 	}
 	
 	private void buildReciprocalVelocityObstacles(List<Agent> agents)
-	{
-		initObstacle();
-		random = new Random();
-		CurrentAgent = createAgent(RobotID);
+	{	
+		agents.add(CurrentAgent);
 
-		if (agents.size() > 0) {
-
-			CurrentAgent.position_ = new Vector2(location.getX(), location.getY());
-			setAgentPrefVelocity(new Vector2(velocity.getX(), velocity.getY()));
+		CurrentAgent.position_ = new Vector2((float) location.getX(),(float) location.getY());
+			setAgentPrefVelocity(new Vector2((float) velocity.getX(),(float) velocity.getY()));
 
 			agents_ = agents;
 			kdTree_ = new KdTree();
@@ -138,21 +136,26 @@ public class ReciprocalVelocityObstaclesCollisionFreeVelocity extends AbstractCo
 
 			CurrentAgent.computeNeighbors(kdTree_); // Simulator.Instance.agents_[agentNo].computeNeighbors();
 			CurrentAgent.computeNewVelocity(); // Simulator.Instance.agents_[agentNo].computeNewVelocity();
-
+						
 			CurrentAgent.update();
-		} else
-			CurrentAgent.velocity_ = new Vector2(velocity.getX(), velocity.getY());
 	}
 
 	private void setAgentPrefVelocity(Vector2 currentVelocity) {
+		
+		if (RVOMath.absSq(currentVelocity) > 1.0f)
+		{
+			currentVelocity = RVOMath.normalize(currentVelocity);
+		}
+		
 		CurrentAgent.prefVelocity_ = currentVelocity;
 
 		/* Perturb a little to avoid deadlocks due to perfect symmetry. */
-		double angle = (double) random.nextDouble() * 2.0f * (double) Math.PI;
-		double dist = (double) random.nextDouble() * 0.0001f;
-
-		CurrentAgent.prefVelocity_ = Vector2.OpAddition(CurrentAgent.prefVelocity_,
-				Vector2.OpMultiply(dist, new Vector2((double) Math.cos(angle), (double) Math.sin(angle))));
+//		float angle = (float) random.nextDouble() * 2.0f * (float) Math.PI;
+//		float dist = (float) random.nextDouble() * 0.0001f;
+//
+//		Vector2 rand = Vector2.OpMultiply(dist, new Vector2((float) Math.cos(angle), (float) Math.sin(angle)));
+//		
+//		CurrentAgent.prefVelocity_ = Vector2.OpAddition(CurrentAgent.prefVelocity_,rand);
 	}
 
 	private void initObstacle() {
@@ -174,10 +177,10 @@ public class ReciprocalVelocityObstaclesCollisionFreeVelocity extends AbstractCo
 
 		List<Vector2> temp = new ArrayList<Vector2>();
 
-		temp.add(new Vector2(x_min, y_max));
-		temp.add(new Vector2(x_min, y_min));
-		temp.add(new Vector2(x_max, y_min));
-		temp.add(new Vector2(x_max, y_max));
+		temp.add(new Vector2((float)x_min,(float) y_max));
+		temp.add(new Vector2((float)x_min,(float) y_min));
+		temp.add(new Vector2((float)x_max,(float) y_min));
+		temp.add(new Vector2((float)x_max,(float) y_max));
 
 		return temp;
 	}
@@ -201,14 +204,14 @@ public class ReciprocalVelocityObstaclesCollisionFreeVelocity extends AbstractCo
 		agent.position_ = new Vector2(0, 0);
 
 		agent.maxNeighbors_ = maxNeighbors;
-		agent.maxSpeed_ = maxSpeed;
-		agent.neighborDist_ = neighborDist;
-		agent.radius_ = radius;
-		agent.timeHorizon_ = timeHorizon;
-		agent.timeHorizonObst_ = timeHorizonObst;
+		agent.maxSpeed_ = (float) maxSpeed;
+		agent.neighborDist_ = (float) neighborDist;
+		agent.radius_ = (float) radius;
+		agent.timeHorizon_ = (float) timeHorizon;
+		agent.timeHorizonObst_ = (float) timeHorizonObst;
 		agent.velocity_ = velocityRVO;
 
-		agent.timeStep_ = timeStep;
+		agent.timeStep_ = (float) timeStep;
 
 		return agent;
 	}
@@ -237,8 +240,8 @@ public class ReciprocalVelocityObstaclesCollisionFreeVelocity extends AbstractCo
 	private Agent createAgent(State state) {
 		Agent temp = createAgent(state.getRobotId());
 
-		temp.position_ = new Vector2(state.getLocation().getX(), state.getLocation().getY());
-		temp.velocity_ = new Vector2(state.getVelocity().getX(), state.getVelocity().getY());
+		temp.position_ = new Vector2((float)state.getLocation().getX(),(float) state.getLocation().getY());
+		temp.velocity_ = new Vector2((float)state.getVelocity().getX(),(float) state.getVelocity().getY());
 
 		return temp;
 	}

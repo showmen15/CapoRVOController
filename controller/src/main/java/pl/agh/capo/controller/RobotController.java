@@ -5,6 +5,8 @@ import org.apache.log4j.Logger;
 import pl.agh.capo.utilities.EnvironmentalConfiguration;
 import pl.agh.capo.utilities.communication.StateCollector;
 import pl.agh.capo.utilities.communication.StatePublisher;
+import pl.agh.capo.utilities.communicationUDP.StateCollectorUDP;
+import pl.agh.capo.utilities.communicationUDP.StatePublisherUDP;
 import pl.agh.capo.utilities.maze.Gate;
 import pl.agh.capo.utilities.maze.MazeMap;
 import pl.agh.capo.utilities.state.Destination;
@@ -16,6 +18,7 @@ import pl.agh.capo.controller.collision.WallCollisionDetector;
 import pl.agh.capo.controller.collision.velocity.AbstractCollisionFreeVelocity;
 import pl.agh.capo.controller.collision.velocity.CollisionFreeVelocityType;
 import pl.agh.capo.controller.collision.velocity.FearMutationType;
+import pl.agh.capo.controller.collision.velocity.ReciprocalVelocityObstaclesCollisionFreeVelocity;
 import pl.agh.capo.fear.Fear;
 import pl.agh.capo.utilities.RobotMotionModel;
 import pl.agh.capo.robot.IRobot;
@@ -41,8 +44,8 @@ public class RobotController implements Runnable {
 
 	private final IRobot robot;
 	private final RobotMotionModel motionModel;
-	private final StatePublisher statePublisher;
-	private final StateCollector stateCollector;
+	private final StatePublisherUDP statePublisher;
+	private final StateCollectorUDP stateCollector;
 	private final CollisionFreeVelocityGenerator collisionFreeVelocityGenerator;
 	private final WallCollisionDetector wallCollisionDetector;
 	private final ScheduledExecutorService controlScheduler = Executors.newScheduledThreadPool(1);
@@ -59,6 +62,9 @@ public class RobotController implements Runnable {
 	private boolean isSensorWorking = true;
 	
 	private Fear fear;
+	private AbstractCollisionFreeVelocity collisionFreeVelocity;
+	
+	private int loop = 0;
 
 	public RobotController(int robotId, List<Destination> destinationList, MazeMap mazeMap, IRobot robot,
 			IRobotManager manager, CollisionFreeVelocityType collisionFreeVelocityType) {
@@ -70,8 +76,13 @@ public class RobotController implements Runnable {
 		wallCollisionDetector = new WallCollisionDetector(mazeMap);
 		collisionFreeVelocityGenerator = new CollisionFreeVelocityGenerator(collisionFreeVelocityType, robotId,
 				wallCollisionDetector);
-		stateCollector = StateCollector.createAndEstablishConnection(collisionFreeVelocityGenerator);
-		statePublisher = StatePublisher.createAndEstablishConnection();
+		
+		//stateCollector = StateCollector.createAndEstablishConnection(collisionFreeVelocityGenerator);
+		//statePublisher = StatePublisher.createAndEstablishConnection();
+		
+		stateCollector = StateCollectorUDP.createAndEstablishConnection(collisionFreeVelocityGenerator);
+		statePublisher = StatePublisherUDP.createAndEstablishConnection();
+		
 		setPath(destinationList);
 	
 		try {
@@ -79,6 +90,9 @@ public class RobotController implements Runnable {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+
+		collisionFreeVelocity = collisionFreeVelocityGenerator.createCollisionFreeState();      
+		publishState(false, new State(robotId,robot.getRobotLocation() , new Velocity(0, 0), destination));
 	}
 
 	public void setPath(List<Destination> destinationList) {
@@ -88,16 +102,23 @@ public class RobotController implements Runnable {
 	}
 
 	public void run() {
-		controlScheduler.scheduleAtFixedRate(this::controlRobot, MOVE_ROBOT_PERIOD_IN_MS, MOVE_ROBOT_PERIOD_IN_MS,
+		
+		
+//		controlScheduler.scheduleAtFixedRate(this::controlRobot, MOVE_ROBOT_PERIOD_IN_MS, MOVE_ROBOT_PERIOD_IN_MS,
+//				TimeUnit.MILLISECONDS);
+		
+		controlScheduler.scheduleAtFixedRate(this::TESTcontrolRobotRVO, MOVE_ROBOT_PERIOD_IN_MS, MOVE_ROBOT_PERIOD_IN_MS,
 				TimeUnit.MILLISECONDS);
-		sensorMonitor.scheduleAtFixedRate(this::monitorSensor, MONITOR_SENSOR_PERIOD_IN_MS, MONITOR_SENSOR_PERIOD_IN_MS,
-				TimeUnit.MILLISECONDS);
+		//sensorMonitor.scheduleAtFixedRate(this::monitorSensor, MONITOR_SENSOR_PERIOD_IN_MS, MONITOR_SENSOR_PERIOD_IN_MS,
+		//		TimeUnit.MILLISECONDS);
+		
+		//sensorMonitor.scheduleAtFixedRate(this::monitorSensor, MOVE_ROBOT_PERIOD_IN_MS, MOVE_ROBOT_PERIOD_IN_MS,
+		//		TimeUnit.MILLISECONDS);
 	}
 
 	private void controlRobot() {
 		try
 		{
-		
 		sensorReadCounter++;
 	        Location robotLocation = robot.getRobotLocation();
 	        if (robotLocation == null) {
@@ -122,7 +143,8 @@ public class RobotController implements Runnable {
 				
 				fearfactor = fear.CalculateFearFactor(collisionFreeVelocityGenerator.GetStates(), robotLocation);
 				
-			    AbstractCollisionFreeVelocity collisionFreeVelocity = collisionFreeVelocityGenerator.createCollisionFreeState(motionModel.getLocation(), optimalVelocity, fearfactor);
+				//AbstractCollisionFreeVelocity collisionFreeVelocity = collisionFreeVelocityGenerator.createCollisionFreeState(motionModel.getLocation(), optimalVelocity);
+			    collisionFreeVelocity.buildVelocityObstacles(motionModel.getLocation(), optimalVelocity,fearfactor);
 				collide = !collisionFreeVelocity.isCurrentVelocityCollisionFree();
 				
 				optimalVelocity = collisionFreeVelocity.get();
@@ -136,7 +158,8 @@ public class RobotController implements Runnable {
 			}
 			else if(EnvironmentalConfiguration.ALGORITHM_FEAR_IMPLEMENTATION == FearMutationType.FEAR_SINGLE_FIRST)
 			{
-				AbstractCollisionFreeVelocity collisionFreeVelocity = collisionFreeVelocityGenerator.createCollisionFreeState(motionModel.getLocation(), optimalVelocity);
+				//AbstractCollisionFreeVelocity collisionFreeVelocity = collisionFreeVelocityGenerator.createCollisionFreeState(motionModel.getLocation(), optimalVelocity);
+				collisionFreeVelocity.buildVelocityObstacles(motionModel.getLocation(), optimalVelocity);
 				collide = !collisionFreeVelocity.isCurrentVelocityCollisionFree();
 
 				fearfactor = fear.CalculateFearFactor(collisionFreeVelocityGenerator.GetStates(), robotLocation);
@@ -157,7 +180,8 @@ public class RobotController implements Runnable {
 			}
 			else if(EnvironmentalConfiguration.ALGORITHM_FEAR_IMPLEMENTATION == FearMutationType.NONE) 
 			{
-				AbstractCollisionFreeVelocity collisionFreeVelocity = collisionFreeVelocityGenerator.createCollisionFreeState(motionModel.getLocation(), optimalVelocity);
+				//AbstractCollisionFreeVelocity collisionFreeVelocity = collisionFreeVelocityGenerator.createCollisionFreeState(motionModel.getLocation(), optimalVelocity);
+				collisionFreeVelocity.buildVelocityObstacles(motionModel.getLocation(), optimalVelocity);
 				collide = !collisionFreeVelocity.isCurrentVelocityCollisionFree();
 
 				optimalVelocity = collisionFreeVelocity.get();
@@ -166,12 +190,253 @@ public class RobotController implements Runnable {
 	        
 	        robot.setVelocity(motionModel.getVelocityLeft(), motionModel.getVelocityRight());  
 	        
-	        
-	        
 	        collisionFreeState = createCollisionFreeState(optimalVelocity);
 	        collisionFreeState.setRobotFearFactor(fearfactor);
 	        
 	        publishState(collide, collisionFreeState);
+	        
+		}
+		catch(Exception ex)
+		{
+			ex.printStackTrace();
+		}
+	}
+	
+	
+	private void TESTcontrolRobotRVO() {
+		try
+		{
+		
+		sensorReadCounter++;
+	        Location robotLocation = robot.getRobotLocation();
+	        if (robotLocation == null) {
+	            robot.setVelocity(0.0, 0.0);
+	            return;
+	        }
+	        motionModel.setLocation(robotLocation);
+	        double destinationDistance = destination.distance(motionModel.getLocation());
+	        if (!findDestination(destinationDistance)) {
+	            stop();
+	            return;
+	        }
+	        
+	        if(loop > 12)
+	        {
+	        	int www = 0;
+	        }
+	        
+	        robotLocation = robot.getRobotLocation();
+	       
+	        Velocity optimalVelocity = new Velocity(destination.getX() - robotLocation.getX(), destination.getY() - robotLocation.getY());  //findOptimalToDestinationVelocity();
+	        
+	    	//AbstractCollisionFreeVelocity collisionFreeVelocity = collisionFreeVelocityGenerator.createCollisionFreeState(motionModel.getLocation(), optimalVelocity);
+
+	    	collisionFreeVelocity.buildVelocityObstacles(motionModel.getLocation(), optimalVelocity);
+			optimalVelocity = collisionFreeVelocity.get(); //new Velocity(0.0,-0.25);  //
+	        
+			float x = (float) optimalVelocity.getX();
+			float y = (float) optimalVelocity.getY();
+			/*
+			if(Math.abs(x) < 0.0001)
+				x = 0.0f;
+			
+			if(Math.abs(y) < 0.0001)
+				y = 0.0f;
+			
+			optimalVelocity.setX(x);
+			optimalVelocity.setY(y);*/
+			
+		//	string.Format("ID: {0} X: {1} Y: {2}", robotID, currentVelocity.x(), currentVelocity.y())
+	    //    System.out.println(loop + "&" + robotId + "&" + optimalVelocity.getX() + "&" + optimalVelocity.getY() + "&");
+			
+		
+			
+	        robotLocation.setX(robotLocation.getX() + optimalVelocity.getX() * 0.2);
+	        robotLocation.setY(robotLocation.getY() + optimalVelocity.getY() * 0.2);
+	        
+	        float Lx = (float) robotLocation.getX();
+	        float Ly = (float) robotLocation.getY();
+	        
+	    	System.out.println(loop + "&" + robotId + "&" + x + "&" + y + "&" + Lx + "&" + Ly + "&" );
+	        
+	        State collisionFreeState;	        
+	        collisionFreeState = createCollisionFreeState(optimalVelocity); 
+	        publishState(false, collisionFreeState);
+	        loop++;
+	        
+	        
+	        
+		      //  robotLocation = new Location(robotLocation.getX() +0.2, robotLocation.getY() +0.2, 0);
+	       // robot.getRobotLocation().setX(robotLocation.getX() +0.2);
+	       // robot.getRobotLocation().setY(robotLocation.getY() +0.2);
+	        
+	        
+	        //motionModel.setLocation(robotLocation);
+	        
+	       
+	        
+	        
+/*	        
+	        Velocity optimalVelocity = new Velocity(0,1);
+	        
+	        double x = robotLocation.getX();
+			double y = robotLocation.getY();
+			double x1 = robotLocation.getX() + optimalVelocity.getX();
+			double y1 = robotLocation.getY() + optimalVelocity.getY();
+			
+			double direction = calcOrientationRVO(x,y,x1,y1);
+	        
+	        
+	        robotLocation = new Location(robotLocation.getX() + 0.3, robotLocation.getY() +0.3, direction);
+	        motionModel.setLocation(robotLocation);
+	        
+	        setToDestinationVelocity(optimalVelocity, destinationDistance);
+	        
+	        robot.setVelocity(motionModel.getVelocityLeft(), motionModel.getVelocityRight());  
+	        
+	        State collisionFreeState;
+	        collisionFreeState = createCollisionFreeState(optimalVelocity);
+	        
+	        publishState(false, collisionFreeState);*/
+	        
+	       /*
+	        * 
+	        * 	       // setToDestinationVelocity(optimalVelocity, destinationDistance);
+	        robotLocation = new Location(robotLocation.getX() + 0.2, robotLocation.getY() + 0.2, 0);
+	        motionModel.setLocation(robotLocation);
+	       
+	        State collisionFreeState;
+	        
+	        Velocity optimalVelocity  = new Velocity(1, 1);
+	        collisionFreeState = createCollisionFreeState(optimalVelocity);
+	       
+	        robot.setVelocity(motionModel.getVelocityLeft(), motionModel.getVelocityRight());
+	        
+	        
+	        
+	        publishState(false, collisionFreeState);*/
+	        
+	        /*
+	        Velocity optimalVelocity = new Velocity(destination.getX() - robotLocation.getX(), destination.getY() - robotLocation.getY());
+	        
+	        AbstractCollisionFreeVelocity collisionFreeVelocity = collisionFreeVelocityGenerator.createCollisionFreeState(motionModel.getLocation(), optimalVelocity);
+	        
+	        optimalVelocity = collisionFreeVelocity.get();
+	       
+			double x = robotLocation.getX();
+			double y = robotLocation.getY();
+			double x1 = robotLocation.getX() + optimalVelocity.getX();
+			double y1 = robotLocation.getY() + optimalVelocity.getY();
+			
+			double direction = calcOrientationRVO(x,y,x1,y1);
+	        
+	        robotLocation = new Location(robotLocation.getX() + optimalVelocity.getX() * 0.2, robotLocation.getY() + optimalVelocity.getY() * 0.2, direction); 
+
+	        motionModel.setLocation(robotLocation);
+	        
+	        
+	        if(robotId == 1)
+	        System.out.println("Robot: " + Integer.toString(robotId) + "X: " + robotLocation.getX() + "Y: " + robotLocation.getY());
+	        
+	        robot.setVelocity(motionModel.getVelocityLeft(), motionModel.getVelocityRight());  
+	        
+	        State collisionFreeState;
+	        
+	        collisionFreeState = createCollisionFreeState(optimalVelocity);
+	        
+	        publishState(false, collisionFreeState);
+	        
+	        
+	        */
+	     //   Velocity optimalVelocity = findOptimalToDestinationVelocity();
+	     //   setToDestinationVelocity(optimalVelocity, destinationDistance);
+	        
+	        
+	        //Velocity optimalVelocity = findOptimalToDestinationVelocity();
+	        //setToDestinationVelocity(optimalVelocity, destinationDistance);
+	        
+//	       State collisionFreeState;
+//	        
+//	        robotLocation = new Location(7, 4, 0);
+//	        
+//	        robotLocation.setDirection(-1.57);
+//	        
+//	        motionModel.setLocation(robotLocation);
+//	        
+//	        
+//	        //optimalVelocity = new Velocity(0, 0);
+//	        setVelocity(optimalVelocity); //ustawienie wektora jak ma jechac
+//	        
+//	        
+//	        robot.setVelocity(motionModel.getVelocityLeft(), motionModel.getVelocityRight()); //wykonanie przez robota  
+//	         
+//	        collisionFreeState = createCollisionFreeState(optimalVelocity); //wizualizacja
+//	        publishState(false, collisionFreeState); //wizualizacja
+//	        
+	        
+	        //boolean collide = false;
+	        //State collisionFreeState;
+	        //double fearfactor = 0.0;
+        	        
+			//AbstractCollisionFreeVelocity collisionFreeVelocity = collisionFreeVelocityGenerator.createCollisionFreeState(motionModel.getLocation(), optimalVelocity);
+			//collide = !collisionFreeVelocity.isCurrentVelocityCollisionFree();
+
+			//optimalVelocity = collisionFreeVelocity.get();
+			//setVelocity(optimalVelocity);
+        
+			//State st = createCollisionFreeState(optimalVelocity);
+			
+			//double x = st.getLocation().getX();
+			//double y = st.getLocation().getY();
+			//double x1 = st.getLocation().getX() + st.getVelocity().getX();
+			//double y1 = st.getLocation().getY() + st.getVelocity().getY();
+			
+			//double optimalDirection = calcOrientationRVO(x,y,x1,y1);
+			
+			//st.getLocation().setDirection(optimalDirection);
+			
+			//Location moveLocation = new Location(robotLocation.getX() + optimalVelocity.getX() * 0.2, robotLocation.getY() + optimalVelocity.getY() * 0.2,0.0);
+					
+			
+			//State sst1 = new State(robotId, moveLocation, optimalVelocity , optimalVelocity);
+			
+			//robot.setVelocity(leftVelocity, rightVelocity);
+			//robot.setVelocity(optimalVelocity.getX(),robotLocation.getY());
+			//publishState(false, sst1);
+			
+			
+		   // robot.setVelocity(motionModel.getVelocityLeft(), motionModel.getVelocityRight());  
+        
+        
+        
+		    //collisionFreeState = createCollisionFreeState(optimalVelocity);
+		    //collisionFreeState.setRobotFearFactor(fearfactor);
+        
+		   //publishState(collide, collisionFreeState);
+			
+			//setVelocity(optimalVelocity);
+			//test
+
+	        //robot.setVelocity(motionModel.getVelocityLeft(), motionModel.getVelocityRight());  
+			
+	        //collisionFreeState = createCollisionFreeState(optimalVelocity);
+	        //collisionFreeState.setRobotFearFactor(fearfactor);
+	        
+	        //publishState(collide, collisionFreeState);
+	        
+//	        Location st =  robotLocation;
+//			
+//			double x = st.getX();
+//			double y = st.getY();
+//			double x1 = st.getX() + optimalVelocity.getX();
+//			double y1 = st.getY() + optimalVelocity.getY();
+//			
+//			double optimalDirection = calcOrientationRVO(x,y,x1,y1);
+//			
+//			st.setDirection(optimalDirection);
+//	        
+//	        publishState(collide, collisionFreeState);
+	        
 	        
 		}
 		catch(Exception ex)

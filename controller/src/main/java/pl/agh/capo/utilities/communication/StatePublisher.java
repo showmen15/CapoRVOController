@@ -8,6 +8,9 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutput;
 import java.io.ObjectOutputStream;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.concurrent.TimeoutException;
 
 public class StatePublisher extends StateConnector {
@@ -35,6 +38,9 @@ public class StatePublisher extends StateConnector {
 
     public void publishRobotState(State state) {
         try {
+        	
+        	System.out.println("Robot: " + state.getRobotId() + " Publish: " + LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.n")));
+
             ByteArrayOutputStream bos = new ByteArrayOutputStream();
             ObjectOutput out = new ObjectOutputStream(bos);
             out.writeObject(state);

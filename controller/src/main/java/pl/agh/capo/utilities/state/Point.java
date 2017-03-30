@@ -63,4 +63,12 @@ public class Point implements Serializable {
         result = 31 * result + (int) (temp ^ (temp >>> 32));
         return result;
     }
+    
+    public void setX(double X) {
+        x = X;
+    }
+
+    public void setY(double Y) {
+        y = Y;
+    }
 }

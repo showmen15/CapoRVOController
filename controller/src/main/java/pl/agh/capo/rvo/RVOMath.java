@@ -44,7 +44,7 @@ public final class RVOMath
 	/**
 	 * <summary>A sufficiently small positive number.</summary>
 	 */
-	public static final double RVO_EPSILON = 0.00001f;
+	public static final float RVO_EPSILON = 0.00001f;
 
 	/**
 	 * <summary>Computes the length of a specified two-dimensional vector.
@@ -54,7 +54,7 @@ public final class RVOMath
 	 * computed.</param>
 	 * <returns>The length of the two-dimensional vector.</returns>
 	 */
-	public static double abs(Vector2 vector)
+	public static float abs(Vector2 vector)
 	{
 		return sqrt(absSq(vector.clone()));
 	}
@@ -68,7 +68,7 @@ public final class RVOMath
 	 * <param name="vector">The two-dimensional vector whose squared length
 	 * is to be computed.</param>
 	 */
-	public static double absSq(Vector2 vector)
+	public static float absSq(Vector2 vector)
 	{
 		return pl.agh.capo.rvo.Vector2.OpMultiply(vector.clone(), vector.clone());
 	}
@@ -100,7 +100,7 @@ public final class RVOMath
 	 * <param name="vector2">The bottom row of the two-dimensional square
 	 * matrix.</param>
 	 */
-	public static double det(Vector2 vector1, Vector2 vector2)
+	public static float det(Vector2 vector1, Vector2 vector2)
 	{
 		return vector1.x_ * vector2.y_ - vector1.y_ * vector2.x_;
 	}
@@ -118,9 +118,9 @@ public final class RVOMath
 	 * <param name="vector3">The point to which the squared distance is to
 	 * be calculated.</param>
 	 */
-	public static double distSqPointLineSegment(Vector2 vector1, Vector2 vector2, Vector2 vector3)
+	public static float distSqPointLineSegment(Vector2 vector1, Vector2 vector2, Vector2 vector3)
 	{
-		double r = pl.agh.capo.rvo.Vector2.OpMultiply(pl.agh.capo.rvo.Vector2.OpSubtraction(vector3.clone(), vector1.clone()), pl.agh.capo.rvo.Vector2.OpSubtraction(vector2.clone(), vector1.clone())) / absSq(pl.agh.capo.rvo.Vector2.OpSubtraction(vector2.clone(), vector1.clone()));
+		float r = pl.agh.capo.rvo.Vector2.OpMultiply(pl.agh.capo.rvo.Vector2.OpSubtraction(vector3.clone(), vector1.clone()), pl.agh.capo.rvo.Vector2.OpSubtraction(vector2.clone(), vector1.clone())) / absSq(pl.agh.capo.rvo.Vector2.OpSubtraction(vector2.clone(), vector1.clone()));
 		
 		if (r < 0.0f)
 		{
@@ -136,14 +136,14 @@ public final class RVOMath
 	}
 
 	/**
-	 * <summary>Computes the absolute value of a double.</summary>
+	 * <summary>Computes the absolute value of a float.</summary>
 	 *
-	 * <returns>The absolute value of the double.</returns>
+	 * <returns>The absolute value of the float.</returns>
 	 *
-	 * <param name="scalar">The double of which to compute the absolute
+	 * <param name="scalar">The float of which to compute the absolute
 	 * value.</param>
 	 */
-	public static double fabs(double scalar)
+	public static float fabs(float scalar)
 	{
 		return Math.abs(scalar);
 	}
@@ -160,33 +160,33 @@ public final class RVOMath
 	 * <param name="c">The point to which the signed distance is to be
 	 * calculated.</param>
 	 */
-	public static double leftOf(Vector2 a, Vector2 b, Vector2 c)
+	public static float leftOf(Vector2 a, Vector2 b, Vector2 c)
 	{
 		return det(pl.agh.capo.rvo.Vector2.OpSubtraction(a.clone(), c.clone()), pl.agh.capo.rvo.Vector2.OpSubtraction(b.clone(), a.clone()));
 	}
 
 	/**
-	 * <summary>Computes the square of a double.</summary>
+	 * <summary>Computes the square of a float.</summary>
 	 *
-	 * <returns>The square of the double.</returns>
+	 * <returns>The square of the float.</returns>
 	 *
-	 * <param name="scalar">The double to be squared.</param>
+	 * <param name="scalar">The float to be squared.</param>
 	 */
-	public static double sqr(double scalar)
+	public static float sqr(float scalar)
 	{
 		return scalar * scalar;
 	}
 
 	/**
-	 * <summary>Computes the square root of a double.</summary>
+	 * <summary>Computes the square root of a float.</summary>
 	 *
-	 * <returns>The square root of the double.</returns>
+	 * <returns>The square root of the float.</returns>
 	 *
-	 * <param name="scalar">The double of which to compute the square root.
+	 * <param name="scalar">The float of which to compute the square root.
 	 * </param>
 	 */
-	public static double sqrt(double scalar)
+	public static float sqrt(float scalar)
 	{
-		return (double)Math.sqrt(scalar);
+		return (float)Math.sqrt(scalar);
 	}
 }

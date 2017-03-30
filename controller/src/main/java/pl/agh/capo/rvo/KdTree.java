@@ -52,10 +52,10 @@ public class KdTree
 		public int end_;
 		public int left_;
 		public int right_;
-		public double maxX_;
-		public double maxY_;
-		public double minX_;
-		public double minY_;
+		public float maxX_;
+		public float maxY_;
+		public float minX_;
+		public float minY_;
 
 		public AgentTreeNode clone()
 		{
@@ -81,8 +81,8 @@ public class KdTree
 //ORIGINAL LINE: private struct FloatPair
 	private final static class FloatPair
 	{
-		private double a_;
-		private double b_;
+		private float a_;
+		private float b_;
 
 		/**
 		 * <summary>Constructs and initializes a pair of scalar
@@ -95,7 +95,7 @@ public class KdTree
 		{
 		}
 
-		public FloatPair(double a, double b)
+		public FloatPair(float a, float b)
 		{
 			a_ = a;
 			b_ = b;
@@ -245,7 +245,7 @@ public class KdTree
 	 * computed.</param>
 	 * <param name="rangeSq">The squared range around the agent.</param>
 	 */
-	public final void computeAgentNeighbors(Agent agent, RefObject<Double> rangeSq)
+	public final void computeAgentNeighbors(Agent agent, RefObject<Float> rangeSq)
 	{
 		queryAgentTreeRecursive(agent, rangeSq, 0);
 	}
@@ -258,7 +258,7 @@ public class KdTree
 	 * computed.</param>
 	 * <param name="rangeSq">The squared range around the agent.</param>
 	 */
-	public final void computeObstacleNeighbors(Agent agent, double rangeSq)
+	public final void computeObstacleNeighbors(Agent agent, float rangeSq)
 	{
 		queryObstacleTreeRecursive(agent, rangeSq, obstacleTree_);
 	}
@@ -277,7 +277,7 @@ public class KdTree
 	 * <param name="radius">The radius within which visibility is to be
 	 * tested.</param>
 	 */
-	public final boolean queryVisibility(Vector2 q1, Vector2 q2, double radius)
+	public final boolean queryVisibility(Vector2 q1, Vector2 q2, float radius)
 	{
 		return queryVisibilityRecursive(q1, q2, radius, obstacleTree_);
 	}
@@ -309,7 +309,7 @@ public class KdTree
 		{
 			/* No leaf node. */
 			boolean isVertical = agentTree_[node].maxX_ - agentTree_[node].minX_ > agentTree_[node].maxY_ - agentTree_[node].minY_;
-			double splitValue = 0.5f * (isVertical ? agentTree_[node].maxX_ + agentTree_[node].minX_ : agentTree_[node].maxY_ + agentTree_[node].minY_);
+			float splitValue = 0.5f * (isVertical ? agentTree_[node].maxX_ + agentTree_[node].minX_ : agentTree_[node].maxY_ + agentTree_[node].minY_);
 
 			int left = begin;
 			int right = end;
@@ -393,8 +393,8 @@ public class KdTree
 				Obstacle obstacleJ1 = obstacles.get(j);
 				Obstacle obstacleJ2 = obstacleJ1.next_;
 
-				double j1LeftOfI = RVOMath.leftOf(obstacleI1.point_, obstacleI2.point_, obstacleJ1.point_);
-				double j2LeftOfI = RVOMath.leftOf(obstacleI1.point_, obstacleI2.point_, obstacleJ2.point_);
+				float j1LeftOfI = RVOMath.leftOf(obstacleI1.point_, obstacleI2.point_, obstacleJ1.point_);
+				float j2LeftOfI = RVOMath.leftOf(obstacleI1.point_, obstacleI2.point_, obstacleJ2.point_);
 
 				if (j1LeftOfI >= -RVOMath.RVO_EPSILON && j2LeftOfI >= -RVOMath.RVO_EPSILON)
 				{
@@ -457,8 +457,8 @@ public class KdTree
 				Obstacle obstacleJ1 = obstacles.get(j);
 				Obstacle obstacleJ2 = obstacleJ1.next_;
 
-				double j1LeftOfI = RVOMath.leftOf(obstacleI1.point_, obstacleI2.point_, obstacleJ1.point_);
-				double j2LeftOfI = RVOMath.leftOf(obstacleI1.point_, obstacleI2.point_, obstacleJ2.point_);
+				float j1LeftOfI = RVOMath.leftOf(obstacleI1.point_, obstacleI2.point_, obstacleJ1.point_);
+				float j2LeftOfI = RVOMath.leftOf(obstacleI1.point_, obstacleI2.point_, obstacleJ2.point_);
 
 				if (j1LeftOfI >= -RVOMath.RVO_EPSILON && j2LeftOfI >= -RVOMath.RVO_EPSILON)
 				{
@@ -471,7 +471,7 @@ public class KdTree
 				else
 				{
 					/* Split obstacle j. */
-					double t = RVOMath.det(Vector2.OpSubtraction(obstacleI2.point_, obstacleI1.point_),Vector2.OpSubtraction(obstacleJ1.point_, obstacleI1.point_)) / RVOMath.det(Vector2.OpSubtraction(obstacleI2.point_, obstacleI1.point_), Vector2.OpSubtraction(obstacleJ1.point_, obstacleJ2.point_));
+					float t = RVOMath.det(Vector2.OpSubtraction(obstacleI2.point_, obstacleI1.point_),Vector2.OpSubtraction(obstacleJ1.point_, obstacleI1.point_)) / RVOMath.det(Vector2.OpSubtraction(obstacleI2.point_, obstacleI1.point_), Vector2.OpSubtraction(obstacleJ1.point_, obstacleJ2.point_));
 
 					Vector2 splitPoint = Vector2.OpAddition(obstacleJ1.point_, Vector2.OpMultiply(t,(Vector2.OpSubtraction(obstacleJ2.point_, obstacleJ1.point_))));
 
@@ -519,7 +519,7 @@ public class KdTree
 	 * <param name="rangeSq">The squared range around the agent.</param>
 	 * <param name="node">The current agent k-D tree node index.</param>
 	 */
-	private void queryAgentTreeRecursive(Agent agent, RefObject<Double> rangeSq, int node)
+	private void queryAgentTreeRecursive(Agent agent, RefObject<Float> rangeSq, int node)
 	{
 		if (agentTree_[node].end_ - agentTree_[node].begin_ <= MAX_LEAF_SIZE)
 		{
@@ -530,8 +530,8 @@ public class KdTree
 		}
 		else
 		{
-			double distSqLeft = RVOMath.sqr(Math.max(0.0f, agentTree_[agentTree_[node].left_].minX_ - agent.position_.x_)) + RVOMath.sqr(Math.max(0.0f, agent.position_.x_ - agentTree_[agentTree_[node].left_].maxX_)) + RVOMath.sqr(Math.max(0.0f, agentTree_[agentTree_[node].left_].minY_ - agent.position_.y_)) + RVOMath.sqr(Math.max(0.0f, agent.position_.y_ - agentTree_[agentTree_[node].left_].maxY_));
-			double distSqRight = RVOMath.sqr(Math.max(0.0f, agentTree_[agentTree_[node].right_].minX_ - agent.position_.x_)) + RVOMath.sqr(Math.max(0.0f, agent.position_.x_ - agentTree_[agentTree_[node].right_].maxX_)) + RVOMath.sqr(Math.max(0.0f, agentTree_[agentTree_[node].right_].minY_ - agent.position_.y_)) + RVOMath.sqr(Math.max(0.0f, agent.position_.y_ - agentTree_[agentTree_[node].right_].maxY_));
+			float distSqLeft = RVOMath.sqr(Math.max(0.0f, agentTree_[agentTree_[node].left_].minX_ - agent.position_.x_)) + RVOMath.sqr(Math.max(0.0f, agent.position_.x_ - agentTree_[agentTree_[node].left_].maxX_)) + RVOMath.sqr(Math.max(0.0f, agentTree_[agentTree_[node].left_].minY_ - agent.position_.y_)) + RVOMath.sqr(Math.max(0.0f, agent.position_.y_ - agentTree_[agentTree_[node].left_].maxY_));
+			float distSqRight = RVOMath.sqr(Math.max(0.0f, agentTree_[agentTree_[node].right_].minX_ - agent.position_.x_)) + RVOMath.sqr(Math.max(0.0f, agent.position_.x_ - agentTree_[agentTree_[node].right_].maxX_)) + RVOMath.sqr(Math.max(0.0f, agentTree_[agentTree_[node].right_].minY_ - agent.position_.y_)) + RVOMath.sqr(Math.max(0.0f, agent.position_.y_ - agentTree_[agentTree_[node].right_].maxY_));
 
 			if (distSqLeft < distSqRight)
 			{
@@ -562,7 +562,7 @@ public class KdTree
 	}
 
 
-	private void queryObstacleTreeRecursiveNew(Agent agent, double rangeSq, ObstacleTreeNode node)
+	private void queryObstacleTreeRecursiveNew(Agent agent, float rangeSq, ObstacleTreeNode node)
 	{
 		// IList<Obstacle> obstacles = Simulator.Instance.obstacles_;
 
@@ -581,7 +581,7 @@ public class KdTree
 	 * <param name="rangeSq">The squared range around the agent.</param>
 	 * <param name="node">The current obstacle k-D node.</param>
 	 */
-	private void queryObstacleTreeRecursive(Agent agent, double rangeSq, ObstacleTreeNode node)
+	private void queryObstacleTreeRecursive(Agent agent, float rangeSq, ObstacleTreeNode node)
 	{
 
 
@@ -590,11 +590,11 @@ public class KdTree
 			Obstacle obstacle1 = node.obstacle_;
 			Obstacle obstacle2 = obstacle1.next_;
 
-			double agentLeftOfLine = RVOMath.leftOf(obstacle1.point_, obstacle2.point_, agent.position_);
+			float agentLeftOfLine = RVOMath.leftOf(obstacle1.point_, obstacle2.point_, agent.position_);
 
 			queryObstacleTreeRecursive(agent, rangeSq, agentLeftOfLine >= 0.0f ? node.left_ : node.right_);
 
-			double distSqLine = RVOMath.sqr(agentLeftOfLine) / RVOMath.absSq(Vector2.OpSubtraction(obstacle2.point_, obstacle1.point_));
+			float distSqLine = RVOMath.sqr(agentLeftOfLine) / RVOMath.absSq(Vector2.OpSubtraction(obstacle2.point_, obstacle1.point_));
 
 			if (distSqLine < rangeSq)
 			{
@@ -628,7 +628,7 @@ public class KdTree
 	 * tested.</param>
 	 * <param name="node">The current obstacle k-D node.</param>
 	 */
-	private boolean queryVisibilityRecursive(Vector2 q1, Vector2 q2, double radius, ObstacleTreeNode node)
+	private boolean queryVisibilityRecursive(Vector2 q1, Vector2 q2, float radius, ObstacleTreeNode node)
 	{
 		if (node == null)
 		{
@@ -638,9 +638,9 @@ public class KdTree
 		Obstacle obstacle1 = node.obstacle_;
 		Obstacle obstacle2 = obstacle1.next_;
 
-		double q1LeftOfI = RVOMath.leftOf(obstacle1.point_, obstacle2.point_, q1);
-		double q2LeftOfI = RVOMath.leftOf(obstacle1.point_, obstacle2.point_, q2);
-		double invLengthI = 1.0f / RVOMath.absSq(Vector2.OpSubtraction(obstacle2.point_, obstacle1.point_));
+		float q1LeftOfI = RVOMath.leftOf(obstacle1.point_, obstacle2.point_, q1);
+		float q2LeftOfI = RVOMath.leftOf(obstacle1.point_, obstacle2.point_, q2);
+		float invLengthI = 1.0f / RVOMath.absSq(Vector2.OpSubtraction(obstacle2.point_, obstacle1.point_));
 
 		if (q1LeftOfI >= 0.0f && q2LeftOfI >= 0.0f)
 		{
@@ -658,9 +658,9 @@ public class KdTree
 			return queryVisibilityRecursive(q1, q2, radius, node.left_) && queryVisibilityRecursive(q1, q2, radius, node.right_);
 		}
 
-		double point1LeftOfQ = RVOMath.leftOf(q1, q2, obstacle1.point_);
-		double point2LeftOfQ = RVOMath.leftOf(q1, q2, obstacle2.point_);
-		double invLengthQ = 1.0f / RVOMath.absSq(Vector2.OpSubtraction(q2, q1));
+		float point1LeftOfQ = RVOMath.leftOf(q1, q2, obstacle1.point_);
+		float point2LeftOfQ = RVOMath.leftOf(q1, q2, obstacle2.point_);
+		float invLengthQ = 1.0f / RVOMath.absSq(Vector2.OpSubtraction(q2, q1));
 
 		return point1LeftOfQ * point2LeftOfQ >= 0.0f && RVOMath.sqr(point1LeftOfQ) * invLengthQ > RVOMath.sqr(radius) && RVOMath.sqr(point2LeftOfQ) * invLengthQ > RVOMath.sqr(radius) && queryVisibilityRecursive(q1, q2, radius, node.left_) && queryVisibilityRecursive(q1, q2, radius, node.right_);
 	}

@@ -1,6 +1,7 @@
 package pl.agh.capo.simulation;
 
 import pl.agh.capo.utilities.communication.StateCollector;
+import pl.agh.capo.utilities.communicationUDP.StateCollectorUDP;
 
 import java.io.FileNotFoundException;
 
@@ -16,7 +17,7 @@ public class Main {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-        StateCollector stateCollector = StateCollector.createAndEstablishConnection(mazeVisualizer);
+        StateCollectorUDP stateCollector = StateCollectorUDP.createAndEstablishConnection(mazeVisualizer);
         if (!stateCollector.isConnectionEstablished()) {
             System.exit(1);
         }

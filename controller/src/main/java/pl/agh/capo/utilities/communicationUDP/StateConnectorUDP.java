@@ -1,4 +1,4 @@
-package pl.agh.capo.utilities.communicationUDP1;
+package pl.agh.capo.utilities.communicationUDP;
 
 import java.io.*;
 import java.net.*;

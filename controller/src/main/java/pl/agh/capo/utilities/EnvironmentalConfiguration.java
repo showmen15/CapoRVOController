@@ -14,7 +14,7 @@ public class EnvironmentalConfiguration {
 	public static  String CHANNEL_NAME = "capoRobotState";
 
 	public static  int SIMULATION_TIME_STEP_IN_MS = 200;
-	public static  int SIMULATION_SLEEP_BETWEEN_TIME_STEP_IN_MS = 10; // SIMULATION_TIME_STEP_IN_MS;
+	public static  int SIMULATION_SLEEP_BETWEEN_TIME_STEP_IN_MS = 200; // SIMULATION_TIME_STEP_IN_MS;
 
 	// Empirically selected values to control robots
 	// Units consisted with International System of Units
@@ -47,9 +47,9 @@ public class EnvironmentalConfiguration {
 	// Multiplier of max speed during selecting velocity in pure VO solution
 	public static  double MIN_SPEED_FACTOR = 0.2;
 
-	public static CollisionFreeVelocityType COLLISIONFREEVELOCITYMETHOD = CollisionFreeVelocityType.RECIPROCAL_VELOCITY_OBSTACLES_FEAR_FACTOR;
+	public static CollisionFreeVelocityType COLLISIONFREEVELOCITYMETHOD = CollisionFreeVelocityType.RECIPROCAL_VELOCITY_OBSTACLES;
 
-	public static FearMutationType ALGORITHM_FEAR_IMPLEMENTATION = FearMutationType.FEAR_ORIGINAL;
+	public static FearMutationType ALGORITHM_FEAR_IMPLEMENTATION = FearMutationType.NONE;
 
 	public static boolean ACTIVEFEARFACTORGATE = false;
 
@@ -84,10 +84,23 @@ public class EnvironmentalConfiguration {
 
 	
 	//OtwartaPrzestrzeñ7x5m.roson
-	public static double NEIGHBOR_DIST = 2.4f; //2.4f;  //2.0  
-	public static int MAX_NEIGHBORS = 30;
-	public static double TIME_HORIZON = 2.7f; 
-	public static double TIME_HORIZON_OBST = 2.5f;
+//	public static double NEIGHBOR_DIST = 2.4f; //2.4f;  //2.0  
+//	public static int MAX_NEIGHBORS = 30;
+//	public static double TIME_HORIZON = 2.7f; 
+//	public static double TIME_HORIZON_OBST = 2.5f;
+//
+//	public static double RADIUS = 0.3f;
+//	public static double MAX_SPEED = 0.25f;
+//	public static double TIME_STEP = 0.2f;
+//	
+//	public static double MAX_OBSERVATION_DISTANCE_FF =  2.0; 
+//	public static double RL_CP = 1.0;  
+	
+	//Circle CAPO 
+	public static double NEIGHBOR_DIST = 5.0f; //2.4f;  //2.0  
+	public static int MAX_NEIGHBORS = 10;
+	public static double TIME_HORIZON = 1.5f; 
+	public static double TIME_HORIZON_OBST = 1.5f;
 
 	public static double RADIUS = 0.3f;
 	public static double MAX_SPEED = 0.25f;
@@ -95,7 +108,6 @@ public class EnvironmentalConfiguration {
 	
 	public static double MAX_OBSERVATION_DISTANCE_FF =  2.0; 
 	public static double RL_CP = 1.0;  
-	
 	
 
 }

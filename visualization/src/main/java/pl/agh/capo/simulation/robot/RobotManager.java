@@ -24,12 +24,14 @@ public class RobotManager implements IRobotManager {
     private List<Thread> robots;
 
     private Map<Integer, Integer> result;
+    private Map<Integer, String>  resultRobotPositon;
 
     public RobotManager(File robotConfig, MazeMap mazeMap) {
         this.robotConfig = robotConfig;
         this.mazeMap = mazeMap;
         runCount = RUN_COUNT + 1;
         result = new TreeMap<>();
+        resultRobotPositon = new TreeMap<>();
         restart();
     }
 
@@ -42,8 +44,9 @@ public class RobotManager implements IRobotManager {
     }
 
     @Override
-    public void onFinish(int id, int time) {
+    public void onFinish(int id, int time,String loggRobotPostition) {
         result.put(id, time);
+        resultRobotPositon.put(id, loggRobotPostition);
         restartIfNeeded();
     }
 
@@ -68,7 +71,7 @@ public class RobotManager implements IRobotManager {
         	
         	  sb.append(String.format("%d;%d;%d\n", id, result.get(id), result.get(id) * RobotController.MOVE_ROBOT_PERIOD_IN_MS));
         	
-        	log.SaveResult(SingleRun.configure,id,result.get(id), result.get(id) * RobotController.MOVE_ROBOT_PERIOD_IN_MS);
+        	log.SaveResult(SingleRun.configure,id,result.get(id), result.get(id) * RobotController.MOVE_ROBOT_PERIOD_IN_MS,resultRobotPositon.get(id));
         	
           
         }

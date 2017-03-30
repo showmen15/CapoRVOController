@@ -58,6 +58,7 @@ public class RobotController implements Runnable {
 	private Destination destination;
 	private Destination lastReachDestination;
 	private int sensorReadCounter = 0;
+	private StringBuilder positionRobot;
 
 	private boolean isSensorWorking = true;
 	
@@ -93,6 +94,8 @@ public class RobotController implements Runnable {
 
 		collisionFreeVelocity = collisionFreeVelocityGenerator.createCollisionFreeState();      
 		publishState(false, new State(robotId,robot.getRobotLocation() , new Velocity(0, 0), destination));
+		
+		positionRobot = new StringBuilder();
 	}
 
 	public void setPath(List<Destination> destinationList) {
@@ -194,6 +197,7 @@ public class RobotController implements Runnable {
 	        collisionFreeState.setRobotFearFactor(fearfactor);
 	        
 	        publishState(collide, collisionFreeState);
+	        loggRobotPostition(collisionFreeState);
 	        
 		}
 		catch(Exception ex)
@@ -262,6 +266,7 @@ public class RobotController implements Runnable {
 	        State collisionFreeState;	        
 	        collisionFreeState = createCollisionFreeState(optimalVelocity); 
 	        publishState(false, collisionFreeState);
+	        loggRobotPostition(collisionFreeState);
 	        loop++;
 	        
 	        
@@ -445,6 +450,21 @@ public class RobotController implements Runnable {
 		}
 	}
 	
+	
+	private void loggRobotPostition(State currentRobotState)
+	{		
+		//RobotID;LoopCount;LocationX;LocationY;LocationDirection;VelocotyX;VelocityY&FearFactor;
+		
+		positionRobot.append( robotId + ";" + sensorReadCounter + ";" + 
+							 currentRobotState.getLocation().getX() + ";" + 
+							 currentRobotState.getLocation().getY() + ";" +
+							 currentRobotState.getLocation().getDirection() + ";" +
+							 currentRobotState.getVelocity().getX() + ";" +
+							 currentRobotState.getVelocity().getY() + ";" + 
+							 currentRobotState.getRobotFearFactor() + ";" + "\n"
+							);
+	}
+	
     //  System.out.println("Robot: " + robotId + " X: " + String.format("%.5f", motionModel.getVelocityLeft())  + "Y: " + String.format("%.5f",motionModel.getVelocityRight()));
 
 	
@@ -605,7 +625,7 @@ public class RobotController implements Runnable {
 		controlScheduler.shutdownNow();
 		sensorMonitor.shutdownNow();
 		publishState(false, State.createFinished(robotId));
-		manager.onFinish(robotId, sensorReadCounter);
+		manager.onFinish(robotId, sensorReadCounter,positionRobot.toString());
 		robot.setVelocity(0.0, 0.0);
 	}
 

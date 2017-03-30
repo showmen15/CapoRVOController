@@ -211,7 +211,7 @@ public class ConnectMSSQLServer {
 		return result;
 	}
 
-	public void SaveResult(TaskConfig config,int ID_Robot,int LoopTime, int TimeMilisecond)
+	public void SaveResult(TaskConfig config,int ID_Robot,int LoopTime, int TimeMilisecond,String resultRobotPositon)
 	{
 		try {
 
@@ -221,7 +221,7 @@ public class ConnectMSSQLServer {
 
 			conn = createNewConnection();
 			
-			PreparedStatement sta = conn.prepareStatement("INSERT INTO dbo.Result(ID_Case ,ID_Program,ID_Trials, ID_Map,ID_Config,ID_Robot,LoopTime,TimeMilisecond) VALUES(?,?,?,?,?,?,?,?);");
+			PreparedStatement sta = conn.prepareStatement("INSERT INTO dbo.Result(ID_Case ,ID_Program,ID_Trials, ID_Map,ID_Config,ID_Robot,LoopTime,TimeMilisecond,RobotPosition) VALUES(?,?,?,?,?,?,?,?,?);");
 			
 			sta.setInt(1, config.ID_Case);
 			sta.setInt(2, config.ID_Program);
@@ -231,6 +231,7 @@ public class ConnectMSSQLServer {
 			sta.setInt(6, ID_Robot);
 			sta.setInt(7, LoopTime);
 			sta.setInt(8, TimeMilisecond);
+			sta.setString(9, resultRobotPositon);
 			
 			sta.executeUpdate();
 

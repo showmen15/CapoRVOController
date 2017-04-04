@@ -89,11 +89,14 @@ public class Form1   {
           for (int i = 0; i < robotStartPos.size(); i++)
           {
         	  
-        	  SimRVO3 sim = new SimRVO3(robotEndPos.get(i),RobotID,null);
-  
+        	  SimRVO3 sim = new SimRVO3(RobotID,null);
+        	  sim.location = robotStartPos.get(i);
+        	  sim.velocity1 = new Vector2(0, 0);
         	  
         	  rvo.add(sim);
 
+        	  
+        	  
               State2 state = new State2();
               state.location = robotStartPos.get(i);
               state.velocity = new Vector2(0, 0);
@@ -102,7 +105,7 @@ public class Form1   {
               AllRobotStates.putIfAbsent(RobotID, state);             
               RobotID++;
 
-              thr.add(new Thread(new RunSim(sim, AllRobotStates)));
+              thr.add(new Thread(new RunSim(sim, AllRobotStates,robotEndPos.get(i))));
           }
           working = true;
       }	  

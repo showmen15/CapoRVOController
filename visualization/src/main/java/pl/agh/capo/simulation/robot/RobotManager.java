@@ -62,8 +62,7 @@ public class RobotManager implements IRobotManager {
         }
     }
 
-    private void printResult() {
-    	
+    private void printResult() {   	
     	ConnectMSSQLServer log = new ConnectMSSQLServer();
     	
         StringBuilder sb = new StringBuilder();

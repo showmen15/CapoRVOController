@@ -17,6 +17,11 @@ public class Location extends Point implements Serializable {
         return direction;
     }
     
+    //Tylko do testow RVO - ruch w dowolnym kierunku
+    public void setDirection(double x,double y) {
+    	direction = Math.atan2(y,x);
+    }
+    
     public void setDirection(double Direction) {
         direction = Direction;
     }

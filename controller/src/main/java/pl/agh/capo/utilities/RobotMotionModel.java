@@ -98,21 +98,21 @@ public class RobotMotionModel {
 
     public Location calculateLocationAfterTimeInMillisecond(int deltaTime) {
     	 
-    	
-    	
     	double radius = getArcRadius();
+        if (Double.isNaN(radius)) {
+            return calculateLocationAfterTimeMovingStraight(deltaTime / 1000.0);
+        }
+        return calculateLocationAfterTimeTurning(radius, deltaTime / 1000.0);
+    	
+    	/*double radius = getArcRadius();
          if (Double.isNaN(radius)) {
              return calculateLocationAfterTimeMovingStraight(deltaTime / 1000.0);
          }
          else
-         {
-        	// location.setDirection(-1.57);
-        	 
-        	 Location loc = calculateLocationAfterTimeTurning(radius, deltaTime / 1000.0);
-        	 //loc.setDirection(1.57);
-        	 
+         {      	 
+        	 Location loc = calculateLocationAfterTimeTurning(radius, deltaTime / 1000.0);        	 
         	 return loc;
-         }
+         }*/
     	
     	//return new Location(0, 0 , 0);
     	

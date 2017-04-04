@@ -106,6 +106,7 @@ public class RobotController implements Runnable {
 		
 		controlScheduler.scheduleAtFixedRate(this::controlRobot, MOVE_ROBOT_PERIOD_IN_MS, MOVE_ROBOT_PERIOD_IN_MS, TimeUnit.MILLISECONDS);
 
+		// Test Algorytmu dzialajacy
 		// controlScheduler.scheduleAtFixedRate(this::rvoTest, MOVE_ROBOT_PERIOD_IN_MS, MOVE_ROBOT_PERIOD_IN_MS, TimeUnit.MILLISECONDS);
 
 		// Test Algorytmu dzialajacy

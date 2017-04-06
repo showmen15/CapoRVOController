@@ -17,7 +17,7 @@ import java.io.FileReader;
 
 public class MazeVisualizer extends JFrame implements StateReceivedCallback {
 
-	private static boolean IS_MAX_MODE = true;
+	private static boolean IS_MAX_MODE = false;
 
 	private static final Dimension FRAME_SIZE = new Dimension(800, 660);
 	private static final int SPLIT_DIVIDER_LOCATION = 600;
@@ -53,12 +53,12 @@ public class MazeVisualizer extends JFrame implements StateReceivedCallback {
 		// MazeMap.class);
 
 		//mazeMap = new Gson().fromJson(new FileReader(new File("\\\\dsview.pcoip.ki.agh.edu.pl\\Biblioteki-Pracownicy$\\szsz\\Desktop\\Map.json")), MazeMap.class);
-		mazeMap = new Gson().fromJson(new FileReader(new File("D:\\Desktop\\Map.json")), MazeMap.class);
-
-		//mazePanel.setMaze(mazeMap);
+		//File robotConfig = new File("\\\\dsview.pcoip.ki.agh.edu.pl\\Biblioteki-Pracownicy$\\szsz\\Desktop\\Config.csv");
 		
-		File robotConfig = new File("\\\\dsview.pcoip.ki.agh.edu.pl\\Biblioteki-Pracownicy$\\szsz\\Desktop\\Config.csv");
-		//File robotConfig = new File("D:\\Desktop\\Config.csv");
+		mazeMap = new Gson().fromJson(new FileReader(new File("D:\\Desktop\\Map.json")), MazeMap.class);
+		File robotConfig = new File("D:\\Desktop\\Config.csv");
+
+		mazePanel.setMaze(mazeMap);	
 		RobotManager robotManager = new RobotManager(robotConfig, mazeMap);
 		// } catch (Exception e) {
 		// CATCH THEM ALL!!!

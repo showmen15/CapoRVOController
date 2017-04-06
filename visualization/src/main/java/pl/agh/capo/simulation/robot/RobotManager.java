@@ -62,16 +62,15 @@ public class RobotManager implements IRobotManager {
         }
     }
 
-    private void printResult() {
-    	
+    private void printResult() {   	
     	ConnectMSSQLServer log = new ConnectMSSQLServer();
     	
         StringBuilder sb = new StringBuilder();
         for (int id : result.keySet()) {
         	
-        	  sb.append(String.format("%d;%d;%d\n", id, result.get(id), result.get(id) * RobotController.MOVE_ROBOT_SIMULATION_IN_MS));
+        	  sb.append(String.format("%d;%d;%d\n", id, result.get(id), result.get(id) * RobotController.MOVE_ROBOT_PERIOD_IN_MS));
         	
-        	log.SaveResult(SingleRun.configure,id,result.get(id), result.get(id) * RobotController.MOVE_ROBOT_SIMULATION_IN_MS,resultRobotPositon.get(id));
+        	log.SaveResult(SingleRun.configure,id,result.get(id), result.get(id) * RobotController.MOVE_ROBOT_PERIOD_IN_MS,resultRobotPositon.get(id));
         	
           
         }

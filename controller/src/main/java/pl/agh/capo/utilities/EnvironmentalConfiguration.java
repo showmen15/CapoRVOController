@@ -14,7 +14,7 @@ public class EnvironmentalConfiguration {
 	public static  String CHANNEL_NAME = "capoRobotState";
 
 	public static  int SIMULATION_TIME_STEP_IN_MS = 200;
-	public static  int SIMULATION_SLEEP_BETWEEN_TIME_STEP_IN_MS = 30; // SIMULATION_TIME_STEP_IN_MS;
+	public static  int SIMULATION_SLEEP_BETWEEN_TIME_STEP_IN_MS = 75; // SIMULATION_TIME_STEP_IN_MS;
 
 	// Empirically selected values to control robots
 	// Units consisted with International System of Units

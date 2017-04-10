@@ -49,6 +49,19 @@ public class SingleRun {
 			EnvironmentalConfiguration.ALGORITHM_FEAR_IMPLEMENTATION = FearMutationType.NONE;
 			EnvironmentalConfiguration.ACTIVEFEARFACTORGATE = false;
 			break;
+		case 4:// FearFactorBaseWithSingleFirst
+			
+			EnvironmentalConfiguration.COLLISIONFREEVELOCITYMETHOD = CollisionFreeVelocityType.RECIPROCAL_VELOCITY_OBSTACLES_FEAR_FACTOR;
+			EnvironmentalConfiguration.ALGORITHM_FEAR_IMPLEMENTATION = FearMutationType.FEAR_SINGLE_FIRST;
+			EnvironmentalConfiguration.ACTIVEFEARFACTORGATE = false;
+			break;
+			
+		case 5: //FearFactorWithPassageThroughTheDoorWithSingleFirst
+			EnvironmentalConfiguration.COLLISIONFREEVELOCITYMETHOD = CollisionFreeVelocityType.RECIPROCAL_VELOCITY_OBSTACLES_FEAR_FACTOR;
+			EnvironmentalConfiguration.ALGORITHM_FEAR_IMPLEMENTATION = FearMutationType.FEAR_SINGLE_FIRST;
+			EnvironmentalConfiguration.ACTIVEFEARFACTORGATE = true;
+			break;
+
 
 		default:
 			throw new IOException("Nieprawidlowe dane wejsciowe");
@@ -60,6 +73,8 @@ public class SingleRun {
 		case 0: // FearFactorBase
 		case 1: // FearFactorWithPassageThroughTheDoor
 		case 2: // RVOBase
+		case 4: // FearFactorBaseWithSingleFirst
+		case 5: //FearFactorWithPassageThroughTheDoorWithSingleFirst
 			switch (configure.ID_Map) {
 			case 9: // BenchmarkCircle
 

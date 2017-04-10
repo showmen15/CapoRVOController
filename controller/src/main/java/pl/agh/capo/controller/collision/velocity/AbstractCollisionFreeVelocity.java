@@ -38,8 +38,8 @@ public abstract class AbstractCollisionFreeVelocity {
         this.velocity = velocity;  
         buildVelocityObstacles();
     }
-    
-    public void buildVelocityObstacles( Location location, Velocity velocity, double currentRobotFearFactor)
+       
+    public void buildVelocityObstacles(Location location, Velocity velocity, double currentRobotFearFactor)
     {
         this.location = location;
         this.velocity = velocity;  

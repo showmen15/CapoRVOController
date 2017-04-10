@@ -9,6 +9,7 @@ import java.nio.file.StandardOpenOption;
 
 import pl.agh.capo.simulation.visualization.MazeVisualizer;
 import pl.agh.capo.utilities.communication.StateCollector;
+import pl.agh.capo.utilities.communicationUDP.StateCollectorUDP;
 
 public class RVOMazeVisualize {
 
@@ -35,7 +36,7 @@ public class RVOMazeVisualize {
 
 		MazeVisualizer mazeVisualizer = MazeVisualizer.getInstance();
 		mazeVisualizer.open(mapPath, sCaseName);
-		StateCollector stateCollector = StateCollector.createAndEstablishConnection(mazeVisualizer);
+		StateCollectorUDP stateCollector = StateCollectorUDP.createAndEstablishConnection(mazeVisualizer);
 		if (!stateCollector.isConnectionEstablished()) {
 			System.exit(1);
 		}

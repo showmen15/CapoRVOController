@@ -10,12 +10,18 @@ public class Location extends Point implements Serializable {
 
     public Location(double x, double y, double direction) {
         super(x, y);
-        this.direction = direction;
+        
+        
+        this.direction = normalizeAngle(direction);
     }
 
     public double getDirection() {
         return direction;
     }
+    
+    public static double normalizeAngle(double angle) {
+        return Math.atan2(Math.sin(angle), Math.cos(angle));
+    }   
     
     //Tylko do testow RVO - ruch w dowolnym kierunku
     public void setDirection(double x,double y) {

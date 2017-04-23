@@ -115,11 +115,21 @@ class MazePanel extends JPanel {
         
    //     g2.drawString(" X: " + pozX + " Y: " + pozY, (float) poX -3, (float) poY -3);
         
+        g2.setColor(ROBOT_COLORS[state.getRobotId() % ROBOT_COLORS.length]);
         int x = (int) normalizeCoordinate(state.getLocation().getX(), minX) + 20;
         int y = (int) normalizeCoordinate(state.getLocation().getY(), minY) + 20;
         String tempFear = String.format("%.2f", state.getRobotFearFactor()); //  Double.toString();
+
+        //String tempFear = String.format("%.2f/%d", state.getRobotFearFactor(),state.getRobotId()); //  Double.toString();
         
         g2.drawString(tempFear,x, y);
+        
+       /* g2.draw(new Line2D.Double(
+        		normalizeCoordinate(state.getLocation().getX(), minX),
+                normalizeCoordinate(state.getLocation().getY(), minY),
+                normalizeCoordinate(state.getDestination().getX(), minX),
+                normalizeCoordinate(state.getDestination().getY(), minY)
+        ));*/
     }
 
     private void drawPoint(Graphics2D g2, Point point) {

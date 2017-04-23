@@ -7,6 +7,7 @@ import com.vividsolutions.jts.math.Vector3D;
 
 import pl.agh.capo.utilities.EnvironmentalConfiguration;
 import pl.agh.capo.utilities.state.Location;
+import pl.agh.capo.utilities.state.Point;
 import pl.agh.capo.utilities.state.State;
 import pl.agh.capo.utilities.state.Velocity;
 import pl.agh.capo.utilities.maze.*;
@@ -19,6 +20,8 @@ public class Fear {
 	private int currentRobotID;
 	private ArrayList<Vector3D> GatesList;
 	private double RobotFearFactor;
+	
+	private Map<Integer, Double> RobotsFF;
 
 	public Fear(int robotId,List<Gate> gates) throws Exception  {
 		currentRobotID = robotId;
@@ -46,7 +49,7 @@ public class Fear {
 		
 			GatesList.add(new Vector3D(centX, centY, -Math.PI / 2));
 		
-		}		
+		}
 	}
 
 	private double calculateFearFactor(Map<Integer, State> states,Location robotLocation, int robotId)
@@ -140,10 +143,43 @@ public class Fear {
 	
 	public double CalculateFearFactor(Map<Integer, State> states,Location robotLocation) {
 
-			Location currentRobotLocation = robotLocation;//states.get(currentRobotID).getLocation();
-			double robotFearFactor = calculateFearFactor(states, currentRobotLocation, currentRobotID);
+		RobotsFF = new HashMap<Integer, Double>(); 
+		State currentRobotState = new State(currentRobotID,robotLocation, new Velocity(0, 0), new Point(0, 0));
+		states.put(currentRobotID, currentRobotState);
+
+		for (State state : states.values()) 
+		{
+			Location currentRobotLocation = state.getLocation();
+			int robotID = state.getRobotId();
+			double robotFearFactor = calculateFearFactor(states, currentRobotLocation, robotID);			
+			
+			RobotsFF.put(robotID, robotFearFactor);
+		}
 		
-		return  robotFearFactor;
+		states.remove(currentRobotID);
+		return RobotsFF.get(currentRobotID);
+		
+		/*	Location currentRobotLocation = robotLocation;//states.get(currentRobotID).getLocation();
+			double robotFearFactor = calculateFearFactor(states, currentRobotLocation, currentRobotID);						
+		return  robotFearFactor;*/
+	}
+	
+	public List<Integer> GetRobotIDBiggerFearFactor(int robotID, double currentRobotFearFactor)
+	{
+		List<Integer> result = new ArrayList<>();
+		
+		for (Integer index : RobotsFF.keySet()) 
+		{
+			if(robotID == index)
+				continue;
+			else
+			{
+				if(RobotsFF.get(index) >= currentRobotFearFactor )
+					result.add(index);
+			}			
+		}
+		
+		return result;
 	}
 
 	public boolean HaveAvoidCollision(Map<Integer, State> states, double currentFearFactor) 
@@ -164,19 +200,38 @@ public class Fear {
 	public Boolean EmergencyStop(Map<Integer, State> states,Location robotLocation,Velocity optimalVelocity, double currentRobotFF)
 	{
 		double minDistance = 1.2 * EnvironmentalConfiguration.ROBOT_DIAMETER;
+		Location otherRobot;		
+		double currentFF;
 		
-		for (State current : states.values())
+		for (Integer index : RobotsFF.keySet()) 
+		{
+			if(index == currentRobotID)
+				continue;
+			else
+			{
+				if (states.containsKey(index)) {
+					otherRobot = states.get(index).getLocation();
+					currentFF = RobotsFF.get(index);
+
+					if ((robotLocation.getDistance(otherRobot) <= minDistance) && (currentRobotFF > currentFF))
+						return true;
+				}
+			}
+		}
+		
+		/*for (State current : states.values())
 		{
 			if(current.getRobotId() == currentRobotID)
 				continue;
 			else
 			{
-				if((robotLocation.getDistance(current.getLocation()) <= minDistance) && (currentRobotFF > current.getRobotFearFactor())) 
+				double currentFF = RobotsFF.get(current.getRobotId());
+				
+				if((robotLocation.getDistance(current.getLocation()) <= minDistance) && (currentRobotFF > currentFF)) 
 					return true;
 			}
-
-		}		
-		
+		}*/
+			
 		return false;
 	}
 }

@@ -125,6 +125,7 @@ public class RobotController implements Runnable {
 			}
 			motionModel.setLocation(robotLocation);
 			double destinationDistance = destination.distance(motionModel.getLocation());
+			
 			if (!findDestination(destinationDistance)) {
 				stop();
 				return;
@@ -136,18 +137,27 @@ public class RobotController implements Runnable {
 			boolean collide = false;
 			State collisionFreeState;
 			double fearfactor = 0.0;
-
+			boolean stopRobot = false;
+			boolean stopWall = false;
+			
+			
 			if (EnvironmentalConfiguration.ALGORITHM_FEAR_IMPLEMENTATION == FearMutationType.FEAR_ORIGINAL) {
 
 				fearfactor = fear.CalculateFearFactor(collisionFreeVelocityGenerator.GetStates(), robotLocation);
 
-				collisionFreeVelocity.buildVelocityObstacles(motionModel.getLocation(), optimalVelocity, fearfactor);
+				List<Integer> listRobotIDBiggerFearFactor = fear.GetRobotIDBiggerFearFactor(robotId, fearfactor);
+				
+				collisionFreeVelocity.buildVelocityObstacles(motionModel.getLocation(), optimalVelocity, listRobotIDBiggerFearFactor);
 				collide = !collisionFreeVelocity.isCurrentVelocityCollisionFree();
 
 				optimalVelocity = collisionFreeVelocity.get();
 				setVelocity(optimalVelocity);
 
-				if (fear.EmergencyStop(collisionFreeVelocityGenerator.GetStates(), robotLocation, optimalVelocity, fearfactor)) 
+				stopRobot = fear.EmergencyStop(collisionFreeVelocityGenerator.GetStates(), robotLocation, optimalVelocity, fearfactor); 
+				
+				stopWall = !wallCollisionDetector.collisionFree(new Point(robotLocation.getX(),robotLocation.getY()), optimalVelocity);
+				
+				if(stopRobot || stopWall)
 				{
 					optimalVelocity = new Velocity(0, 0);
 					setVelocity(optimalVelocity);
@@ -176,11 +186,16 @@ public class RobotController implements Runnable {
 				collide = !collisionFreeVelocity.isCurrentVelocityCollisionFree();
 
 				optimalVelocity = collisionFreeVelocity.get();
-				setVelocity(optimalVelocity);
+				setVelocity(optimalVelocity);				
 			}
 
-			robot.setVelocity(motionModel.getVelocityLeft(), motionModel.getVelocityRight());
+//			if(stopRobot || stopWall)
+//				robot.setVelocity(0,0);
+//			else
+//				robot.setVelocity(motionModel.getVelocityLeft(), motionModel.getVelocityRight());
 
+			robot.setVelocity(motionModel.getVelocityLeft(), motionModel.getVelocityRight());
+			
 			collisionFreeState = createCollisionFreeState(optimalVelocity);
 			collisionFreeState.setRobotFearFactor(fearfactor);
 
@@ -204,6 +219,7 @@ public class RobotController implements Runnable {
 			}
 			motionModel.setLocation(robotLocation);
 			double destinationDistance = destination.distance(motionModel.getLocation());
+			
 			if (!findDestination(destinationDistance)) {
 				stop();
 				return;
@@ -223,6 +239,8 @@ public class RobotController implements Runnable {
 			State state = new State(robotId, new Location(robotLocation.getX(), robotLocation.getY(), 0), new Velocity(optimalVelocity.getX(), optimalVelocity.getY()), destination);
 
 			publishState(false, state);
+			
+			loggRobotPostition(state);
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
@@ -240,10 +258,11 @@ public class RobotController implements Runnable {
 			}
 			motionModel.setLocation(robotLocation);
 			double destinationDistance = destination.distance(motionModel.getLocation());
-			if (!findDestination(destinationDistance)) {
+			
+			/*if (!findDestination(destinationDistance)) {
 				stop();
 				return;
-			}
+			}*/
 
 			// robotLocation = robot.getRobotLocation();
 
@@ -272,6 +291,8 @@ public class RobotController implements Runnable {
 			// State state = new State(robotId, new Location(loc.getX(), loc.getY(), 0), new Velocity(optimalVelocity.getX(), optimalVelocity.getY()), destination);
 
 			publishState(false, collisionFreeState);
+			
+			loggRobotPostition(collisionFreeState);
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
@@ -639,6 +660,9 @@ public class RobotController implements Runnable {
 	// }
 
 	private void loggRobotPostition(State currentRobotState) {
+		
+	//	System.out.println(robotId + ";" + sensorReadCounter + ";" + currentRobotState.getLocation().getX() + ";" + currentRobotState.getLocation().getY() + ";" + currentRobotState.getLocation().getDirection() + ";" + currentRobotState.getVelocity().getX() + ";" + currentRobotState.getVelocity().getY() + ";" + currentRobotState.getRobotFearFactor() + ";" + "\n");
+		
 		positionRobot.append(robotId + ";" + sensorReadCounter + ";" + currentRobotState.getLocation().getX() + ";" + currentRobotState.getLocation().getY() + ";" + currentRobotState.getLocation().getDirection() + ";" + currentRobotState.getVelocity().getX() + ";" + currentRobotState.getVelocity().getY() + ";" + currentRobotState.getRobotFearFactor() + ";" + "\n");
 	}
 

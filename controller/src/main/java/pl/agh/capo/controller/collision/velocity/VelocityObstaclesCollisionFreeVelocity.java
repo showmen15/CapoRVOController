@@ -8,6 +8,7 @@ import pl.agh.capo.utilities.state.Velocity;
 import pl.agh.capo.velocityobstales.VelocityObstacles;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 public class VelocityObstaclesCollisionFreeVelocity extends AbstractCollisionFreeVelocity {
@@ -28,7 +29,7 @@ public class VelocityObstaclesCollisionFreeVelocity extends AbstractCollisionFre
     }
     
 	@Override
-	protected void buildVelocityObstacles(double currentRobotFearFactor) {		
+	protected void buildVelocityObstacles(List<Integer> robotBiggerFF) {		
 	}
 
    /* @Override

@@ -514,6 +514,12 @@ public class Agent
 	 */
 	public final void update()
 	{
+		if(Math.abs(newVelocity_.x_) < 0.00001)
+			newVelocity_.x_ = 0.0f;
+		
+		if(Math.abs(newVelocity_.y_) < 0.00001)
+			newVelocity_.y_ = 0.0f;
+		
 		velocity_ = newVelocity_.clone();
 		//position_ = Vector2.OpAddition(position_ , Vector2.OpMultiply(velocity_ , timeStep_));
 	}

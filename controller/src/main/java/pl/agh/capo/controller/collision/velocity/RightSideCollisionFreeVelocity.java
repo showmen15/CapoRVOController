@@ -9,6 +9,7 @@ import pl.agh.capo.controller.collision.WallCollisionDetector;
 import pl.agh.capo.velocityobstales.VelocityObstacles;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 public class RightSideCollisionFreeVelocity extends AbstractCollisionFreeVelocity {
@@ -29,7 +30,7 @@ public class RightSideCollisionFreeVelocity extends AbstractCollisionFreeVelocit
     }
 
     @Override
-	protected void buildVelocityObstacles(double currentRobotFearFactor) {
+	protected void buildVelocityObstacles(List<Integer> robotBiggerFF) {
     	
     }
     

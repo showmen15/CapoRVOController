@@ -78,6 +78,8 @@ public class SingleRun {
 			switch (configure.ID_Map) {
 			case 9: // BenchmarkCircle
 
+				EnvironmentalConfiguration.WALL_COLLISION_MARGIN_FACTOR = 1.6;
+				
 				EnvironmentalConfiguration.NEIGHBOR_DIST = 15.0f;
 				EnvironmentalConfiguration.MAX_NEIGHBORS = 10;
 				EnvironmentalConfiguration.TIME_HORIZON = 10.0f;
@@ -96,6 +98,8 @@ public class SingleRun {
 				break;
 					
 			case 10: // OtwartaPrzestrzeñ7x5m.roson
+				
+				EnvironmentalConfiguration.WALL_COLLISION_MARGIN_FACTOR = 1.6;
 
 				EnvironmentalConfiguration.NEIGHBOR_DIST = 2.0f;
 				EnvironmentalConfiguration.MAX_NEIGHBORS = 10;
@@ -112,6 +116,8 @@ public class SingleRun {
 
 			case 12: // Pojedyncze Roboty OtwartaPrzestrzeñ 7x5m.roson
 
+				EnvironmentalConfiguration.WALL_COLLISION_MARGIN_FACTOR = 1.6;
+				
 				EnvironmentalConfiguration.NEIGHBOR_DIST = 2.0f;
 				EnvironmentalConfiguration.MAX_NEIGHBORS = 10;
 				EnvironmentalConfiguration.TIME_HORIZON = 3.0f;
@@ -127,6 +133,8 @@ public class SingleRun {
 
 			case 11: // PrzejœciePrzezDrzwi7x5.roson
 
+				EnvironmentalConfiguration.WALL_COLLISION_MARGIN_FACTOR = 1.6;
+				
 				EnvironmentalConfiguration.NEIGHBOR_DIST = 2.4f;
 				EnvironmentalConfiguration.MAX_NEIGHBORS = 30;
 				EnvironmentalConfiguration.TIME_HORIZON = 2.7f;
@@ -141,6 +149,8 @@ public class SingleRun {
 				break;
 				
 			case 13: //W¹skiKorytarz7x5m.roson
+				
+				EnvironmentalConfiguration.WALL_COLLISION_MARGIN_FACTOR = 1.6;
 				
 				EnvironmentalConfiguration.NEIGHBOR_DIST = 2.4f;
 				EnvironmentalConfiguration.MAX_NEIGHBORS = 30;
@@ -157,6 +167,8 @@ public class SingleRun {
 				
 			case 14: //W¹skiePrzejœcieMijankaNowa
 				
+				EnvironmentalConfiguration.WALL_COLLISION_MARGIN_FACTOR = 1.6;
+				
 				EnvironmentalConfiguration.NEIGHBOR_DIST = 2.4f;
 				EnvironmentalConfiguration.MAX_NEIGHBORS = 30;
 				EnvironmentalConfiguration.TIME_HORIZON = 2.7f;
@@ -171,6 +183,8 @@ public class SingleRun {
 				break;
 			
 			case 15: //Skrzy¿owanieRównorzêdneNowe
+				
+				EnvironmentalConfiguration.WALL_COLLISION_MARGIN_FACTOR = 1.6;
 				
 				EnvironmentalConfiguration.NEIGHBOR_DIST = 2.4f;
 				EnvironmentalConfiguration.MAX_NEIGHBORS = 30;
@@ -197,6 +211,7 @@ public class SingleRun {
 				EnvironmentalConfiguration.ROBOT_DIAMETER = 1.5;
 				EnvironmentalConfiguration.ROBOT_WHEELS_HALF_DISTANCE = 1.5/2;
 				EnvironmentalConfiguration.ROBOT_MAX_SPEED = 2.0;
+				EnvironmentalConfiguration.WALL_COLLISION_MARGIN_FACTOR = 1.6;
 				break;
 				
 			case 10: // OtwartaPrzestrzeñ7x5m.roson
@@ -205,6 +220,9 @@ public class SingleRun {
 			case 13: //W¹skiKorytarz7x5m.roson
 			case 14: //W¹skiePrzejœcieMijankaNowa
 			case 15: //Skrzy¿owanieRównorzêdneNowe
+				
+				EnvironmentalConfiguration.WALL_COLLISION_MARGIN_FACTOR = 1.6;
+				
 				EnvironmentalConfiguration.ROBOT_DIAMETER = 0.3;
 				EnvironmentalConfiguration.ROBOT_WHEELS_HALF_DISTANCE = 0.14;
 				EnvironmentalConfiguration.ROBOT_MAX_SPEED = 0.5;

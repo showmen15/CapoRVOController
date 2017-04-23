@@ -170,19 +170,24 @@ public class ReciprocalVelocityObstaclesCollisionFreeVelocity extends AbstractCo
 		CurrentAgent.prefVelocity_ = goalVector; // Simulator.Instance.setAgentPrefVelocity(i, goalVector);
 
 		/* Perturb a little to avoid deadlocks due to perfect symmetry. */
-		 float angle = (float)random.nextDouble() * 2.0f * (float)Math.PI;
-		 float dist = (float)random.nextDouble() * 0.0001f;
+		float angle = (float)random.nextDouble() * 2.0f * (float)Math.PI;
+		float dist = (float)random.nextDouble() * 0.0001f;
 
-		 CurrentAgent.prefVelocity_ = Vector2.OpAddition(CurrentAgent.prefVelocity_,Vector2.OpMultiply(dist,new Vector2((float)Math.cos(angle), (float)Math.sin(angle))));
+		CurrentAgent.prefVelocity_ = Vector2.OpAddition(CurrentAgent.prefVelocity_,Vector2.OpMultiply(dist,new Vector2((float)Math.cos(angle), (float)Math.sin(angle))));
 	}
 
-	private Collection<State> getStates(double currentRobotFearFactor) {
+	private Collection<State> getStates(List<Integer> robotBiggerFF) {
 		Collection<State> temp = new ArrayList<>();
 
-		for (State state : states.values()) {
+		for (Integer robotID : robotBiggerFF) 
+		{
+			temp.add(states.get(robotID));
+		}
+		
+		/*for (State state : states.values()) {
 			if (state.getRobotFearFactor() >= currentRobotFearFactor)
 				temp.add(state);
-		}
+		}*/
 
 		return temp;
 	}
@@ -193,8 +198,8 @@ public class ReciprocalVelocityObstaclesCollisionFreeVelocity extends AbstractCo
 	}
 
 	@Override
-	protected void buildVelocityObstacles(double currentRobotFearFactor) {
-		Collection<State> statesFF = getStates(currentRobotFearFactor);
+	protected void buildVelocityObstacles(List<Integer> robotBiggerFF) {
+		Collection<State> statesFF = getStates(robotBiggerFF);
 
 		compute(statesFF, new Vector2((float) location.getX(), (float) location.getY()), velocity);
 	}

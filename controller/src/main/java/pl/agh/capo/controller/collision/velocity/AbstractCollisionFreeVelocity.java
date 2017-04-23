@@ -39,11 +39,11 @@ public abstract class AbstractCollisionFreeVelocity {
         buildVelocityObstacles();
     }
        
-    public void buildVelocityObstacles(Location location, Velocity velocity, double currentRobotFearFactor)
+    public void buildVelocityObstacles(Location location, Velocity velocity, List<Integer> robotBiggerFF)
     {
         this.location = location;
         this.velocity = velocity;  
-        buildVelocityObstacles(currentRobotFearFactor);
+        buildVelocityObstacles(robotBiggerFF);
     }
 
     public boolean isCurrentVelocityCollisionFree() {
@@ -56,7 +56,7 @@ public abstract class AbstractCollisionFreeVelocity {
 
     protected abstract void buildVelocityObstacles();
     
-    protected abstract void buildVelocityObstacles(double currentRobotFearFactor);
+    protected abstract void buildVelocityObstacles(List<Integer> robotBiggerFF);
 
     protected abstract Velocity findBestCollisionFreeVelocity();
 

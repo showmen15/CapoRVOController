@@ -27,6 +27,7 @@ import pl.agh.capo.robot.IRobot;
 import pl.agh.capo.robot.IRobotManager;
 import pl.agh.capo.rvo.Vector2;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -153,11 +154,24 @@ public class RobotController implements Runnable {
 				optimalVelocity = collisionFreeVelocity.get();
 				setVelocity(optimalVelocity);
 
+				optimalVelocity = wallCollisionDetector.collisionFreeVelocity(new Point(robotLocation.getX(),robotLocation.getY()), optimalVelocity);
+				setVelocity(optimalVelocity);
+				
+				//stopWall = !wallCollisionDetector.collisionFree(new Point(robotLocation.getX(),robotLocation.getY()), optimalVelocity);
+				
+				
+				//if(stopWall)
+				//{
+					//optimalVelocity.setX(optimalVelocity.getX() * -1);
+					//optimalVelocity.setY(optimalVelocity.getY() * -1);
+									
+				//}
+				
 				stopRobot = fear.EmergencyStop(collisionFreeVelocityGenerator.GetStates(), robotLocation, optimalVelocity, fearfactor); 
 				
-				stopWall = !wallCollisionDetector.collisionFree(new Point(robotLocation.getX(),robotLocation.getY()), optimalVelocity);
 				
-				if(stopRobot || stopWall)
+				
+				if(stopRobot)
 				{
 					optimalVelocity = new Velocity(0, 0);
 					setVelocity(optimalVelocity);

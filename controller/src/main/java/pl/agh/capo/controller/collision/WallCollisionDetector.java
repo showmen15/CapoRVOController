@@ -39,7 +39,52 @@ public class WallCollisionDetector {
         }
         return true;
     }
-
+ 
+    public Velocity collisionFreeVelocity(Point position, Velocity velocity)
+    {
+    	//LineSegment wall = null; 
+    	
+    	 double x = position.getX() + velocity.getX();
+          double y = position.getY() + velocity.getY();
+          
+          double A,B;
+          double d1,d2;
+          
+          for (LineSegment segment : wallLineSegments) 
+          {        	 
+              if (segment.distance(new Coordinate(x, y)) < MARGIN) 
+              {
+            	  segment.isHorizontal();
+            	  
+            	  
+            	  A = segment.p1.x - segment.p0.x;
+            	  B = segment.p1.y - segment.p0.y;
+            	  
+            	  
+            	  d1 = segment.distance(new Coordinate(position.getX() + -B,  position.getY() + A));
+                  d2 = segment.distance(new Coordinate(position.getX() + B,  position.getY() + -A));
+                  
+                  if(d1 > d2)
+                  {
+                	  return new Velocity(-B,A);
+                  }
+                  else
+                	  return new Velocity(B,-A);
+                  
+//            	  if(segment.distance(new Coordinate(x, y)) < MARGIN)
+//            	  {
+//            		  return new Velocity(-B,A);
+//            	  }
+            	  
+            	 
+            	 
+              }
+          }
+    	
+          return velocity;
+    }
+    
+    
     public boolean isDestinationVisible(Location location, Destination destination) {
         LineSegment direction = new LineSegment(location.getX(), location.getY(), destination.getX(), destination.getY());
         for (LineSegment lineSegment : wallLineSegments) {

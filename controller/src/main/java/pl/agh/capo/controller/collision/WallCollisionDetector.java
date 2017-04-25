@@ -41,43 +41,41 @@ public class WallCollisionDetector {
     }
  
     public Velocity collisionFreeVelocity(Point position, Velocity velocity)
-    {
-    	//LineSegment wall = null; 
-    	
-    	 double x = position.getX() + velocity.getX();
+    {    	
+          double x = position.getX() + velocity.getX();
           double y = position.getY() + velocity.getY();
           
-          double A,B;
+          double modulVelocity = Math.sqrt(Math.pow(velocity.getX(), 2) + Math.pow(velocity.getY(), 2)); 
           double d1,d2;
           
           for (LineSegment segment : wallLineSegments) 
           {        	 
               if (segment.distance(new Coordinate(x, y)) < MARGIN) 
               {
-            	  segment.isHorizontal();
-            	  
-            	  
-            	  A = segment.p1.x - segment.p0.x;
-            	  B = segment.p1.y - segment.p0.y;
-            	  
-            	  
-            	  d1 = segment.distance(new Coordinate(position.getX() + -B,  position.getY() + A));
-                  d2 = segment.distance(new Coordinate(position.getX() + B,  position.getY() + -A));
-                  
-                  if(d1 > d2)
-                  {
-                	  return new Velocity(-B,A);
-                  }
-                  else
-                	  return new Velocity(B,-A);
-                  
-//            	  if(segment.distance(new Coordinate(x, y)) < MARGIN)
-//            	  {
-//            		  return new Velocity(-B,A);
-//            	  }
-            	  
-            	 
-            	 
+            	  if(segment.isVertical())
+            	  {
+            		  d1 = segment.distance(new Coordinate(position.getX() + modulVelocity,  position.getY()));
+            		  d2 = segment.distance(new Coordinate(position.getX() - modulVelocity,  position.getY()));
+            		  
+            	      if(d1 > d2)
+                      {
+                    	  return new Velocity(modulVelocity,0);
+                      }
+                      else
+                    	  return new Velocity(-modulVelocity,0);
+            	  }
+            	  else
+            	  {
+            		  d1 = segment.distance(new Coordinate(position.getX(),  position.getY() + modulVelocity));
+            		  d2 = segment.distance(new Coordinate(position.getX(),  position.getY() - modulVelocity));
+            		  
+            		     if(d1 > d2)
+                         {
+                       	  return new Velocity(0,modulVelocity);
+                         }
+                         else
+                       	  return new Velocity(0,-modulVelocity);
+            	  }           	 
               }
           }
     	

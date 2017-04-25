@@ -169,8 +169,6 @@ public class RobotController implements Runnable {
 				
 				stopRobot = fear.EmergencyStop(collisionFreeVelocityGenerator.GetStates(), robotLocation, optimalVelocity, fearfactor); 
 				
-				
-				
 				if(stopRobot)
 				{
 					optimalVelocity = new Velocity(0, 0);

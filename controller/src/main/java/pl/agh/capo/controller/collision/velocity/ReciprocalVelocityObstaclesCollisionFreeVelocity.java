@@ -143,8 +143,9 @@ public class ReciprocalVelocityObstaclesCollisionFreeVelocity extends AbstractCo
 	private List<Agent> getAgents(Collection<State> sates) {
 		List<Agent> temp = new ArrayList<Agent>();
 
+		
 		for (State item : sates) {
-			if (item.getRobotId() == RobotID)
+			if (item.getRobotId() == RobotID)//TODO //bug at pl.agh.capo.controller.collision.velocity.ReciprocalVelocityObstaclesCollisionFreeVelocity.getAgents(ReciprocalVelocityObstaclesCollisionFreeVelocity.java:147
 				continue;
 			else
 				temp.add(createAgent(item));

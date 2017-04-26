@@ -169,11 +169,11 @@ public class RobotController implements Runnable {
 				
 				stopRobot = fear.EmergencyStop(collisionFreeVelocityGenerator.GetStates(), robotLocation, optimalVelocity, fearfactor); 
 				
-				if(stopRobot)
-				{
-					optimalVelocity = new Velocity(0, 0);
-					setVelocity(optimalVelocity);
-				}
+//				if(stopRobot)
+//				{
+//					optimalVelocity = new Velocity(0, 0);
+//					setVelocity(optimalVelocity);
+//				}
 			} else if (EnvironmentalConfiguration.ALGORITHM_FEAR_IMPLEMENTATION == FearMutationType.FEAR_SINGLE_FIRST) {
 
 				collisionFreeVelocity.buildVelocityObstacles(motionModel.getLocation(), optimalVelocity);
@@ -190,8 +190,16 @@ public class RobotController implements Runnable {
 
 					optimalVelocity = collisionFreeVelocity.get();
 					setVelocity(optimalVelocity);
-				} else
+				} 
+				else
 					collide = false;
+				
+				optimalVelocity = wallCollisionDetector.collisionFreeVelocity(new Point(robotLocation.getX(),robotLocation.getY()), optimalVelocity);
+				setVelocity(optimalVelocity);
+				
+				stopRobot = fear.EmergencyStop(collisionFreeVelocityGenerator.GetStates(), robotLocation, optimalVelocity, fearfactor); 
+				
+				
 			} else if (EnvironmentalConfiguration.ALGORITHM_FEAR_IMPLEMENTATION == FearMutationType.NONE) {
 
 				collisionFreeVelocity.buildVelocityObstacles(motionModel.getLocation(), optimalVelocity);
@@ -201,12 +209,12 @@ public class RobotController implements Runnable {
 				setVelocity(optimalVelocity);				
 			}
 
-//			if(stopRobot || stopWall)
-//				robot.setVelocity(0,0);
-//			else
-//				robot.setVelocity(motionModel.getVelocityLeft(), motionModel.getVelocityRight());
+			if(stopRobot)
+				robot.setVelocity(0,0);
+			else
+				robot.setVelocity(motionModel.getVelocityLeft(), motionModel.getVelocityRight());
 
-			robot.setVelocity(motionModel.getVelocityLeft(), motionModel.getVelocityRight());
+			//robot.setVelocity(motionModel.getVelocityLeft(), motionModel.getVelocityRight());
 			
 			collisionFreeState = createCollisionFreeState(optimalVelocity);
 			collisionFreeState.setRobotFearFactor(fearfactor);

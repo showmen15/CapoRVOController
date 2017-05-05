@@ -2,6 +2,7 @@ package pl.agh.capo.utilities;
 
 import pl.agh.capo.controller.collision.velocity.CollisionFreeVelocityType;
 import pl.agh.capo.controller.collision.velocity.FearMutationType;
+import pl.agh.capo.controller.collision.velocity.PointViaSelectionType;
 
 public class EnvironmentalConfiguration {
 
@@ -15,7 +16,7 @@ public class EnvironmentalConfiguration {
 
 	public static  int SIMULATION_TIME_STEP_IN_MS = 200;
 
-	public static  int SIMULATION_SLEEP_BETWEEN_TIME_STEP_IN_MS = 40; // SIMULATION_TIME_STEP_IN_MS;
+	public static  int SIMULATION_SLEEP_BETWEEN_TIME_STEP_IN_MS = 50; // SIMULATION_TIME_STEP_IN_MS;
 
 	// Empirically selected values to control robots
 	// Units consisted with International System of Units
@@ -52,6 +53,8 @@ public class EnvironmentalConfiguration {
 
 	public static FearMutationType ALGORITHM_FEAR_IMPLEMENTATION = FearMutationType.NONE;
 
+	public static PointViaSelectionType POINT_VIA_SELECTION_TYPE = PointViaSelectionType.ALL;
+	
 	public static boolean ACTIVEFEARFACTORGATE = false;
 
 	// Tries of selecting velocity in pure VO solution
@@ -98,16 +101,44 @@ public class EnvironmentalConfiguration {
 //	public static double RL_CP = 1.0;  
 	
 	//Circle CAPO 
-	public static double NEIGHBOR_DIST = 2.4;//1.0f; //2.4f;  //2.0  
+//	public static double NEIGHBOR_DIST = 2.4;//1.0f; //2.4f;  //2.0  
+//	public static int MAX_NEIGHBORS = 30;
+//	public static double TIME_HORIZON = 2.7f; 
+//	public static double TIME_HORIZON_OBST = 2.25f;//1.5f;
+//
+//	public static double RADIUS = 0.3f;
+//	public static double MAX_SPEED = 0.25f;
+//	public static double TIME_STEP = 0.2f;
+//	
+//	public static double MAX_OBSERVATION_DISTANCE_FF =  2.0; 
+//	public static double RL_CP = 1.0;  
+	
+	
+//	//Circle CAPO 
+//	public static double NEIGHBOR_DIST = 15.0f;//1.0f; //2.4f;  //2.0  
+//	public static int MAX_NEIGHBORS = 10;
+//	public static double TIME_HORIZON = 10.0f; 
+//	public static double TIME_HORIZON_OBST = 10.0f;//1.5f;
+//
+//	public static double RADIUS = 0.3f;
+//	public static double MAX_SPEED = 0.25f;
+//	public static double TIME_STEP = 0.2f;
+//	
+//	public static double MAX_OBSERVATION_DISTANCE_FF =  2.0; 
+//	public static double RL_CP = 1.0; 
+	
+//	//Skrzy¿owanie typ 8 
+	public static double NEIGHBOR_DIST = 2.4f;//1.0f; //2.4f;  //2.0  
 	public static int MAX_NEIGHBORS = 30;
-	public static double TIME_HORIZON = 2.7f; 
-	public static double TIME_HORIZON_OBST = 2.25f;//1.5f;
+	public static double TIME_HORIZON = 2.4f; 
+	public static double TIME_HORIZON_OBST = 2.5f;//1.5f;
 
 	public static double RADIUS = 0.3f;
 	public static double MAX_SPEED = 0.25f;
 	public static double TIME_STEP = 0.2f;
 	
 	public static double MAX_OBSERVATION_DISTANCE_FF =  2.0; 
-	public static double RL_CP = 1.0;  
+	public static double RL_CP = 1.0;	
+	
 	
 }

@@ -6,6 +6,7 @@ import com.vividsolutions.jts.math.Vector2D;
 import com.vividsolutions.jts.math.Vector3D;
 
 import pl.agh.capo.utilities.EnvironmentalConfiguration;
+import pl.agh.capo.utilities.RobotMotionModel;
 import pl.agh.capo.utilities.state.Location;
 import pl.agh.capo.utilities.state.Point;
 import pl.agh.capo.utilities.state.State;

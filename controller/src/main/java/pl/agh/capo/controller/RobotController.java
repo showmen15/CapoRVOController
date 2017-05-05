@@ -20,6 +20,7 @@ import pl.agh.capo.controller.collision.WallCollisionDetector;
 import pl.agh.capo.controller.collision.velocity.AbstractCollisionFreeVelocity;
 import pl.agh.capo.controller.collision.velocity.CollisionFreeVelocityType;
 import pl.agh.capo.controller.collision.velocity.FearMutationType;
+import pl.agh.capo.controller.collision.velocity.PointViaSelectionType;
 import pl.agh.capo.controller.collision.velocity.ReciprocalVelocityObstaclesCollisionFreeVelocity;
 import pl.agh.capo.fear.Fear;
 import pl.agh.capo.utilities.RobotMotionModel;
@@ -127,9 +128,19 @@ public class RobotController implements Runnable {
 			motionModel.setLocation(robotLocation);
 			double destinationDistance = destination.distance(motionModel.getLocation());
 			
-			if (!findDestination(destinationDistance)) {
-				stop();
-				return;
+			if(EnvironmentalConfiguration.POINT_VIA_SELECTION_TYPE == PointViaSelectionType.ALL)
+			{	
+				if (!findDestination(destinationDistance)) {
+					stop();
+					return;
+				}
+			}
+			else
+			{
+				if (!findDestination2(destinationDistance)) {
+					stop();
+					return;
+				}
 			}
 
 			Velocity optimalVelocity = findOptimalToDestinationVelocity();
@@ -774,6 +785,25 @@ public class RobotController implements Runnable {
 				return false;
 			}
 		}
+		return true;
+	}
+	
+	private boolean findDestination2(double destinationDistance) {
+		if (destination.isFinal() && destinationDistance <= destination.getMargin())
+			return false;
+		else {
+			Destination currentDest;
+
+			for (int i = path.size() - 1; i > -1; i--) {
+				currentDest = path.get(i);
+
+				if (wallCollisionDetector.isDestinationVisible(motionModel.getLocation(), currentDest)) {
+					destination = currentDest;
+					return true;
+				}
+			}
+		}
+
 		return true;
 	}
 

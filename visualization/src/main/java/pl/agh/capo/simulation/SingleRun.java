@@ -95,6 +95,7 @@ public class SingleRun {
 				break;
 			
 			case 9: // BenchmarkCircle
+				EnvironmentalConfiguration.POINT_VIA_SELECTION_TYPE = PointViaSelectionType.NONE;
 
 				EnvironmentalConfiguration.WALL_COLLISION_MARGIN_FACTOR = 1.6;
 				
@@ -116,6 +117,7 @@ public class SingleRun {
 				break;
 					
 			case 10: // OtwartaPrzestrzeñ7x5m.roson
+				EnvironmentalConfiguration.POINT_VIA_SELECTION_TYPE = PointViaSelectionType.NONE;
 			
 				EnvironmentalConfiguration.WALL_COLLISION_MARGIN_FACTOR = 1.6;
 
@@ -133,6 +135,7 @@ public class SingleRun {
 				break;
 
 			case 12: // Pojedyncze Roboty OtwartaPrzestrzeñ 7x5m.roson
+				EnvironmentalConfiguration.POINT_VIA_SELECTION_TYPE = PointViaSelectionType.NONE;
 
 				EnvironmentalConfiguration.WALL_COLLISION_MARGIN_FACTOR = 1.6;
 				
@@ -150,6 +153,7 @@ public class SingleRun {
 				break;
 
 			case 11: // PrzejœciePrzezDrzwi7x5.roson
+				EnvironmentalConfiguration.POINT_VIA_SELECTION_TYPE = PointViaSelectionType.NONE;
 
 				EnvironmentalConfiguration.WALL_COLLISION_MARGIN_FACTOR = 1.6;
 				
@@ -167,6 +171,7 @@ public class SingleRun {
 				break;
 				
 			case 13: //W¹skiKorytarz7x5m.roson
+				EnvironmentalConfiguration.POINT_VIA_SELECTION_TYPE = PointViaSelectionType.NONE;
 				
 				EnvironmentalConfiguration.WALL_COLLISION_MARGIN_FACTOR = 1.6;
 				
@@ -184,6 +189,7 @@ public class SingleRun {
 				break;
 				
 			case 14: //W¹skiePrzejœcieMijankaNowa
+				EnvironmentalConfiguration.POINT_VIA_SELECTION_TYPE = PointViaSelectionType.NONE;
 				
 				EnvironmentalConfiguration.WALL_COLLISION_MARGIN_FACTOR = 1.6;
 				
@@ -201,6 +207,7 @@ public class SingleRun {
 				break;
 			
 			case 15: //Skrzy¿owanieRównorzêdneNowe
+				EnvironmentalConfiguration.POINT_VIA_SELECTION_TYPE = PointViaSelectionType.NONE;
 				
 				EnvironmentalConfiguration.WALL_COLLISION_MARGIN_FACTOR = 1.6;
 				
@@ -218,6 +225,7 @@ public class SingleRun {
 				break;	
 				
 			case 16: //Otwarta Przestrzeñ 4 Roboty 4
+				EnvironmentalConfiguration.POINT_VIA_SELECTION_TYPE = PointViaSelectionType.NONE;
 				
 				EnvironmentalConfiguration.WALL_COLLISION_MARGIN_FACTOR = 1.6;
 				
@@ -265,6 +273,7 @@ public class SingleRun {
 				break;
 				
 			case 9: // BenchmarkCircle
+				EnvironmentalConfiguration.POINT_VIA_SELECTION_TYPE = PointViaSelectionType.NONE;
 			
 				EnvironmentalConfiguration.ROBOT_DIAMETER = 1.5;
 				EnvironmentalConfiguration.ROBOT_WHEELS_HALF_DISTANCE = 1.5/2;
@@ -279,6 +288,7 @@ public class SingleRun {
 			case 14: //W¹skiePrzejœcieMijankaNowa
 			case 15: //Skrzy¿owanieRównorzêdneNowe
 			case 16: //Otwarta Przestrzeñ 4 Roboty 4
+				EnvironmentalConfiguration.POINT_VIA_SELECTION_TYPE = PointViaSelectionType.NONE;
 				
 				EnvironmentalConfiguration.WALL_COLLISION_MARGIN_FACTOR = 1.6;
 				

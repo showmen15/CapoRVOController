@@ -49,11 +49,11 @@ public class EnvironmentalConfiguration {
 	// Multiplier of max speed during selecting velocity in pure VO solution
 	public static  double MIN_SPEED_FACTOR = 0.2;
 
-	public static CollisionFreeVelocityType COLLISIONFREEVELOCITYMETHOD = CollisionFreeVelocityType.RIGHT_HAND;
+	public static CollisionFreeVelocityType COLLISIONFREEVELOCITYMETHOD = CollisionFreeVelocityType.RECIPROCAL_VELOCITY_OBSTACLES_FEAR_FACTOR;
 
-	public static FearMutationType ALGORITHM_FEAR_IMPLEMENTATION = FearMutationType.NONE;
+	public static FearMutationType ALGORITHM_FEAR_IMPLEMENTATION = FearMutationType.FEAR_ORIGINAL;
 
-	public static PointViaSelectionType POINT_VIA_SELECTION_TYPE = PointViaSelectionType.ALL;
+	public static PointViaSelectionType POINT_VIA_SELECTION_TYPE = PointViaSelectionType.NONE;
 	
 	public static boolean ACTIVEFEARFACTORGATE = false;
 
@@ -127,10 +127,23 @@ public class EnvironmentalConfiguration {
 //	public static double MAX_OBSERVATION_DISTANCE_FF =  2.0; 
 //	public static double RL_CP = 1.0; 
 	
-//	//Skrzy¿owanie typ 8 
+////	//Skrzy¿owanie typ 8 
+//	public static double NEIGHBOR_DIST = 2.4f;//1.0f; //2.4f;  //2.0  
+//	public static int MAX_NEIGHBORS = 30;
+//	public static double TIME_HORIZON = 2.4f; 
+//	public static double TIME_HORIZON_OBST = 2.5f;//1.5f;
+//
+//	public static double RADIUS = 0.3f;
+//	public static double MAX_SPEED = 0.25f;
+//	public static double TIME_STEP = 0.2f;
+//	
+//	public static double MAX_OBSERVATION_DISTANCE_FF =  2.0; 
+//	public static double RL_CP = 1.0;	
+	
+	//mijanka
 	public static double NEIGHBOR_DIST = 2.4f;//1.0f; //2.4f;  //2.0  
 	public static int MAX_NEIGHBORS = 30;
-	public static double TIME_HORIZON = 2.4f; 
+	public static double TIME_HORIZON = 2.7f; 
 	public static double TIME_HORIZON_OBST = 2.5f;//1.5f;
 
 	public static double RADIUS = 0.3f;
@@ -139,6 +152,5 @@ public class EnvironmentalConfiguration {
 	
 	public static double MAX_OBSERVATION_DISTANCE_FF =  2.0; 
 	public static double RL_CP = 1.0;	
-	
-	
+		
 }

@@ -188,6 +188,7 @@ public class SingleRun {
 				EnvironmentalConfiguration.RL_CP = 1.0;
 				break;
 				
+			case 18: //W¹skiePrzejœcieMijankaDuza	
 			case 14: //W¹skiePrzejœcieMijankaNowa
 				EnvironmentalConfiguration.POINT_VIA_SELECTION_TYPE = PointViaSelectionType.NONE;
 				
@@ -288,6 +289,7 @@ public class SingleRun {
 			case 14: //W¹skiePrzejœcieMijankaNowa
 			case 15: //Skrzy¿owanieRównorzêdneNowe
 			case 16: //Otwarta Przestrzeñ 4 Roboty 4
+			case 18: //W¹skiePrzejœcieMijankaDuza
 				EnvironmentalConfiguration.POINT_VIA_SELECTION_TYPE = PointViaSelectionType.NONE;
 				
 				EnvironmentalConfiguration.WALL_COLLISION_MARGIN_FACTOR = 1.6;

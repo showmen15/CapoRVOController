@@ -152,5 +152,18 @@ public class EnvironmentalConfiguration {
 	
 	public static double MAX_OBSERVATION_DISTANCE_FF =  2.0; 
 	public static double RL_CP = 1.0;	
-		
+			
+	//mijanka duza
+//	public static double NEIGHBOR_DIST = 3.4f;//1.0f; //2.4f;  //2.0  
+//	public static int MAX_NEIGHBORS = 30;
+//	public static double TIME_HORIZON = 3.7f; 
+//	public static double TIME_HORIZON_OBST = 2.5f;//1.5f;
+//
+//	public static double RADIUS = 0.3f;
+//	public static double MAX_SPEED = 0.25f;
+//	public static double TIME_STEP = 0.2f;
+//	
+//	public static double MAX_OBSERVATION_DISTANCE_FF =  3.0; 
+//	public static double RL_CP = 1.0;	
+//	
 }

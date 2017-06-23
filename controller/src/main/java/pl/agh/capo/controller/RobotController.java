@@ -46,8 +46,8 @@ public class RobotController implements Runnable {
 
 	private final IRobot robot;
 	private final RobotMotionModel motionModel;
-	private final StatePublisherUDP statePublisher;
-	private final StateCollectorUDP stateCollector;
+	private final StatePublisher statePublisher;
+	private final StateCollector stateCollector;
 	private final CollisionFreeVelocityGenerator collisionFreeVelocityGenerator;
 	private final WallCollisionDetector wallCollisionDetector;
 	private final ScheduledExecutorService controlScheduler = Executors.newScheduledThreadPool(1);
@@ -76,12 +76,11 @@ public class RobotController implements Runnable {
 		wallCollisionDetector = new WallCollisionDetector(mazeMap);
 		collisionFreeVelocityGenerator = new CollisionFreeVelocityGenerator(collisionFreeVelocityType, robotId, wallCollisionDetector);
 
-		// stateCollector =
-		// StateCollector.createAndEstablishConnection(collisionFreeVelocityGenerator);
-		// statePublisher = StatePublisher.createAndEstablishConnection();
+		 stateCollector = StateCollector.createAndEstablishConnection(collisionFreeVelocityGenerator);
+		 statePublisher = StatePublisher.createAndEstablishConnection();
 
-		stateCollector = StateCollectorUDP.createAndEstablishConnection(collisionFreeVelocityGenerator);
-		statePublisher = StatePublisherUDP.createAndEstablishConnection();
+		//stateCollector = StateCollectorUDP.createAndEstablishConnection(collisionFreeVelocityGenerator);
+		//statePublisher = StatePublisherUDP.createAndEstablishConnection();
 
 		setPath(destinationList);
 

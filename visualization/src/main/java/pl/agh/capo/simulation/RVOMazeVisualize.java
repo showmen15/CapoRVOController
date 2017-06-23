@@ -36,7 +36,7 @@ public class RVOMazeVisualize {
 
 		MazeVisualizer mazeVisualizer = MazeVisualizer.getInstance();
 		mazeVisualizer.open(mapPath, sCaseName);
-		StateCollectorUDP stateCollector = StateCollectorUDP.createAndEstablishConnection(mazeVisualizer);
+		StateCollector stateCollector = StateCollector.createAndEstablishConnection(mazeVisualizer);
 		if (!stateCollector.isConnectionEstablished()) {
 			System.exit(1);
 		}

@@ -4,7 +4,52 @@
   "walls": [
     {
       "type": "wall",
-      "id": "Wall149",
+      "id": "Wall45",
+      "width": 0.1,
+      "height": 0.3,
+      "color": "ff000000",
+      "from": {
+        "x": 0.0,
+        "y": 5.0
+      },
+      "to": {
+        "x": 7.0,
+        "y": 5.0
+      }
+    },
+    {
+      "type": "wall",
+      "id": "Wall46",
+      "width": 0.1,
+      "height": 0.3,
+      "color": "ff000000",
+      "from": {
+        "x": 7.0,
+        "y": 2.5
+      },
+      "to": {
+        "x": 7.0,
+        "y": 5.0
+      }
+    },
+    {
+      "type": "wall",
+      "id": "Wall47",
+      "width": 0.1,
+      "height": 0.3,
+      "color": "ff8080ff",
+      "from": {
+        "x": 3.9,
+        "y": 2.5
+      },
+      "to": {
+        "x": 7.0,
+        "y": 2.5
+      }
+    },
+    {
+      "type": "wall",
+      "id": "Wall49",
       "width": 0.1,
       "height": 0.3,
       "color": "ff000000",
@@ -13,88 +58,13 @@
         "y": 2.5
       },
       "to": {
-        "x": 0.8,
+        "x": 3.1,
         "y": 2.5
       }
     },
     {
       "type": "wall",
-      "id": "Wall151",
-      "width": 0.1,
-      "height": 0.3,
-      "color": "ff000000",
-      "from": {
-        "x": 1.5,
-        "y": 2.5
-      },
-      "to": {
-        "x": 2.35,
-        "y": 2.5
-      }
-    },
-    {
-      "type": "wall",
-      "id": "Wall153",
-      "width": 0.1,
-      "height": 0.3,
-      "color": "ff000000",
-      "from": {
-        "x": 0.74,
-        "y": 0.4
-      },
-      "to": {
-        "x": 2.35,
-        "y": 0.4
-      }
-    },
-    {
-      "type": "wall",
-      "id": "Wall159",
-      "width": 0.1,
-      "height": 0.3,
-      "color": "ff000000",
-      "from": {
-        "x": 0.74,
-        "y": 0.0
-      },
-      "to": {
-        "x": 0.74,
-        "y": 0.4
-      }
-    },
-    {
-      "type": "wall",
-      "id": "Wall160",
-      "width": 0.1,
-      "height": 0.3,
-      "color": "ff000000",
-      "from": {
-        "x": 0.0,
-        "y": 0.0
-      },
-      "to": {
-        "x": 0.74,
-        "y": 0.0
-      }
-    },
-    {
-      "type": "wall",
-      "id": "Wall161",
-      "width": 0.1,
-      "height": 0.3,
-      "color": "ff000000",
-      "from": {
-        "x": 0.0,
-        "y": 0.0
-      },
-      "to": {
-        "x": 0.0,
-        "y": 0.4
-      }
-    },
-    {
-      "type": "wall",
-      "id": "Wall166",
+      "id": "Wall50",
       "width": 0.1,
       "height": 0.3,
       "color": "ff000000",
@@ -104,132 +74,12 @@
       },
       "to": {
         "x": 0.0,
-        "y": 3.26
+        "y": 5.0
       }
     },
     {
       "type": "wall",
-      "id": "Wall168",
-      "width": 0.1,
-      "height": 0.3,
-      "color": "ff000000",
-      "from": {
-        "x": 2.35,
-        "y": 2.5
-      },
-      "to": {
-        "x": 2.35,
-        "y": 3.26
-      }
-    },
-    {
-      "type": "wall",
-      "id": "Wall175",
-      "width": 0.1,
-      "height": 0.3,
-      "color": "ff000000",
-      "from": {
-        "x": 2.35,
-        "y": 3.26
-      },
-      "to": {
-        "x": 3.0,
-        "y": 3.26
-      }
-    },
-    {
-      "type": "wall",
-      "id": "Wall177",
-      "width": 0.1,
-      "height": 0.3,
-      "color": "ff000000",
-      "from": {
-        "x": 0.0,
-        "y": 3.26
-      },
-      "to": {
-        "x": 0.0,
-        "y": 4.9
-      }
-    },
-    {
-      "type": "wall",
-      "id": "Wall179",
-      "width": 0.1,
-      "height": 0.3,
-      "color": "ff000000",
-      "from": {
-        "x": 3.0,
-        "y": 3.26
-      },
-      "to": {
-        "x": 3.0,
-        "y": 4.9
-      }
-    },
-	 {
-      "type": "wall",
-      "id": "Wall331",
-      "width": 0.1,
-      "height": 0.3,
-      "color": "ff000000",
-      "from": {
-        "x": 2.0,
-        "y": 4.9
-      },
-      "to": {
-        "x": 3.0,
-        "y": 4.9
-      }
-    },
-	 {
-      "type": "wall",
-      "id": "Wall336",
-      "width": 0.1,
-      "height": 0.3,
-      "color": "ff000000",
-      "from": {
-        "x": 1.4,
-        "y": 4.9
-      },
-      "to": {
-        "x": 2.0,
-        "y": 4.9
-      }
-    },
-	{
-      "type": "wall",
-      "id": "Wall291",
-      "width": 0.1,
-      "height": 0.3,
-      "color": "ff000000",
-      "from": {
-        "x": 0.0,
-        "y": 4.9
-      },
-      "to": {
-        "x": 1.4,
-        "y": 4.9
-      }
-    },
-	{
-      "type": "wall",
-      "id": "Wall259",
-      "width": 0.1,
-      "height": 0.3,
-      "color": "ff000000",
-      "from": {
-        "x": 2.35,
-        "y": 0.4
-      },
-      "to": {
-        "x": 2.35,
-        "y": 1.38
-      }
-    },
-	{
-      "type": "wall",
-      "id": "Wall265",
+      "id": "Wall54",
       "width": 0.1,
       "height": 0.3,
       "color": "ff000000",
@@ -239,119 +89,115 @@
       },
       "to": {
         "x": 0.0,
-        "y": 1.38
-      }
-    },
-	{
-      "type": "wall",
-      "id": "Wall308",
-      "width": 0.1,
-      "height": 0.3,
-      "color": "ff000000",
-      "from": {
-        "x": 2.35,
-        "y": 1.38
-      },
-      "to": {
-        "x": 2.35,
         "y": 2.5
       }
     },
-	{
+    {
       "type": "wall",
-      "id": "Wall319",
+      "id": "Wall58",
+      "width": 0.1,
+      "height": 0.3,
+      "color": "ff000000",
+      "from": {
+        "x": 7.0,
+        "y": 0.0
+      },
+      "to": {
+        "x": 7.0,
+        "y": 2.5
+      }
+    },
+    {
+      "type": "wall",
+      "id": "Wall59",
       "width": 0.1,
       "height": 0.3,
       "color": "ff000000",
       "from": {
         "x": 0.0,
-        "y": 1.38
+        "y": 0.0
       },
       "to": {
-        "x": 0.0,
+        "x": 7.0,
+        "y": 0.0
+      }
+    }
+  ],
+  "gates": [
+    {
+      "type": "gate",
+      "id": "Wall48",
+      "kind": "door",
+      "blocked": 0.0,
+      "from": {
+        "x": 3.1,
+        "y": 2.5
+      },
+      "to": {
+        "x": 3.9,
         "y": 2.5
       }
     }
   ],
-  "gates": [    
-    {
-      "type": "gate",
-      "id": "Wall150",
-      "kind": "door",
-      "blocked": 0.0,
-      "from": {
-        "x": 0.8,
-        "y": 2.5
-      },
-      "to": {
-        "x": 1.5,
-        "y": 2.5
-      },
-	  "center": {
-        "x": 1.15,
-        "y": 2.5
-      }
-    }
-   ],
   "spaces": [
     {
       "type": "space",
-      "id": "Space183",
+      "id": "Space51",
       "kind": "room",
       "name": null,
       "function": null,
-      "expectedPersonCount": 3,
-      "area": 6.706,
-      "diameter": 3.8418745424597089,
+      "expectedPersonCount": 14,
+      "area": 17.5,
+      "diameter": 7.4330343736592521,
       "searched": 0
     },
     {
       "type": "space",
-      "id": "Space185",
-      "kind": "corridor",
+      "id": "Space60",
+      "kind": "room",
       "name": null,
       "function": null,
-      "expectedPersonCount": 0,
-      "area": 5.231,
-      "diameter": 3.4311076928595527,
+      "expectedPersonCount": 12,
+      "area": 17.5,
+      "diameter": 7.4330343736592521,
       "searched": 0
     }
   ],
   "nodes": [
     {
       "type": "node",
-      "id": "Node157",
-      "kind": "gateNode",
-      "position": {
-        "x": 1.1500119013889731,
-        "y": 2.3995001416631281
-      }
-    },
-    {
-      "type": "node",
-      "id": "Node174",
-      "kind": "gateNode",
-      "position": {
-        "x": 1.1500328237787008,
-        "y": 2.6004989214362526
-      }
-    },
-    {
-      "type": "node",
-      "id": "Node184",
+      "id": "Node52",
       "kind": "spaceNode",
       "position": {
-        "x": 1.4134431852072771,
-        "y": 3.7604056069191771
+        "x": 3.5,
+        "y": 3.75
       }
     },
     {
       "type": "node",
-      "id": "Node186",
+      "id": "Node53",
+      "kind": "gateNode",
+      "position": {
+        "x": 3.5,
+        "y": 2.6005000000000003
+      }
+    },
+    {
+      "type": "node",
+      "id": "Node61",
       "kind": "spaceNode",
       "position": {
-        "x": 1.1294484802141083,
-        "y": 1.3792678264194229
+        "x": 3.5,
+        "y": 1.25
+      }
+    },
+    {
+      "type": "node",
+      "id": "Node62",
+      "kind": "gateNode",
+      "position": {
+        "x": 3.5,
+        "y": 2.3994999999999997
       }
     }
   ],
@@ -360,139 +206,89 @@
   "space-walls": [
     {
       "type": "space-wall",
-      "spaceId": "Space183",
-      "wallId": "Wall149"
+      "spaceId": "Space51",
+      "wallId": "Wall45"
     },
     {
       "type": "space-wall",
-      "spaceId": "Space183",
-      "wallId": "Wall166"
+      "spaceId": "Space51",
+      "wallId": "Wall46"
     },
     {
       "type": "space-wall",
-      "spaceId": "Space183",
-      "wallId": "Wall168"
+      "spaceId": "Space51",
+      "wallId": "Wall47"
     },
     {
       "type": "space-wall",
-      "spaceId": "Space183",
-      "wallId": "Wall151"
+      "spaceId": "Space51",
+      "wallId": "Wall49"
     },
     {
       "type": "space-wall",
-      "spaceId": "Space183",
-      "wallId": "Wall175"
+      "spaceId": "Space51",
+      "wallId": "Wall50"
     },
     {
       "type": "space-wall",
-      "spaceId": "Space183",
-      "wallId": "Wall177"
+      "spaceId": "Space60",
+      "wallId": "Wall54"
     },
     {
       "type": "space-wall",
-      "spaceId": "Space183",
-      "wallId": "Wall179"
-    },	
-	{
-      "type": "space-wall",
-      "spaceId": "Space183",
-      "wallId": "Wall291"
-    },	
-	{
-      "type": "space-wall",
-      "spaceId": "Space183",
-      "wallId": "Wall336"
-    },	
-	{
-      "type": "space-wall",
-      "spaceId": "Space183",
-      "wallId": "Wall331"
+      "spaceId": "Space60",
+      "wallId": "Wall49"
     },
     {
       "type": "space-wall",
-      "spaceId": "Space185",
-      "wallId": "Wall159"
-    },	
-	{
-      "type": "space-wall",
-      "spaceId": "Space185",
-      "wallId": "Wall259"
-    },
-	{
-      "type": "space-wall",
-      "spaceId": "Space185",
-      "wallId": "Wall265"
-    },
-	{
-      "type": "space-wall",
-      "spaceId": "Space185",
-      "wallId": "Wall308"
-    },
-	{
-      "type": "space-wall",
-      "spaceId": "Space185",
-      "wallId": "Wall319"
-    },	
-    {
-      "type": "space-wall",
-      "spaceId": "Space185",
-      "wallId": "Wall160"
+      "spaceId": "Space60",
+      "wallId": "Wall47"
     },
     {
       "type": "space-wall",
-      "spaceId": "Space185",
-      "wallId": "Wall161"
+      "spaceId": "Space60",
+      "wallId": "Wall58"
     },
     {
       "type": "space-wall",
-      "spaceId": "Space185",
-      "wallId": "Wall149"
-    },
-    {
-      "type": "space-wall",
-      "spaceId": "Space185",
-      "wallId": "Wall151"
-    },
-    {
-      "type": "space-wall",
-      "spaceId": "Space185",
-      "wallId": "Wall153"
+      "spaceId": "Space60",
+      "wallId": "Wall59"
     }
   ],
   "space-gates": [
     {
       "type": "space-gate",
-      "spaceId": "Space183",
-      "gateId": "Wall150",
+      "spaceId": "Space51",
+      "gateId": "Wall48",
       "passable": true
     },
     {
       "type": "space-gate",
-      "spaceId": "Space185",
-      "gateId": "Wall150",
+      "spaceId": "Space60",
+      "gateId": "Wall48",
       "passable": true
     }
   ],
   "space-nodes": [
     {
       "type": "space-node",
-      "spaceId": "Space185",
-      "nodeId": "Node157"
+      "spaceId": "Space51",
+      "nodeId": "Node52"
     },
     {
       "type": "space-node",
-      "spaceId": "Space183",
-      "nodeId": "Node174"
+      "spaceId": "Space51",
+      "nodeId": "Node53"
     },
     {
       "type": "space-node",
-      "spaceId": "Space183",
-      "nodeId": "Node184"
+      "spaceId": "Space60",
+      "nodeId": "Node61"
     },
     {
       "type": "space-node",
-      "spaceId": "Space185",
-      "nodeId": "Node186"
+      "spaceId": "Space60",
+      "nodeId": "Node62"
     }
   ],
   "space-robots": [],
@@ -500,56 +296,56 @@
   "gate-nodes": [
     {
       "type": "gate-node",
-      "nodeId": "Node157",
-      "gateId": "Wall150"
+      "nodeId": "Node53",
+      "gateId": "Wall48"
     },
     {
       "type": "gate-node",
-      "nodeId": "Node174",
-      "gateId": "Wall150"
+      "nodeId": "Node62",
+      "gateId": "Wall48"
     }
   ],
   "node-nodes": [
     {
       "type": "node-nodes",
-      "nodeFromId": "Node157",
-      "nodeToId": "Node174",
-      "cost": 0.20099878086205245,
+      "nodeFromId": "Node52",
+      "nodeToId": "Node53",
+      "cost": 1.1495,
       "blocked": 0.0
     },
     {
       "type": "node-nodes",
-      "nodeFromId": "Node157",
-      "nodeToId": "Node186",
-      "cost": 1.0204395285159948,
+      "nodeFromId": "Node53",
+      "nodeToId": "Node52",
+      "cost": 1.1495,
       "blocked": 0.0
     },
     {
       "type": "node-nodes",
-      "nodeFromId": "Node174",
-      "nodeToId": "Node157",
-      "cost": 0.20099878086205245,
+      "nodeFromId": "Node53",
+      "nodeToId": "Node62",
+      "cost": 0.20100000000000023,
       "blocked": 0.0
     },
     {
       "type": "node-nodes",
-      "nodeFromId": "Node174",
-      "nodeToId": "Node184",
-      "cost": 1.189440430427652,
+      "nodeFromId": "Node61",
+      "nodeToId": "Node62",
+      "cost": 1.1495,
       "blocked": 0.0
     },
     {
       "type": "node-nodes",
-      "nodeFromId": "Node184",
-      "nodeToId": "Node174",
-      "cost": 1.189440430427652,
+      "nodeFromId": "Node62",
+      "nodeToId": "Node61",
+      "cost": 1.1495,
       "blocked": 0.0
     },
     {
       "type": "node-nodes",
-      "nodeFromId": "Node186",
-      "nodeToId": "Node157",
-      "cost": 1.0204395285159948,
+      "nodeFromId": "Node62",
+      "nodeToId": "Node53",
+      "cost": 0.20100000000000023,
       "blocked": 0.0
     }
   ]

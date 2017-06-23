@@ -6,10 +6,10 @@ import pl.agh.capo.controller.collision.velocity.PointViaSelectionType;
 
 public class EnvironmentalConfiguration {
 
-	public static final boolean SIMULATION = true;
+	public static final boolean SIMULATION = false;
 
 	// RabbitMQ connection leads
-	public static  String ADDRESS = SIMULATION ? "127.0.0.1" : "192.168.2.101";
+	public static  String ADDRESS = SIMULATION ? "127.0.0.1" : "192.168.2.111";
 	public static  String USERNAME = SIMULATION ? "guest" : "panda";
 	public static  String PASSWORD = SIMULATION ? "guest" : "panda";
 	public static  String CHANNEL_NAME = "capoRobotState";

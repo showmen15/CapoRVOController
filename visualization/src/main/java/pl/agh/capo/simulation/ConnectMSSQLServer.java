@@ -21,7 +21,7 @@ public class ConnectMSSQLServer {
 	private String DatabaseName;
 
 	public ConnectMSSQLServer() {
-		ServerName = "WR-7-BASE-74\\SQLEXPRESS";//"SZSZ\\SQLEXPRESS"; //"WR-7-BASE-74\\SQLEXPRESS";//"SZSZ\\SQLEXPRESS";////"WR-7-BASE-74\\SQLEXPRESS";//// ServerName = "SZYMON-KOMPUTER";
+		ServerName = ServerName = "192.168.2.110"; // "SZYMON-KOMPUTER"; //"SZSZ\\SQLEXPRESS"; //"WR-7-BASE-74\\SQLEXPRESS";//"SZSZ\\SQLEXPRESS";////"WR-7-BASE-74\\SQLEXPRESS";//// ServerName = "SZYMON-KOMPUTER";
 		User = "szsz";
 		Password = "szsz";
 		DatabaseName = "Doktorat";

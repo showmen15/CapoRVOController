@@ -2,9 +2,10 @@ package pl.agh.capo.simulation.robot;
 
 import pl.agh.capo.utilities.maze.MazeMap;
 import pl.agh.capo.utilities.state.State;
+import pl.agh.capo.configure.ConnectMSSQLServer;
+import pl.agh.capo.configure.TaskConfig;
 import pl.agh.capo.controller.RobotController;
 import pl.agh.capo.robot.IRobotManager;
-import pl.agh.capo.simulation.ConnectMSSQLServer;
 import pl.agh.capo.simulation.SingleRun;
 import pl.agh.capo.simulation.robot.mock.MockRobotFactory;
 
@@ -77,4 +78,10 @@ public class RobotManager implements IRobotManager {
         System.out.print(sb.toString());
         System.exit(1);
     }
+
+	@Override
+	public void onFinishDB(TaskConfig configure, int id, int time, String loggRobotPostition) {
+		// TODO Auto-generated method stub
+		
+	}
 }

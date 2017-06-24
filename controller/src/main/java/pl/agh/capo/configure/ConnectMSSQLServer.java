@@ -1,4 +1,4 @@
-package pl.agh.capo.simulation;
+package pl.agh.capo.configure;
 
 import java.io.InputStream;
 import java.sql.Connection;
@@ -9,6 +9,8 @@ import java.sql.Statement;
 
 import com.microsoft.sqlserver.jdbc.SQLServerDataSource;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
+
+import pl.agh.capo.configure.TaskConfig;
 
 public class ConnectMSSQLServer {
 
@@ -21,7 +23,7 @@ public class ConnectMSSQLServer {
 	private String DatabaseName;
 
 	public ConnectMSSQLServer() {
-		ServerName = ServerName = "192.168.2.110"; // "SZYMON-KOMPUTER"; //"SZSZ\\SQLEXPRESS"; //"WR-7-BASE-74\\SQLEXPRESS";//"SZSZ\\SQLEXPRESS";////"WR-7-BASE-74\\SQLEXPRESS";//// ServerName = "SZYMON-KOMPUTER";
+		ServerName = ServerName = "192.168.2.101"; // "SZYMON-KOMPUTER"; //"SZSZ\\SQLEXPRESS"; //"WR-7-BASE-74\\SQLEXPRESS";//"SZSZ\\SQLEXPRESS";////"WR-7-BASE-74\\SQLEXPRESS";//// ServerName = "SZYMON-KOMPUTER";
 		User = "szsz";
 		Password = "szsz";
 		DatabaseName = "Doktorat";
@@ -211,7 +213,7 @@ public class ConnectMSSQLServer {
 		return result;
 	}
 
-	public void SaveResult(TaskConfig config,int ID_Robot,int LoopTime, int TimeMilisecond,String resultRobotPositon)
+	public void SaveResult(TaskConfig config,int ID_Robot,int LoopTime, long TimeMilisecond,String resultRobotPositon)
 	{
 		try {
 
@@ -230,7 +232,7 @@ public class ConnectMSSQLServer {
 			sta.setInt(5, config.ID_Config);
 			sta.setInt(6, ID_Robot);
 			sta.setInt(7, LoopTime);
-			sta.setInt(8, TimeMilisecond);
+			sta.setLong(8, TimeMilisecond);
 			sta.setString(9, resultRobotPositon);
 			
 			sta.executeUpdate();

@@ -9,14 +9,14 @@ import pl.agh.capo.utilities.RobotMotionModel;
 import pl.agh.capo.utilities.maze.MazeMap;
 import pl.agh.capo.utilities.state.Destination;
 import pl.agh.capo.Main;
+import pl.agh.capo.configure.ConnectMSSQLServer;
 import pl.agh.capo.configure.RunAllgorytmConfigureRobot;
 import pl.agh.capo.configure.RunAllgorytmConfigureSimulation;
+import pl.agh.capo.configure.TaskConfig;
 import pl.agh.capo.controller.RobotController;
 import pl.agh.capo.controller.collision.velocity.CollisionFreeVelocityType;
 import pl.agh.capo.robot.Robot;
 import pl.agh.capo.robot.RobotManager;
-import pl.agh.capo.simulation.ConnectMSSQLServer;
-import pl.agh.capo.simulation.TaskConfig;
 
 import java.io.File;
 import java.io.FileReader;
@@ -27,6 +27,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.function.ToIntFunction;
 
@@ -38,12 +39,26 @@ public class SingleRunRobot {
 		//java -jar controller.jar <ID_Case>
 	
 	    public static void main(String[] args) {
-	      
+	         	
+try
+{
+	System.out.println(SingleRunRobot.getRobotIP());
+	return;
+}
+catch(Exception ex)
+{
+	ex.printStackTrace();
+}
+
+	    	
+	    	
 	    	if (args.length != 1)
 				return;
 	    	
 	    	try {
-	    		String RobotIP = "192.168.2.201"; //SingleRunRobot.getRobotIP(); //TODO do sprawdzenia
+		    	
+	    		
+	    		String RobotIP = "192.168.2.200"; // SingleRunRobot.getRobotIP(); //"192.168.2.200"; //TODO do sprawdzenia
 	    		int RobotID = SingleRunRobot.getRobotID(RobotIP); 
 
 				ConnectMSSQLServer log = new ConnectMSSQLServer();
@@ -56,7 +71,7 @@ public class SingleRunRobot {
 				String currentRobotDestinations = getDestination(RobotID,configure.ConfigFile); 
 				List<Destination> destinations = parseDestinations(currentRobotDestinations);
 				
-			    RobotController controller = new RobotController(RobotID,destinations,mazeMap,robot,new RobotManager(),EnvironmentalConfiguration.COLLISIONFREEVELOCITYMETHOD);
+			    RobotController controller = new RobotController(RobotID,destinations,mazeMap,robot,new RobotManager(),EnvironmentalConfiguration.COLLISIONFREEVELOCITYMETHOD,configure);
 
 			    new Thread(controller).start();
 

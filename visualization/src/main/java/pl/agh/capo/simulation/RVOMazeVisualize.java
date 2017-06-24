@@ -7,6 +7,8 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 
+import pl.agh.capo.configure.ConnectMSSQLServer;
+import pl.agh.capo.configure.TaskConfig;
 import pl.agh.capo.simulation.visualization.MazeVisualizer;
 import pl.agh.capo.utilities.communication.StateCollector;
 import pl.agh.capo.utilities.communicationUDP.StateCollectorUDP;

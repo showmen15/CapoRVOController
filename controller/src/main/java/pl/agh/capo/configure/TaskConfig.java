@@ -1,4 +1,6 @@
-package pl.agh.capo.simulation;
+package pl.agh.capo.configure;
+
+import java.util.Date;
 
 public class TaskConfig {
 	
@@ -19,9 +21,18 @@ public class TaskConfig {
 	 public String Name_Config;
    
     public String ConfigFile;
+    	
+	private Date StartTime = new Date();
     
-	
 	public TaskConfig()
 	{		
+		
 	}	
+	
+	public long RobotSimulationTimeMilisecond()
+	{
+		Date date2 = new Date();
+		
+		return  date2.getTime() - StartTime.getTime();
+	}
 }

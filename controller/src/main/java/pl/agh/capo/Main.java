@@ -30,7 +30,8 @@ public class Main {
                 new RobotManager(),
                 Integer.parseInt(args[4]) == 1
                         ? CollisionFreeVelocityType.RIGHT_HAND
-                        : CollisionFreeVelocityType.VELOCITY_OBSTACLES
+                        : CollisionFreeVelocityType.VELOCITY_OBSTACLES,
+                        null
         );
         new Thread(controller).start();
     }

@@ -5,7 +5,6 @@ import java.io.IOException;
 import pl.agh.capo.controller.collision.velocity.CollisionFreeVelocityType;
 import pl.agh.capo.controller.collision.velocity.FearMutationType;
 import pl.agh.capo.controller.collision.velocity.PointViaSelectionType;
-import pl.agh.capo.simulation.TaskConfig;
 import pl.agh.capo.utilities.EnvironmentalConfiguration;
 
 public class RunAllgorytmConfigureSimulation {

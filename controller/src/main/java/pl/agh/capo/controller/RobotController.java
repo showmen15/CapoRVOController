@@ -15,6 +15,7 @@ import pl.agh.capo.utilities.state.Location;
 import pl.agh.capo.utilities.state.Point;
 import pl.agh.capo.utilities.state.State;
 import pl.agh.capo.utilities.state.Velocity;
+import pl.agh.capo.configure.TaskConfig;
 import pl.agh.capo.controller.collision.CollisionFreeVelocityGenerator;
 import pl.agh.capo.controller.collision.WallCollisionDetector;
 import pl.agh.capo.controller.collision.velocity.AbstractCollisionFreeVelocity;
@@ -66,8 +67,10 @@ public class RobotController implements Runnable {
 
 	private Fear fear;
 	private AbstractCollisionFreeVelocity collisionFreeVelocity;
-
-	public RobotController(int robotId, List<Destination> destinationList, MazeMap mazeMap, IRobot robot, IRobotManager manager, CollisionFreeVelocityType collisionFreeVelocityType) {
+	
+	private TaskConfig configure;
+	
+	public RobotController(int robotId, List<Destination> destinationList, MazeMap mazeMap, IRobot robot, IRobotManager manager, CollisionFreeVelocityType collisionFreeVelocityType,TaskConfig conf) {
 		this.robotId = robotId;
 		this.robot = robot;
 		this.manager = manager;
@@ -95,6 +98,7 @@ public class RobotController implements Runnable {
 		publishState(false, new State(robotId, robot.getRobotLocation(), new Velocity(0, 0), destination));
 
 		positionRobot = new StringBuilder();
+		configure = conf;
 	}
 
 	public void setPath(List<Destination> destinationList) {
@@ -704,7 +708,7 @@ public class RobotController implements Runnable {
 		controlScheduler.shutdownNow();
 		sensorMonitor.shutdownNow();
 		publishState(false, State.createFinished(robotId));
-		manager.onFinish(robotId, sensorReadCounter, positionRobot.toString());
+		manager.onFinishDB(configure,robotId, sensorReadCounter, positionRobot.toString());
 		robot.setVelocity(0.0, 0.0);
 	}
 

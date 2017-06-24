@@ -12,7 +12,9 @@ import com.google.gson.Gson;
 import com.google.gson.JsonIOException;
 import com.google.gson.JsonSyntaxException;
 
+import pl.agh.capo.configure.ConnectMSSQLServer;
 import pl.agh.capo.configure.RunAllgorytmConfigureSimulation;
+import pl.agh.capo.configure.TaskConfig;
 import pl.agh.capo.controller.collision.velocity.CollisionFreeVelocityType;
 import pl.agh.capo.controller.collision.velocity.FearMutationType;
 import pl.agh.capo.controller.collision.velocity.PointViaSelectionType;

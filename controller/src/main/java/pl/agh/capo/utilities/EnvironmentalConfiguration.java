@@ -9,7 +9,7 @@ public class EnvironmentalConfiguration {
 	public static final boolean SIMULATION = false;
 
 	// RabbitMQ connection leads
-	public static  String ADDRESS = SIMULATION ? "127.0.0.1" : "192.168.2.111";
+	public static  String ADDRESS = SIMULATION ? "127.0.0.1" : "192.168.2.101";
 	public static  String USERNAME = SIMULATION ? "guest" : "panda";
 	public static  String PASSWORD = SIMULATION ? "guest" : "panda";
 	public static  String CHANNEL_NAME = "capoRobotState";
@@ -22,7 +22,7 @@ public class EnvironmentalConfiguration {
 	// Units consisted with International System of Units
 	public static  double ROBOT_DIAMETER = 0.3;
 	public static  double ROBOT_WHEELS_HALF_DISTANCE = 0.14;
-	public static  double ROBOT_MAX_SPEED = 0.5;
+	public static  double ROBOT_MAX_SPEED = 1.0;
 	public static  double PREF_ROBOT_SPEED =  ROBOT_MAX_SPEED / 2.0;
 
 	// Multiplier of angle to desired velocity (used to perform turning)

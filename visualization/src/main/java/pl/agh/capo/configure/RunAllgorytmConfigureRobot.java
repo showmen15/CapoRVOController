@@ -11,6 +11,7 @@ public class RunAllgorytmConfigureRobot {
 
 	public static void RunAllgorytmConfigure(TaskConfig configure) throws Exception {
 
+		
 		switch (configure.ID_Program) {
 
 		case 0: // FearFactorBase
@@ -65,6 +66,12 @@ public class RunAllgorytmConfigureRobot {
 			switch (configure.ID_Map) {
 								
 			case 19: //Lab OtwartaPrzestrzeñ
+				
+				EnvironmentalConfiguration.ROBOT_DIAMETER = 0.4;
+				EnvironmentalConfiguration.ROBOT_WHEELS_HALF_DISTANCE = 0.2;
+				
+				
+				
 				EnvironmentalConfiguration.POINT_VIA_SELECTION_TYPE = PointViaSelectionType.NONE;
 			
 				EnvironmentalConfiguration.WALL_COLLISION_MARGIN_FACTOR = 1.6;
@@ -82,6 +89,28 @@ public class RunAllgorytmConfigureRobot {
 				EnvironmentalConfiguration.RL_CP = 1.0;
 				break;
 
+			case 17: //Lab PrzejœciePrzezDrzwi
+				
+				EnvironmentalConfiguration.ROBOT_DIAMETER = 0.3;
+				EnvironmentalConfiguration.ROBOT_WHEELS_HALF_DISTANCE = 0.15;
+				
+				EnvironmentalConfiguration.POINT_VIA_SELECTION_TYPE = PointViaSelectionType.NONE;
+
+				EnvironmentalConfiguration.WALL_COLLISION_MARGIN_FACTOR = 1.6;
+				
+				EnvironmentalConfiguration.NEIGHBOR_DIST = 2.4f;
+				EnvironmentalConfiguration.MAX_NEIGHBORS = 30;
+				EnvironmentalConfiguration.TIME_HORIZON = 2.7f;
+				EnvironmentalConfiguration.TIME_HORIZON_OBST = 1.5f;
+
+				EnvironmentalConfiguration.RADIUS = 0.25f;
+				EnvironmentalConfiguration.MAX_SPEED = 0.25f;
+				EnvironmentalConfiguration.TIME_STEP = 0.2f;
+
+				EnvironmentalConfiguration.MAX_OBSERVATION_DISTANCE_FF = 2.0;
+				EnvironmentalConfiguration.RL_CP = 1.0;
+				break;
+				
 			default:
 				throw new Exception("Algorytm nie skonfigurowany!!!!");
 
@@ -91,7 +120,9 @@ public class RunAllgorytmConfigureRobot {
 
 			switch (configure.ID_Map) {
 				
+			
 			case 19: // Lab OtwartaPrzestrzeñ
+			case 17: //Lab PrzejœciePrzezDrzwi
 				EnvironmentalConfiguration.POINT_VIA_SELECTION_TYPE = PointViaSelectionType.NONE;
 				
 				EnvironmentalConfiguration.WALL_COLLISION_MARGIN_FACTOR = 1.6;

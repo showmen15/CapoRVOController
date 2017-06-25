@@ -22,6 +22,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.net.Inet4Address;
+import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -40,29 +41,18 @@ public class SingleRunRobot {
 	
 	    public static void main(String[] args) {
 	         	
-try
-{
-	System.out.println(SingleRunRobot.getRobotIP());
-	return;
-}
-catch(Exception ex)
-{
-	ex.printStackTrace();
-}
-
-	    	
-	    	
 	    	if (args.length != 1)
 				return;
 	    	
 	    	try {
 		    	
-	    		
-	    		String RobotIP = "192.168.2.200"; // SingleRunRobot.getRobotIP(); //"192.168.2.200"; //TODO do sprawdzenia
+	    		String RobotIP = "192.168.2.20" + args[0];  // "192.168.2.200"; // SingleRunRobot.getRobotIP(); //"192.168.2.200"; //TODO do sprawdzenia
 	    		int RobotID = SingleRunRobot.getRobotID(RobotIP); 
 
 				ConnectMSSQLServer log = new ConnectMSSQLServer();
-				configure = log.GetTaskConfig(Integer.parseInt(args[0]));	
+				int id_config = log.GetConfigRobot();
+
+				configure = log.GetTaskConfig(id_config);	
 				RunAllgorytmConfigureRobot.RunAllgorytmConfigure(configure);
 				
 				Robot robot = new Robot(RobotIP);
@@ -104,9 +94,9 @@ catch(Exception ex)
 	
 	    private static String getRobotIP() throws UnknownHostException
 	    {
-	    	String sIP = Inet4Address.getLocalHost().getHostAddress();	
+	
 	    	
-	    	return sIP;
+	    	return "";
 	    }
 	    
 	    private static String getDestination(int RobotID,String ConfigFile)

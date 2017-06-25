@@ -20,8 +20,8 @@ public class EnvironmentalConfiguration {
 
 	// Empirically selected values to control robots
 	// Units consisted with International System of Units
-	public static  double ROBOT_DIAMETER = 0.3;
-	public static  double ROBOT_WHEELS_HALF_DISTANCE = 0.14;
+	public static  double ROBOT_DIAMETER = 0.4;
+	public static  double ROBOT_WHEELS_HALF_DISTANCE = 0.2;
 	public static  double ROBOT_MAX_SPEED = 1.0;
 	public static  double PREF_ROBOT_SPEED =  ROBOT_MAX_SPEED / 2.0;
 

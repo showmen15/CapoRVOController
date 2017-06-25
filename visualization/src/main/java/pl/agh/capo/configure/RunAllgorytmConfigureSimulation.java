@@ -10,7 +10,7 @@ import pl.agh.capo.utilities.EnvironmentalConfiguration;
 public class RunAllgorytmConfigureSimulation {
 
 	public static void RunAllgorytmConfigure(TaskConfig configure) throws Exception {
-
+		
 		switch (configure.ID_Program) {
 
 		case 0: // FearFactorBase

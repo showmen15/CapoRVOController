@@ -242,4 +242,35 @@ public class ConnectMSSQLServer {
 		}
 	}
 	
+	public int GetConfigRobot()
+	{
+		int Result = -1;
+		
+		try {
+
+			ResultSet rs = null;
+			Statement stmt = null;
+			Connection conn;
+
+			conn = createNewConnection();
+
+			String SQL = "select MIN(ID_CASE) as ID_CASE from dbo.TasksList";
+
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(SQL);
+
+			if (rs.next()) {
+				Result = rs.getInt("ID_CASE");
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return Result;
+		
+	}
+	
+	
+	
 }

@@ -66,9 +66,12 @@ public class RunAllgorytmConfigureRobot {
 			switch (configure.ID_Map) {
 								
 			case 19: //Lab OtwartaPrzestrzeñ
+				EnvironmentalConfiguration.ROBOT_MAX_SPEED = 0.5;
+				EnvironmentalConfiguration.PREF_ROBOT_SPEED = EnvironmentalConfiguration.ROBOT_MAX_SPEED / 2.0;
+				
 				
 				EnvironmentalConfiguration.ROBOT_DIAMETER = 0.4;
-				EnvironmentalConfiguration.ROBOT_WHEELS_HALF_DISTANCE = 0.2;
+				EnvironmentalConfiguration.ROBOT_WHEELS_HALF_DISTANCE = EnvironmentalConfiguration.ROBOT_DIAMETER / 2;
 				
 				
 				
@@ -91,8 +94,12 @@ public class RunAllgorytmConfigureRobot {
 
 			case 17: //Lab PrzejœciePrzezDrzwi
 				
-				EnvironmentalConfiguration.ROBOT_DIAMETER = 0.3;
-				EnvironmentalConfiguration.ROBOT_WHEELS_HALF_DISTANCE = 0.15;
+				EnvironmentalConfiguration.ROBOT_MAX_SPEED = 0.5;
+				EnvironmentalConfiguration.PREF_ROBOT_SPEED = EnvironmentalConfiguration.ROBOT_MAX_SPEED / 2.0;
+				
+				
+				EnvironmentalConfiguration.ROBOT_DIAMETER = 0.35;
+				EnvironmentalConfiguration.ROBOT_WHEELS_HALF_DISTANCE = EnvironmentalConfiguration.ROBOT_WHEELS_HALF_DISTANCE / 2;
 				
 				EnvironmentalConfiguration.POINT_VIA_SELECTION_TYPE = PointViaSelectionType.NONE;
 
@@ -127,8 +134,8 @@ public class RunAllgorytmConfigureRobot {
 				
 				EnvironmentalConfiguration.WALL_COLLISION_MARGIN_FACTOR = 1.6;
 				
-				EnvironmentalConfiguration.ROBOT_DIAMETER = 0.3;
-				EnvironmentalConfiguration.ROBOT_WHEELS_HALF_DISTANCE = 0.14;
+				EnvironmentalConfiguration.ROBOT_DIAMETER = 0.4;
+				EnvironmentalConfiguration.ROBOT_WHEELS_HALF_DISTANCE = EnvironmentalConfiguration.ROBOT_DIAMETER / 2;
 				EnvironmentalConfiguration.ROBOT_MAX_SPEED = 0.5;
 				EnvironmentalConfiguration.PREF_ROBOT_SPEED = EnvironmentalConfiguration.ROBOT_MAX_SPEED / 2.0;
 				EnvironmentalConfiguration.ANGULAR_VELOCITY_FACTOR = 3.0;

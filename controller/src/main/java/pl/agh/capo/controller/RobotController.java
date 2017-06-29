@@ -710,6 +710,16 @@ public class RobotController implements Runnable {
 		publishState(false, State.createFinished(robotId));
 		manager.onFinishDB(configure,robotId, sensorReadCounter, positionRobot.toString());
 		robot.setVelocity(0.0, 0.0);
+		robot.setVelocity(0.0, 0.0);
+		robot.setVelocity(0.0, 0.0);
+		try {
+			Thread.sleep(10);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		robot.setVelocity(0.0, 0.0);
+		robot.setVelocity(0.0, 0.0);
 	}
 
 	private void setToDestinationVelocity(Velocity velocity, double destinationDistance) {

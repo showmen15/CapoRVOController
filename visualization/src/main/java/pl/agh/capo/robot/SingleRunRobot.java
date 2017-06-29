@@ -46,8 +46,8 @@ public class SingleRunRobot {
 	    	
 	    	try {
 		    	
-	    		String RobotIP = "192.168.2.20" + args[0];  // "192.168.2.200"; // SingleRunRobot.getRobotIP(); //"192.168.2.200"; //TODO do sprawdzenia
-	    		int RobotID = SingleRunRobot.getRobotID(RobotIP); 
+	    		String RobotIP = "127.0.0.1";//"192.168.2.20" + args[0];  // "192.168.2.200"; // SingleRunRobot.getRobotIP(); //"192.168.2.200"; //TODO do sprawdzenia
+	    		int RobotID = Integer.parseInt(args[0]);//SingleRunRobot.getRobotID(RobotIP); 
 
 				ConnectMSSQLServer log = new ConnectMSSQLServer();
 				int id_config = log.GetConfigRobot();
@@ -56,7 +56,7 @@ public class SingleRunRobot {
 				RunAllgorytmConfigureRobot.RunAllgorytmConfigure(configure);
 				
 				Robot robot = new Robot(RobotIP);
-				MazeMap mazeMap = new Gson().fromJson(configure.Map,MazeMap.class); //TODO czy zadziala
+				MazeMap mazeMap = new Gson().fromJson(configure.Map,MazeMap.class);
 						
 				String currentRobotDestinations = getDestination(RobotID,configure.ConfigFile); 
 				List<Destination> destinations = parseDestinations(currentRobotDestinations);

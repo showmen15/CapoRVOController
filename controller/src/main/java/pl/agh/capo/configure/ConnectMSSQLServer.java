@@ -11,6 +11,7 @@ import com.microsoft.sqlserver.jdbc.SQLServerDataSource;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 
 import pl.agh.capo.configure.TaskConfig;
+import pl.agh.capo.utilities.EnvironmentalConfiguration;
 
 public class ConnectMSSQLServer {
 
@@ -23,7 +24,7 @@ public class ConnectMSSQLServer {
 	private String DatabaseName;
 
 	public ConnectMSSQLServer() {
-		ServerName = ServerName = "192.168.2.101"; // "SZYMON-KOMPUTER"; //"SZSZ\\SQLEXPRESS"; //"WR-7-BASE-74\\SQLEXPRESS";//"SZSZ\\SQLEXPRESS";////"WR-7-BASE-74\\SQLEXPRESS";//// ServerName = "SZYMON-KOMPUTER";
+		ServerName =  EnvironmentalConfiguration.ADDRESS; //"192.168.2.103";//"SZYMON-KOMPUTER";//"192.168.2.101"; // "SZYMON-KOMPUTER"; //"SZSZ\\SQLEXPRESS"; //"WR-7-BASE-74\\SQLEXPRESS";//"SZSZ\\SQLEXPRESS";////"WR-7-BASE-74\\SQLEXPRESS";//// ServerName = "SZYMON-KOMPUTER";
 		User = "szsz";
 		Password = "szsz";
 		DatabaseName = "Doktorat";
@@ -215,6 +216,8 @@ public class ConnectMSSQLServer {
 
 	public void SaveResult(TaskConfig config,int ID_Robot,int LoopTime, long TimeMilisecond,String resultRobotPositon)
 	{
+		
+		
 		try {
 
 			ResultSet rs = null;
@@ -235,7 +238,7 @@ public class ConnectMSSQLServer {
 			sta.setLong(8, TimeMilisecond);
 			sta.setString(9, resultRobotPositon);
 			
-			sta.executeUpdate();
+			//sta.executeUpdate();
 
 		} catch (SQLException e) {
 			e.printStackTrace();

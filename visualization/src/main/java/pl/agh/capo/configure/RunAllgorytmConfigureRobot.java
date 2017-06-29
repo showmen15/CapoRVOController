@@ -129,12 +129,32 @@ public class RunAllgorytmConfigureRobot {
 				
 			
 			case 19: // Lab OtwartaPrzestrzeñ
-			case 17: //Lab PrzejœciePrzezDrzwi
 				EnvironmentalConfiguration.POINT_VIA_SELECTION_TYPE = PointViaSelectionType.NONE;
 				
 				EnvironmentalConfiguration.WALL_COLLISION_MARGIN_FACTOR = 1.6;
 				
 				EnvironmentalConfiguration.ROBOT_DIAMETER = 0.4;
+				EnvironmentalConfiguration.ROBOT_WHEELS_HALF_DISTANCE = EnvironmentalConfiguration.ROBOT_DIAMETER / 2;
+				EnvironmentalConfiguration.ROBOT_MAX_SPEED = 0.5;
+				EnvironmentalConfiguration.PREF_ROBOT_SPEED = EnvironmentalConfiguration.ROBOT_MAX_SPEED / 2.0;
+				EnvironmentalConfiguration.ANGULAR_VELOCITY_FACTOR = 3.0;
+				EnvironmentalConfiguration.RECIPROCITY_FACTOR_OPPOSITE = 5.0;
+				EnvironmentalConfiguration.RECIPROCITY_FACTOR_PRIMARY = 1.0;
+				EnvironmentalConfiguration.RECIPROCITY_FACTOR_SUBORDINATED = 10.0;
+				EnvironmentalConfiguration.RECIPROCITY_FACTOR_BEHIND = 3.0;
+				EnvironmentalConfiguration.WALL_COLLISION_MARGIN_FACTOR = 1.6;
+				EnvironmentalConfiguration.VO_ROBOT_RADIUS = 1.6 * EnvironmentalConfiguration.ROBOT_DIAMETER;
+				EnvironmentalConfiguration.ACCEPTABLE_RADIUS = 1 * EnvironmentalConfiguration.VO_ROBOT_RADIUS;
+				EnvironmentalConfiguration.MIN_SPEED_FACTOR = 0.2;
+				break;
+				
+				
+			case 17: //Lab PrzejœciePrzezDrzwi
+				EnvironmentalConfiguration.POINT_VIA_SELECTION_TYPE = PointViaSelectionType.NONE;
+				
+				EnvironmentalConfiguration.WALL_COLLISION_MARGIN_FACTOR = 1.6;
+				
+				EnvironmentalConfiguration.ROBOT_DIAMETER = 0.35;
 				EnvironmentalConfiguration.ROBOT_WHEELS_HALF_DISTANCE = EnvironmentalConfiguration.ROBOT_DIAMETER / 2;
 				EnvironmentalConfiguration.ROBOT_MAX_SPEED = 0.5;
 				EnvironmentalConfiguration.PREF_ROBOT_SPEED = EnvironmentalConfiguration.ROBOT_MAX_SPEED / 2.0;

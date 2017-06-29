@@ -13,6 +13,7 @@ import com.google.gson.JsonIOException;
 import com.google.gson.JsonSyntaxException;
 
 import pl.agh.capo.configure.ConnectMSSQLServer;
+import pl.agh.capo.configure.RunAllgorytmConfigureRobot;
 import pl.agh.capo.configure.RunAllgorytmConfigureSimulation;
 import pl.agh.capo.configure.TaskConfig;
 import pl.agh.capo.controller.collision.velocity.CollisionFreeVelocityType;
@@ -39,7 +40,9 @@ public class SingleRun {
 			ConnectMSSQLServer log = new ConnectMSSQLServer();
 
 			configure = log.GetTaskConfig(Integer.parseInt(args[0]));
-			RunAllgorytmConfigureSimulation.RunAllgorytmConfigure(configure);
+			
+			RunAllgorytmConfigureRobot.RunAllgorytmConfigure(configure);
+			//RunAllgorytmConfigureSimulation.RunAllgorytmConfigure(configure);
 
 			Files.write(Paths.get(robotConfigPath), configure.ConfigFile.getBytes(), StandardOpenOption.CREATE,
 					StandardOpenOption.TRUNCATE_EXISTING);

@@ -62,7 +62,7 @@ public class StateCollector extends StateConnector {
                	
                     State state = (State) in.readObject();
                     
-                    System.out.println("State robot : " + state.getRobotId() + " "  + LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.n")));
+                   // System.out.println("State robot : " + state.getRobotId() + " "  + LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.n")));
                     
                     stateReceivedCallback.handle(state);
                 } catch (ClassNotFoundException e) {

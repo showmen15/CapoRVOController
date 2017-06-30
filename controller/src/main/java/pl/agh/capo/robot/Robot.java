@@ -22,9 +22,14 @@ public class Robot implements IRobot {
     @Override
     public void setVelocity(double leftVelocity, double rightVelocity) {
         try {
-            int robotLeftVelocity = (int) (leftVelocity * 1000.0);
+        	System.out.println(String.format("OPTIMAL left: %f, roght: %f", leftVelocity, rightVelocity));
+
+        	
+        	int robotLeftVelocity = (int) (leftVelocity * 1000.0);
             int robotRightVelocity = (int) (rightVelocity * 1000.0);
+            
             System.out.println(String.format("LEFT: %d, RIGHT: %d", robotLeftVelocity, robotRightVelocity));
+           
             roboclawProxy.sendMotorsCommand(robotLeftVelocity, robotRightVelocity, robotLeftVelocity, robotRightVelocity);
         } catch (IOException e) {
             System.out.println("Error in sending a command: " + e);
@@ -34,12 +39,28 @@ public class Robot implements IRobot {
     @Override
     public Location getRobotLocation() {
         try {
-            LocationCurrent locationCurrent = locationProxy.getCurrentLocation();
-            locationCurrent.waitAvailable();
-            System.out.println(String.format("X: %f, Y: %f, Alpha: %f", locationCurrent.getX(), locationCurrent.getY(), locationCurrent.getAngle()));
+            LocationCurrent locationCurrent;
+            
+            do
+            {
+            	locationCurrent = locationProxy.getCurrentLocation();
+            	locationCurrent.waitAvailable(51);
+            }
+            while(!isLocationValid(locationCurrent));
+            	
+            //System.out.println(String.format("X: %f, Y: %f, Alpha: %f", locationCurrent.getX(), locationCurrent.getY(), locationCurrent.getAngle()));
+           
             return new Location(locationCurrent.getX(), locationCurrent.getY(), locationCurrent.getAngle());
         } catch (Exception e) {
             return null;
         }
+    }
+    
+    private Boolean isLocationValid(LocationCurrent locationCurrent) throws Exception
+    {
+    	if((locationCurrent.getX() != 0.0) || (locationCurrent.getY() != 0.0))
+    		return true;
+    	return false;
+    	
     }
 }

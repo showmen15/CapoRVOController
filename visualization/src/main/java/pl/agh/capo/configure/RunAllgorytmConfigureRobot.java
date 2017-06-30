@@ -77,6 +77,7 @@ public class RunAllgorytmConfigureRobot {
 				
 				EnvironmentalConfiguration.POINT_VIA_SELECTION_TYPE = PointViaSelectionType.NONE;
 			
+				EnvironmentalConfiguration.ANGULAR_VELOCITY_FACTOR = 3.55;
 				EnvironmentalConfiguration.WALL_COLLISION_MARGIN_FACTOR = 1.6;
 
 				EnvironmentalConfiguration.NEIGHBOR_DIST = 2.0f;
@@ -98,11 +99,12 @@ public class RunAllgorytmConfigureRobot {
 				EnvironmentalConfiguration.PREF_ROBOT_SPEED = EnvironmentalConfiguration.ROBOT_MAX_SPEED / 2.0;
 				
 				
-				EnvironmentalConfiguration.ROBOT_DIAMETER = 0.35;
-				EnvironmentalConfiguration.ROBOT_WHEELS_HALF_DISTANCE = EnvironmentalConfiguration.ROBOT_WHEELS_HALF_DISTANCE / 2;
+				EnvironmentalConfiguration.ROBOT_DIAMETER = 0.3;
+				EnvironmentalConfiguration.ROBOT_WHEELS_HALF_DISTANCE = 0.2;//EnvironmentalConfiguration.ROBOT_WHEELS_HALF_DISTANCE / 2;
 				
 				EnvironmentalConfiguration.POINT_VIA_SELECTION_TYPE = PointViaSelectionType.NONE;
 
+				EnvironmentalConfiguration.ANGULAR_VELOCITY_FACTOR = 3.55;
 				EnvironmentalConfiguration.WALL_COLLISION_MARGIN_FACTOR = 1.6;
 				
 				EnvironmentalConfiguration.NEIGHBOR_DIST = 2.4f;
@@ -137,7 +139,7 @@ public class RunAllgorytmConfigureRobot {
 				EnvironmentalConfiguration.ROBOT_WHEELS_HALF_DISTANCE = EnvironmentalConfiguration.ROBOT_DIAMETER / 2;
 				EnvironmentalConfiguration.ROBOT_MAX_SPEED = 0.5;
 				EnvironmentalConfiguration.PREF_ROBOT_SPEED = EnvironmentalConfiguration.ROBOT_MAX_SPEED / 2.0;
-				EnvironmentalConfiguration.ANGULAR_VELOCITY_FACTOR = 3.0;
+				EnvironmentalConfiguration.ANGULAR_VELOCITY_FACTOR = 3.55;
 				EnvironmentalConfiguration.RECIPROCITY_FACTOR_OPPOSITE = 5.0;
 				EnvironmentalConfiguration.RECIPROCITY_FACTOR_PRIMARY = 1.0;
 				EnvironmentalConfiguration.RECIPROCITY_FACTOR_SUBORDINATED = 10.0;
@@ -158,7 +160,7 @@ public class RunAllgorytmConfigureRobot {
 				EnvironmentalConfiguration.ROBOT_WHEELS_HALF_DISTANCE = EnvironmentalConfiguration.ROBOT_DIAMETER / 2;
 				EnvironmentalConfiguration.ROBOT_MAX_SPEED = 0.5;
 				EnvironmentalConfiguration.PREF_ROBOT_SPEED = EnvironmentalConfiguration.ROBOT_MAX_SPEED / 2.0;
-				EnvironmentalConfiguration.ANGULAR_VELOCITY_FACTOR = 3.0;
+				EnvironmentalConfiguration.ANGULAR_VELOCITY_FACTOR = 3.55;
 				EnvironmentalConfiguration.RECIPROCITY_FACTOR_OPPOSITE = 5.0;
 				EnvironmentalConfiguration.RECIPROCITY_FACTOR_PRIMARY = 1.0;
 				EnvironmentalConfiguration.RECIPROCITY_FACTOR_SUBORDINATED = 10.0;

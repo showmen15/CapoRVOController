@@ -40,13 +40,18 @@ public class SingleRunRobot {
 		//java -jar controller.jar <ID_Case>
 	
 	    public static void main(String[] args) {
-	         	
-	    	if (args.length != 1)
+	        
+	    	String RobotIP = "127.0.0.1";
+	    	
+	    	if (args.length < 1)
 				return;
+	    	
+	    	if(args.length == 2)
+	    		RobotIP = args[1];
 	    	
 	    	try {
 		    	
-	    		String RobotIP = "127.0.0.1";//"192.168.2.20" + args[0];  // "192.168.2.200"; // SingleRunRobot.getRobotIP(); //"192.168.2.200"; //TODO do sprawdzenia
+	    		//RobotIP = "127.0.0.1";//"192.168.2.20" + args[0];  // "192.168.2.200"; // SingleRunRobot.getRobotIP(); //"192.168.2.200"; //TODO do sprawdzenia
 	    		int RobotID = Integer.parseInt(args[0]);//SingleRunRobot.getRobotID(RobotIP); 
 
 				ConnectMSSQLServer log = new ConnectMSSQLServer();

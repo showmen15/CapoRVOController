@@ -1,6 +1,8 @@
 package pl.agh.capo.utilities.state;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
+import java.text.DateFormat;
 
 public class State implements Serializable {
 
@@ -9,6 +11,7 @@ public class State implements Serializable {
     private Velocity velocity;
     private boolean finished;
     private double robotFearFactor;
+    private Timestamp timeStemp;
 
     // To pl.agh.capo.simulation.visualization only:
     private Point destination;
@@ -22,8 +25,31 @@ public class State implements Serializable {
         this.destination = destination;
         this.finished = false;
         this.robotFearFactor = 0.0;
+        this.timeStemp = new Timestamp(System.currentTimeMillis());
     }
 
+    public State(String sLogState)
+    {
+    	destination = new Point(0, 0);
+    	
+    	String[] sSplitedState =  sLogState.split(";");
+    	
+    	robotId = Integer.parseInt(sSplitedState[0]); //robotId
+    	//sSplitedState[1] sensorReadCounter
+    	 	
+    	location = new Location(Double.parseDouble(sSplitedState[2]),Double.parseDouble(sSplitedState[3]), Double.parseDouble(sSplitedState[4])); //currentRobotState.getLocation().getX(),currentRobotState.getLocation().getY(), currentRobotState.getLocation().getDirection()
+    	velocity = new Velocity(Double.parseDouble(sSplitedState[5]), Double.parseDouble(sSplitedState[6])); //currentRobotState.getVelocity().getX(), currentRobotState.getVelocity().getY()
+    	robotFearFactor = Double.parseDouble(sSplitedState[7]); //currentRobotState.getRobotFearFactor()
+    	
+    	if(sSplitedState.length > 8)
+    	{
+    		destination = new Point(Double.parseDouble(sSplitedState[8]), Double.parseDouble(sSplitedState[9])); //currentRobotState.getDestination().getX(), currentRobotState.getDestination().getY()
+    		finished = Boolean.parseBoolean(sSplitedState[10]); //currentRobotState.isFinished()
+    			
+    		timeStemp = new Timestamp(Long.parseLong(sSplitedState[11])); //currentRobotState.getTimeStemp()    				
+    	}	
+    }
+    
     public static State createFinished(int robotId){
         State state = new State();
         state.setRobotId(robotId);
@@ -66,4 +92,15 @@ public class State implements Serializable {
     public void setRobotFearFactor(double robotFearFactor){
     	this.robotFearFactor =  robotFearFactor;
     }
+    
+    public long getTimeStemp()
+    {
+    	return timeStemp.getTime();
+    }
+    
+    public void setTimeStemp(long time)
+    {
+    	timeStemp = new Timestamp(time);
+    }
 }
+

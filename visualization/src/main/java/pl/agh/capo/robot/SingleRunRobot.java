@@ -34,13 +34,26 @@ import java.util.function.ToIntFunction;
 
 public class SingleRunRobot {
 
-	public static TaskConfig configure;
+	public TaskConfig configure;
+	public  RobotController controller;
 	
 		// build command: gradle clean jar
 		//java -jar controller.jar <ID_Case>
 	
 	    public static void main(String[] args) {
 	        
+	    	SingleRunRobot temp0 = new SingleRunRobot(args);
+	    	temp0.Run();
+	    	
+	    /*	SingleRunRobot temp0 = new SingleRunRobot(new String[] {"0", "192.168.2.200"});
+	    	SingleRunRobot temp1 = new SingleRunRobot(new String[] {"1", "192.168.2.201"});
+	    	
+	    	temp0.Run();
+	    	temp1.Run();*/
+	    }
+
+	    public SingleRunRobot(String[] args)
+	    {
 	    	String RobotIP = "127.0.0.1";
 	    	
 	    	if (args.length < 1)
@@ -66,17 +79,18 @@ public class SingleRunRobot {
 				String currentRobotDestinations = getDestination(RobotID,configure.ConfigFile); 
 				List<Destination> destinations = parseDestinations(currentRobotDestinations);
 				
-			    RobotController controller = new RobotController(RobotID,destinations,mazeMap,robot,new RobotManager(),EnvironmentalConfiguration.COLLISIONFREEVELOCITYMETHOD,configure);
-
-			    new Thread(controller).start();
-
+			    controller = new RobotController(RobotID,destinations,mazeMap,robot,new RobotManager(),EnvironmentalConfiguration.COLLISIONFREEVELOCITYMETHOD,configure);
 
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-
 	    }
-
+	    
+	    public void Run()
+	    {
+	    	new Thread(controller).start();
+	    }
+	    
 	    private static List<Destination> parseDestinations(String robotConfigure) {
 	    	String[] robotData = robotConfigure.split(";");
 	    	int index = 2;

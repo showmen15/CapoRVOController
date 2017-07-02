@@ -102,21 +102,21 @@ public class RunAllgorytmConfigureRobot {
 				EnvironmentalConfiguration.ROBOT_DIAMETER = 0.3;
 				EnvironmentalConfiguration.ROBOT_WHEELS_HALF_DISTANCE = 0.2;//EnvironmentalConfiguration.ROBOT_WHEELS_HALF_DISTANCE / 2;
 				
-				EnvironmentalConfiguration.POINT_VIA_SELECTION_TYPE = PointViaSelectionType.NONE;
+				EnvironmentalConfiguration.POINT_VIA_SELECTION_TYPE = PointViaSelectionType.ALL;
 
 				EnvironmentalConfiguration.ANGULAR_VELOCITY_FACTOR = 3.55;
 				EnvironmentalConfiguration.WALL_COLLISION_MARGIN_FACTOR = 1.6;
 				
-				EnvironmentalConfiguration.NEIGHBOR_DIST = 2.4f;
+				EnvironmentalConfiguration.NEIGHBOR_DIST = 2.5f;
 				EnvironmentalConfiguration.MAX_NEIGHBORS = 30;
-				EnvironmentalConfiguration.TIME_HORIZON = 2.7f;
-				EnvironmentalConfiguration.TIME_HORIZON_OBST = 1.5f;
+				EnvironmentalConfiguration.TIME_HORIZON = 3.0f;
+				EnvironmentalConfiguration.TIME_HORIZON_OBST = 2.4f;
 
 				EnvironmentalConfiguration.RADIUS = 0.25f;
 				EnvironmentalConfiguration.MAX_SPEED = 0.25f;
 				EnvironmentalConfiguration.TIME_STEP = 0.2f;
 
-				EnvironmentalConfiguration.MAX_OBSERVATION_DISTANCE_FF = 2.0;
+				EnvironmentalConfiguration.MAX_OBSERVATION_DISTANCE_FF = 2.3;
 				EnvironmentalConfiguration.RL_CP = 1.0;
 				break;
 				

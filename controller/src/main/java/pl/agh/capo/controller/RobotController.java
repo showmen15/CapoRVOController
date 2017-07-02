@@ -29,7 +29,9 @@ import pl.agh.capo.robot.IRobot;
 import pl.agh.capo.robot.IRobotManager;
 import pl.agh.capo.rvo.Vector2;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -697,7 +699,10 @@ public class RobotController implements Runnable {
 		
 	//	System.out.println(robotId + ";" + sensorReadCounter + ";" + currentRobotState.getLocation().getX() + ";" + currentRobotState.getLocation().getY() + ";" + currentRobotState.getLocation().getDirection() + ";" + currentRobotState.getVelocity().getX() + ";" + currentRobotState.getVelocity().getY() + ";" + currentRobotState.getRobotFearFactor() + ";" + "\n");
 		
-		positionRobot.append(robotId + ";" + sensorReadCounter + ";" + currentRobotState.getLocation().getX() + ";" + currentRobotState.getLocation().getY() + ";" + currentRobotState.getLocation().getDirection() + ";" + currentRobotState.getVelocity().getX() + ";" + currentRobotState.getVelocity().getY() + ";" + currentRobotState.getRobotFearFactor() + ";" + "\n");
+		positionRobot.append(robotId + ";" + sensorReadCounter + ";" + currentRobotState.getLocation().getX() + ";" + currentRobotState.getLocation().getY() + ";" + 
+		currentRobotState.getLocation().getDirection() + ";" + currentRobotState.getVelocity().getX() + ";" + currentRobotState.getVelocity().getY() + ";" + 
+		currentRobotState.getRobotFearFactor() + ";" + currentRobotState.getDestination().getX() + ";" + currentRobotState.getDestination().getY() + ";" + currentRobotState.isFinished() + ";" +
+		currentRobotState.getTimeStemp() + ";" + "\n");
 	}
 
 	private double calcOrientationRVO(double x, double y, double x1, double y1) {

@@ -1,17 +1,20 @@
 package pl.agh.capo.configure;
 
 import java.io.InputStream;
+import java.sql.Array;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 import com.microsoft.sqlserver.jdbc.SQLServerDataSource;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 
 import pl.agh.capo.configure.TaskConfig;
 import pl.agh.capo.utilities.EnvironmentalConfiguration;
+import pl.agh.capo.utilities.state.State;
 
 public class ConnectMSSQLServer {
 
@@ -24,7 +27,7 @@ public class ConnectMSSQLServer {
 	private String DatabaseName;
 
 	public ConnectMSSQLServer() {
-		ServerName =  EnvironmentalConfiguration.ADDRESS; //"192.168.2.103";//"SZYMON-KOMPUTER";//"192.168.2.101"; // "SZYMON-KOMPUTER"; //"SZSZ\\SQLEXPRESS"; //"WR-7-BASE-74\\SQLEXPRESS";//"SZSZ\\SQLEXPRESS";////"WR-7-BASE-74\\SQLEXPRESS";//// ServerName = "SZYMON-KOMPUTER";
+		ServerName =  "SZSZ\\SQLEXPRESS"; //EnvironmentalConfiguration.ADDRESS; //"192.168.2.103";//"SZYMON-KOMPUTER";//"192.168.2.101"; // "SZYMON-KOMPUTER"; //"SZSZ\\SQLEXPRESS"; //"WR-7-BASE-74\\SQLEXPRESS";//"SZSZ\\SQLEXPRESS";////"WR-7-BASE-74\\SQLEXPRESS";//// ServerName = "SZYMON-KOMPUTER";
 		User = "szsz";
 		Password = "szsz";
 		DatabaseName = "Doktorat";
@@ -274,6 +277,90 @@ public class ConnectMSSQLServer {
 		
 	}
 	
+	public State[]  GetVisualizeRobotCaseSimulation(int ID_Case)
+	{
+		ArrayList<State> tempResult = new ArrayList<>();
+		State[] result;
+		
+		try {
+
+			ResultSet rs = null;
+			Statement stmt = null;
+			Connection conn;
+			String sLog;
+			String[] sSplitLog;
+			String[] sSplitState;
+			State tempState;
+			
+			conn = createNewConnection();
+
+			String SQL = "select l.RobotPosition AS RobotPosition  from dbo.Result r INNER JOIN dbo.LogResult l on r.ID = l.ID WHERE r.ID_Case = "
+			+ ID_Case;
+
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(SQL);
+
+			while(rs.next()) 
+			{
+				sLog = rs.getString("RobotPosition");
+				sSplitLog = sLog.split("\n");
+				
+				for(int i = 0; i< sSplitLog.length; i++)
+				{
+					tempState = new State(sSplitLog[i]);
+					tempState.setTimeStemp(i * 200); //czas sumulacji 200ms;
+					tempResult.add(tempState);
+				}
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		tempResult.sort((o1,o2) -> (Long.compare(o1.getTimeStemp(), o2.getTimeStemp())));
+		
+		result = new State[tempResult.size()];
+		result = tempResult.toArray(result);
+		
+		return result;		
+	}	
 	
 	
+	public TaskConfig GetTaskConfigVisualization(int ID_Case) {
+		TaskConfig result = new TaskConfig();
+		try {
+
+			ResultSet rs = null;
+			Statement stmt = null;
+			Connection conn;
+
+			conn = createNewConnection();
+
+			String SQL = "SELECT ID_Case, ID_Program, ID_Trials, ID_Map, Map, ID_Config, ConfigFile, Name_Program, Name_Map, Name_Config FROM dbo.TaskConfigVisualization WHERE ID_Case = "
+					+ ID_Case;
+
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(SQL);
+
+			if (rs.next()) {
+				result.ID_Case = rs.getInt("ID_Case");
+				result.ID_Program = rs.getInt("ID_Program");
+				result.ID_Trials = rs.getInt("ID_Trials");
+				result.ID_Map = rs.getInt("ID_Map");
+				result.Map = rs.getString("Map");
+				result.ID_Config = rs.getInt("ID_Config");
+				result.ConfigFile = rs.getString("ConfigFile");
+				
+				result.Name_Program = rs.getString("Name_Program");
+				result.Name_Map =  rs.getString("Name_Map");
+				result.Name_Config = rs.getString("Name_Config");
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return result;
+	}
+
 }

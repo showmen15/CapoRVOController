@@ -43,6 +43,14 @@ public class SingleRunRobot {
 	    public static void main(String[] args) {
 	        
 	    	SingleRunRobot temp0 = new SingleRunRobot(args);
+	    	
+	    	try {
+	    		System.out.println("Start??");
+				int s = System.in.read();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 	    	temp0.Run();
 	    	
 	    /*	SingleRunRobot temp0 = new SingleRunRobot(new String[] {"0", "192.168.2.200"});

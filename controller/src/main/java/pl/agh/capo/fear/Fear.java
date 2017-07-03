@@ -200,7 +200,7 @@ public class Fear {
 	
 	public Boolean EmergencyStop(Map<Integer, State> states,Location robotLocation,Velocity optimalVelocity, double currentRobotFF)
 	{
-		double minDistance = 1.2 * EnvironmentalConfiguration.ROBOT_DIAMETER;
+		double minDistance = 1.3 * EnvironmentalConfiguration.ROBOT_DIAMETER;
 		Location otherRobot;		
 		double currentFF;
 		

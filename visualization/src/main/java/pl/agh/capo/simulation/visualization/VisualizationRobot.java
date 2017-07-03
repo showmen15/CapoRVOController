@@ -12,10 +12,12 @@ import pl.agh.capo.configure.TaskConfig;
 import pl.agh.capo.utilities.communication.StateCollector;
 import pl.agh.capo.utilities.state.State;
 
+
+
 public class VisualizationRobot {
 
 	public static void main(String[] args) {
-
+	
 		if (args.length != 1)
 			return;
 

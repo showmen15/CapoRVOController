@@ -11,6 +11,8 @@ public class RunAllgorytmConfigureRobot {
 
 	public static void RunAllgorytmConfigure(TaskConfig configure) throws Exception {
 
+		EnvironmentalConfiguration.SIMULATION_SLEEP_BETWEEN_TIME_STEP_IN_MS = 30;
+		
 		
 		switch (configure.ID_Program) {
 
@@ -95,28 +97,28 @@ public class RunAllgorytmConfigureRobot {
 
 			case 17: //Lab PrzejœciePrzezDrzwi
 				
-				EnvironmentalConfiguration.ROBOT_MAX_SPEED = 0.5;
+				EnvironmentalConfiguration.ROBOT_MAX_SPEED = 0.4;
 				EnvironmentalConfiguration.PREF_ROBOT_SPEED = EnvironmentalConfiguration.ROBOT_MAX_SPEED / 2.0;
 				
 				
 				EnvironmentalConfiguration.ROBOT_DIAMETER = 0.3;
 				EnvironmentalConfiguration.ROBOT_WHEELS_HALF_DISTANCE = 0.2;//EnvironmentalConfiguration.ROBOT_WHEELS_HALF_DISTANCE / 2;
 				
-				EnvironmentalConfiguration.POINT_VIA_SELECTION_TYPE = PointViaSelectionType.ALL;
+				EnvironmentalConfiguration.POINT_VIA_SELECTION_TYPE = PointViaSelectionType.NONE;
 
 				EnvironmentalConfiguration.ANGULAR_VELOCITY_FACTOR = 3.55;
 				EnvironmentalConfiguration.WALL_COLLISION_MARGIN_FACTOR = 1.6;
 				
-				EnvironmentalConfiguration.NEIGHBOR_DIST = 2.5f;
+				EnvironmentalConfiguration.NEIGHBOR_DIST = 2.7f;
 				EnvironmentalConfiguration.MAX_NEIGHBORS = 30;
 				EnvironmentalConfiguration.TIME_HORIZON = 3.0f;
-				EnvironmentalConfiguration.TIME_HORIZON_OBST = 2.4f;
+				EnvironmentalConfiguration.TIME_HORIZON_OBST = 2.7f;
 
-				EnvironmentalConfiguration.RADIUS = 0.25f;
-				EnvironmentalConfiguration.MAX_SPEED = 0.25f;
-				EnvironmentalConfiguration.TIME_STEP = 0.2f;
+				EnvironmentalConfiguration.RADIUS = 0.26f; //0.25
+				EnvironmentalConfiguration.MAX_SPEED = 0.25f; //0.25
+				EnvironmentalConfiguration.TIME_STEP = 0.03;//0.03f; //0.2
 
-				EnvironmentalConfiguration.MAX_OBSERVATION_DISTANCE_FF = 2.3;
+				EnvironmentalConfiguration.MAX_OBSERVATION_DISTANCE_FF = 2.7;
 				EnvironmentalConfiguration.RL_CP = 1.0;
 				break;
 				

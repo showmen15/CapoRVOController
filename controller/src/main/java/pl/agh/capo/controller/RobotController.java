@@ -123,6 +123,8 @@ public class RobotController implements Runnable {
 	}
 
 	private void controlRobot() {
+		Timestamp timsStart = new Timestamp(System.currentTimeMillis());
+		
 		try {
 			sensorReadCounter++;
 			Location robotLocation = robot.getRobotLocation();
@@ -241,6 +243,11 @@ public class RobotController implements Runnable {
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
+		
+		Timestamp endTime = new Timestamp(System.currentTimeMillis());
+		
+		long diff = endTime.getTime() - timsStart.getTime();
+		System.out.println("Time" + diff);  
 	}
 
 	private void rvoAlgorithmImplementationTest() {

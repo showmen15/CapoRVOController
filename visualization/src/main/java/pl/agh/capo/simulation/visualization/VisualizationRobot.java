@@ -18,14 +18,14 @@ public class VisualizationRobot {
 
 	public static void main(String[] args) {
 	
-		if (args.length != 1)
+		if (args.length != 2)
 			return;
 
 		String mapPath = "./MapVisualizerRVO.json";
 
 		ConnectMSSQLServer log = new ConnectMSSQLServer();
 
-		TaskConfig configure = log.GetTaskConfigVisualization(Integer.parseInt(args[0]));
+		TaskConfig configure = log.GetTaskConfigVisualization(Integer.parseInt(args[0]),Integer.parseInt(args[1]));
 		String sCaseName = "Algorytm: " + configure.Name_Program + " Mapa: " + configure.Name_Map
 				+ " Konfiguracja: " + configure.Name_Config;
 
@@ -40,7 +40,7 @@ public class VisualizationRobot {
 		MazeVisualizer mazeVisualizer = MazeVisualizer.getInstance();
 		mazeVisualizer.open(mapPath, sCaseName);
 		
-		State[] tempLog = log.GetVisualizeRobotCaseSimulation(configure.ID_Case);
+		State[] tempLog = log.GetVisualizeRobotCaseSimulation(configure.ID_Case,configure.ID_Trials);
 		
 		StateCollectorVisualizer vis = new StateCollectorVisualizer(mazeVisualizer,tempLog);
 		//System.exit(1);		

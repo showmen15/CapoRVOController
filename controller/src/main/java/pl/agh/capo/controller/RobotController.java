@@ -224,6 +224,7 @@ public class RobotController implements Runnable {
 				collide = !collisionFreeVelocity.isCurrentVelocityCollisionFree();
 
 				optimalVelocity = collisionFreeVelocity.get();
+				
 				setVelocity(optimalVelocity);				
 			}
 
@@ -754,6 +755,18 @@ public class RobotController implements Runnable {
 
 	private void setVelocity(Velocity velocity) {
 		double angleToTarget = getToVelocityAngle(velocity);
+		
+		if(Math.abs(angleToTarget) > Math.PI / 4 )
+		{
+			System.out.println("SpinAround");
+			
+			
+			motionModel.spinAround(robot.getRobotLocation().getDirection(),angleToTarget); 	
+		}
+		else
+		{
+			
+		
 		if (Double.isNaN(angleToTarget)) {
 			motionModel.setVelocity(0.0, 0.0);
 			return;
@@ -763,6 +776,7 @@ public class RobotController implements Runnable {
 			motionModel.setLinearAndAngularVelocities(0.0, 0.0);
 		} else {
 			motionModel.setLinearAndAngularVelocities(velocity.getSpeed(), calculateAngularVelocity(angleToTarget));
+		}
 		}
 	}
 
@@ -782,7 +796,7 @@ public class RobotController implements Runnable {
 		if (distance == 0.0) {
 			return new Velocity(0.0, 0.0);
 		}
-		double factor = EnvironmentalConfiguration.PREF_ROBOT_SPEED / distance;
+		double factor = (2 * EnvironmentalConfiguration.PREF_ROBOT_SPEED) / distance; //EnvironmentalConfiguration.PREF_ROBOT_SPEED / distance;
 		return new Velocity(deltaX * factor, deltaY * factor);
 	}
 

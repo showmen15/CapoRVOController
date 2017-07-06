@@ -23,8 +23,8 @@ public abstract class StateConnectorUDP {
 	    
 	    protected void createChannel() throws IOException {
 
-	    	addressGroup = InetAddress.getByName("230.0.0.1");
-	    	socket = new MulticastSocket(4446);	        
+	    	addressGroup = InetAddress.getByName("230.1.1.8");
+	    	socket = new MulticastSocket(4446);
 	        socket.joinGroup(addressGroup);
 	        buf = new byte[1024]; //zmienis na siez of state
 	    }

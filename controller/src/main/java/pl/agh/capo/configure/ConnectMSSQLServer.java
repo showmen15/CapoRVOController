@@ -277,7 +277,7 @@ public class ConnectMSSQLServer {
 		
 	}
 	
-	public State[]  GetVisualizeRobotCaseSimulation(int ID_Case)
+	public State[]  GetVisualizeRobotCaseSimulation(int ID_Case,int ID_Trials)
 	{
 		ArrayList<State> tempResult = new ArrayList<>();
 		State[] result;
@@ -295,7 +295,7 @@ public class ConnectMSSQLServer {
 			conn = createNewConnection();
 
 			String SQL = "select l.RobotPosition AS RobotPosition  from dbo.Result r INNER JOIN dbo.LogResult l on r.ID = l.ID WHERE r.ID_Case = "
-			+ ID_Case;
+			+ ID_Case + " AND r.ID_Trials = " + ID_Trials;
 
 			stmt = conn.createStatement();
 			rs = stmt.executeQuery(SQL);
@@ -326,7 +326,7 @@ public class ConnectMSSQLServer {
 	}	
 	
 	
-	public TaskConfig GetTaskConfigVisualization(int ID_Case) {
+	public TaskConfig GetTaskConfigVisualization(int ID_Case,int ID_Trials) {
 		TaskConfig result = new TaskConfig();
 		try {
 
@@ -336,8 +336,9 @@ public class ConnectMSSQLServer {
 
 			conn = createNewConnection();
 
-			String SQL = "SELECT ID_Case, ID_Program, ID_Trials, ID_Map, Map, ID_Config, ConfigFile, Name_Program, Name_Map, Name_Config FROM dbo.TaskConfigVisualization WHERE ID_Case = "
-					+ ID_Case;
+			String SQL = "SELECT ID_Case, ID_Program, ID_Trials, ID_Map, Map, ID_Config, ConfigFile, Name_Program, Name_Map, Name_Config FROM "
+					+ "dbo.TaskConfigVisualization WHERE ID_Case = "
+					+ ID_Case + " AND ID_Trials = " +  ID_Trials;
 
 			stmt = conn.createStatement();
 			rs = stmt.executeQuery(SQL);

@@ -91,6 +91,26 @@ public class RobotMotionModel {
         }
         return checkFeasibility();
     }
+    
+    public boolean spinAround(double direction,double angleToTarget)
+    {
+    	System.out.println("AngleTo target: " + angleToTarget);
+    	System.out.println("Directorion: " + direction);
+    	
+    	
+    	if(angleToTarget < 0)
+    	{
+    	velocityLeft = - EnvironmentalConfiguration.ROBOT_MAX_SPEED;
+    	velocityRight =   EnvironmentalConfiguration.ROBOT_MAX_SPEED;
+    	}
+    	else
+    	{
+    		velocityLeft =  EnvironmentalConfiguration.ROBOT_MAX_SPEED;
+    		velocityRight = -  EnvironmentalConfiguration.ROBOT_MAX_SPEED;
+    	}
+    	
+    	return true;
+    }
 
     public void performMoveByTimeInMilliseconds(int deltaTime) {
         location = calculateLocationAfterTimeInMillisecond(deltaTime);

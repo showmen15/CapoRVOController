@@ -47,7 +47,11 @@ public class State implements Serializable {
     		finished = Boolean.parseBoolean(sSplitedState[10]); //currentRobotState.isFinished()
     			
     		timeStemp = new Timestamp(Long.parseLong(sSplitedState[11])); //currentRobotState.getTimeStemp()    				
-    	}	
+    	}
+    	else
+    	{
+    		timeStemp = null;
+    	}
     }
     
     public static State createFinished(int robotId){
@@ -100,7 +104,8 @@ public class State implements Serializable {
     
     public void setTimeStemp(long time)
     {
-    	timeStemp = new Timestamp(time);
+    	if(timeStemp == null)
+    		timeStemp = new Timestamp(time);
     }
 }
 

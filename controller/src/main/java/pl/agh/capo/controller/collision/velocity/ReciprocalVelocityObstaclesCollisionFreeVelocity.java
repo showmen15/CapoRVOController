@@ -171,10 +171,10 @@ public class ReciprocalVelocityObstaclesCollisionFreeVelocity extends AbstractCo
 		CurrentAgent.prefVelocity_ = goalVector; // Simulator.Instance.setAgentPrefVelocity(i, goalVector);
 
 		/* Perturb a little to avoid deadlocks due to perfect symmetry. */
-		//float angle = (float)random.nextDouble() * 2.0f * (float)Math.PI;
-		//float dist = (float)random.nextDouble() * 0.0001f;
+		float angle = (float)random.nextDouble() * 2.0f * (float)Math.PI;
+		float dist = (float)random.nextDouble() * 0.0001f;
 
-		//CurrentAgent.prefVelocity_ = Vector2.OpAddition(CurrentAgent.prefVelocity_,Vector2.OpMultiply(dist,new Vector2((float)Math.cos(angle), (float)Math.sin(angle))));
+		CurrentAgent.prefVelocity_ = Vector2.OpAddition(CurrentAgent.prefVelocity_,Vector2.OpMultiply(dist,new Vector2((float)Math.cos(angle), (float)Math.sin(angle))));
 	}
 
 	private Collection<State> getStates(List<Integer> robotBiggerFF) {

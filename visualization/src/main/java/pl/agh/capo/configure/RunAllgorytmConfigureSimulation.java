@@ -11,6 +11,8 @@ public class RunAllgorytmConfigureSimulation {
 
 	public static void RunAllgorytmConfigure(TaskConfig configure) throws Exception {
 		
+		EnvironmentalConfiguration.SIMULATION_SLEEP_BETWEEN_TIME_STEP_IN_MS = 200;
+		
 		switch (configure.ID_Program) {
 
 		case 0: // FearFactorBase

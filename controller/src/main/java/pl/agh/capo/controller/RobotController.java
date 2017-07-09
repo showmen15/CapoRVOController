@@ -142,9 +142,16 @@ public class RobotController implements Runnable {
 					return;
 				}
 			}
-			else
+			else if(EnvironmentalConfiguration.POINT_VIA_SELECTION_TYPE == PointViaSelectionType.NONE)
 			{
 				if (!findDestination2(destinationDistance)) {
+					stop();
+					return;
+				}
+			}
+			else
+			{
+				if (!findDestination3(destinationDistance)) {
 					stop();
 					return;
 				}
@@ -233,6 +240,8 @@ public class RobotController implements Runnable {
 			else
 				robot.setVelocity(motionModel.getVelocityLeft(), motionModel.getVelocityRight());
 
+			System.out.printf("Left: %f Right: %f\n",motionModel.getVelocityLeft(), motionModel.getVelocityRight());
+			
 			//robot.setVelocity(motionModel.getVelocityLeft(), motionModel.getVelocityRight());
 			
 			collisionFreeState = createCollisionFreeState(optimalVelocity);
@@ -796,8 +805,12 @@ public class RobotController implements Runnable {
 		if (distance == 0.0) {
 			return new Velocity(0.0, 0.0);
 		}
-		double factor = (2 * EnvironmentalConfiguration.PREF_ROBOT_SPEED) / distance; //EnvironmentalConfiguration.PREF_ROBOT_SPEED / distance;
-		return new Velocity(deltaX * factor, deltaY * factor);
+		double factor = EnvironmentalConfiguration.PREF_ROBOT_SPEED / distance; //EnvironmentalConfiguration.PREF_ROBOT_SPEED / distance;
+		Velocity vel = new Velocity(deltaX * factor, deltaY * factor);
+		
+		
+		//System.out.printf("Factor: %f velX: %f velY: %f \n",factor,vel.getX(),vel.getY());
+		return vel;
 	}
 
 	private State createCollisionFreeState(Velocity optimalVelocity) {
@@ -846,6 +859,26 @@ public class RobotController implements Runnable {
 		return true;
 	}
 
+	private boolean findDestination3(double destinationDistance) 
+	{
+		if (destination.isFinal() && (destinationDistance <= destination.getMargin()))
+			return false;
+		else 
+		{
+			if (destinationDistance <= destination.getMargin()) 
+			{
+				path.remove(0);
+			
+				if (path.size() > 0) 
+					destination = path.get(0); 
+				else 
+					return false;
+			}
+			
+			return true;
+		}
+	}	
+	
 	private void monitorSensor() {
 		if (isSensorWorking) {
 			isSensorWorking = false;

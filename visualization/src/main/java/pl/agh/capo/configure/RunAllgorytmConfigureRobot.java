@@ -11,7 +11,48 @@ public class RunAllgorytmConfigureRobot {
 
 	public static void RunAllgorytmConfigure(TaskConfig configure) throws Exception {
 
-		EnvironmentalConfiguration.SIMULATION_SLEEP_BETWEEN_TIME_STEP_IN_MS = 80;
+		EnvironmentalConfiguration.SIMULATION = true;
+		EnvironmentalConfiguration.ADDRESS_SQL = EnvironmentalConfiguration.SIMULATION ? "127.0.0.1" : "192.168.2.101";
+		
+		// RabbitMQ connection leads
+		EnvironmentalConfiguration.ADDRESS = EnvironmentalConfiguration.SIMULATION ? "127.0.0.1" : "192.168.2.101";
+		EnvironmentalConfiguration.USERNAME = "panda";
+		EnvironmentalConfiguration.PASSWORD =  "panda";
+		EnvironmentalConfiguration.CHANNEL_NAME = "capoRobotState";
+
+		EnvironmentalConfiguration.SIMULATION_TIME_STEP_IN_MS = 200;
+
+		EnvironmentalConfiguration.SIMULATION_SLEEP_BETWEEN_TIME_STEP_IN_MS = 200; //80; // SIMULATION_TIME_STEP_IN_MS;
+
+		// Empirically selected values to control robots
+		// Units consisted with International System of Units
+		EnvironmentalConfiguration.ROBOT_DIAMETER = 0.4;
+		EnvironmentalConfiguration.ROBOT_WHEELS_HALF_DISTANCE = 0.2;
+		EnvironmentalConfiguration.ROBOT_MAX_SPEED = 0.5;
+		EnvironmentalConfiguration.PREF_ROBOT_SPEED = EnvironmentalConfiguration.ROBOT_MAX_SPEED / 2.0;
+		
+		// Multiplier of angle to desired velocity (used to perform turning)
+		EnvironmentalConfiguration.ANGULAR_VELOCITY_FACTOR = 3.0; 
+
+		// Max speed multiplier determining collision free zone in Free right side
+		// solution
+		EnvironmentalConfiguration.RECIPROCITY_FACTOR_OPPOSITE = 5.0;
+		EnvironmentalConfiguration.RECIPROCITY_FACTOR_PRIMARY = 1.0;
+		EnvironmentalConfiguration.RECIPROCITY_FACTOR_SUBORDINATED = 10.0;
+		EnvironmentalConfiguration.RECIPROCITY_FACTOR_BEHIND = 3.0;
+
+		// Multiplier of half robot diameter
+		EnvironmentalConfiguration.WALL_COLLISION_MARGIN_FACTOR = 1.6;
+
+		// Radius used to find VO
+		EnvironmentalConfiguration.VO_ROBOT_RADIUS = 1.6 * EnvironmentalConfiguration.ROBOT_DIAMETER; // 1.6 *
+																			// ROBOT_DIAMETER;
+		// Minimum distance which allow robots to turn near each other,
+		// Additional area of VO - not quite consistent with definition
+		EnvironmentalConfiguration.ACCEPTABLE_RADIUS = 1 * EnvironmentalConfiguration.VO_ROBOT_RADIUS;
+
+		// Multiplier of max speed during selecting velocity in pure VO solution
+		EnvironmentalConfiguration.MIN_SPEED_FACTOR = 0.2;
 		
 		
 		switch (configure.ID_Program) {
@@ -118,8 +159,8 @@ public class RunAllgorytmConfigureRobot {
 				EnvironmentalConfiguration.MAX_SPEED = 0.25f; //0.25
 				EnvironmentalConfiguration.TIME_STEP = 0.03;//0.03f; //0.2
 
-				EnvironmentalConfiguration.MAX_OBSERVATION_DISTANCE_FF = 2.0;
-				EnvironmentalConfiguration.RL_CP = 1.5;
+				EnvironmentalConfiguration.MAX_OBSERVATION_DISTANCE_FF = 0.8;
+				EnvironmentalConfiguration.RL_CP = 1.0;
 				break;
 				
 			case 20: //Lab  Mijanka 
@@ -158,7 +199,7 @@ public class RunAllgorytmConfigureRobot {
 				
 				
 				
-				EnvironmentalConfiguration.POINT_VIA_SELECTION_TYPE = PointViaSelectionType.NONE;
+				EnvironmentalConfiguration.POINT_VIA_SELECTION_TYPE = PointViaSelectionType.ONLY_ONCE;
 			
 				EnvironmentalConfiguration.ANGULAR_VELOCITY_FACTOR = 3.55;
 				EnvironmentalConfiguration.WALL_COLLISION_MARGIN_FACTOR = 1.6;
@@ -248,7 +289,7 @@ public class RunAllgorytmConfigureRobot {
 				break;
 				
 			case 21: //Lab Otwarta Przestrzeñ 4 Roboty 4
-				EnvironmentalConfiguration.POINT_VIA_SELECTION_TYPE = PointViaSelectionType.ALL;
+				EnvironmentalConfiguration.POINT_VIA_SELECTION_TYPE = PointViaSelectionType.ONLY_ONCE;
 				
 				EnvironmentalConfiguration.WALL_COLLISION_MARGIN_FACTOR = 1.6;
 				

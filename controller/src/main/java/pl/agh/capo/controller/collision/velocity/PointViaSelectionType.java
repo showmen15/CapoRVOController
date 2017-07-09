@@ -3,5 +3,6 @@ package pl.agh.capo.controller.collision.velocity;
 public enum PointViaSelectionType {
 
 	NONE,
-	ALL
+	ALL,
+	ONLY_ONCE
 }

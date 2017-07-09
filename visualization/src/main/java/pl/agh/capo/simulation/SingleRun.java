@@ -29,7 +29,7 @@ public class SingleRun {
 
 	public static void main(String[] args) throws Exception {
 
-		if (args.length != 2)
+		if (args.length != 1)
 			return;
 
 		try {
@@ -41,8 +41,8 @@ public class SingleRun {
 
 			configure = log.GetTaskConfig(Integer.parseInt(args[0]));
 			
-			//RunAllgorytmConfigureRobot.RunAllgorytmConfigure(configure);
-			RunAllgorytmConfigureSimulation.RunAllgorytmConfigure(configure);
+			RunAllgorytmConfigureRobot.RunAllgorytmConfigure(configure);
+			//RunAllgorytmConfigureSimulation.RunAllgorytmConfigure(configure);
 
 			Files.write(Paths.get(robotConfigPath), configure.ConfigFile.getBytes(), StandardOpenOption.CREATE,
 					StandardOpenOption.TRUNCATE_EXISTING);

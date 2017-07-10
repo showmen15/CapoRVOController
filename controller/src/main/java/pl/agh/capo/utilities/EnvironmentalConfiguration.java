@@ -6,7 +6,7 @@ import pl.agh.capo.controller.collision.velocity.PointViaSelectionType;
 
 public class EnvironmentalConfiguration {
 
-	public static boolean SIMULATION = true;
+	public static boolean SIMULATION = false;
 
 	public static String ADDRESS_SQL =  SIMULATION ? "127.0.0.1" : "192.168.2.101";
 	

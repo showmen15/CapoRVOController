@@ -11,11 +11,11 @@ public class RunAllgorytmConfigureRobot {
 
 	public static void RunAllgorytmConfigure(TaskConfig configure) throws Exception {
 
-		EnvironmentalConfiguration.SIMULATION = true;
+		EnvironmentalConfiguration.SIMULATION = false;
 		EnvironmentalConfiguration.ADDRESS_SQL = EnvironmentalConfiguration.SIMULATION ? "127.0.0.1" : "192.168.2.101";
 		
 		// RabbitMQ connection leads
-		EnvironmentalConfiguration.ADDRESS = EnvironmentalConfiguration.SIMULATION ? "127.0.0.1" : "192.168.2.101";
+		EnvironmentalConfiguration.ADDRESS = EnvironmentalConfiguration.SIMULATION ? "127.0.0.1" : "192.168.2.100";
 		EnvironmentalConfiguration.USERNAME = "panda";
 		EnvironmentalConfiguration.PASSWORD =  "panda";
 		EnvironmentalConfiguration.CHANNEL_NAME = "capoRobotState";

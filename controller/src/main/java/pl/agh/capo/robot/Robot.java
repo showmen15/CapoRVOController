@@ -58,15 +58,8 @@ public class Robot implements IRobot {
     
     private Boolean isLocationValid(LocationCurrent locationCurrent) throws Exception
     {
-    	locationCurrent.setAngle(1.57);
-    	locationCurrent.setX(1.15);
-    	locationCurrent.setY(2.03);
-    	
-    	return true;
-    	/*
     	if((locationCurrent.getX() != 0.0) || (locationCurrent.getY() != 0.0))
     		return true;
-    	return false;*/
-    	
+    	return false;
     }
 }

@@ -241,7 +241,7 @@ public class ConnectMSSQLServer {
 			sta.setLong(8, TimeMilisecond);
 			sta.setString(9, resultRobotPositon);
 			
-			//sta.executeUpdate();
+			sta.executeUpdate();
 
 		} catch (SQLException e) {
 			e.printStackTrace();

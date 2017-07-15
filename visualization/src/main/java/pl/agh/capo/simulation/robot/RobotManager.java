@@ -73,8 +73,8 @@ public class RobotManager implements IRobotManager {
         	
         	log.SaveResult(SingleRun.configure,id,result.get(id), result.get(id) * RobotController.MOVE_ROBOT_SIMULATION_IN_MS,resultRobotPositon.get(id));
         	
-          
         }
+        
         System.out.print(sb.toString());
         System.exit(1);
     }
@@ -83,5 +83,6 @@ public class RobotManager implements IRobotManager {
 	public void onFinishDB(TaskConfig configure, int id, int time, String loggRobotPostition) {
 		// TODO Auto-generated method stub
 		
+		onFinish(id, time, loggRobotPostition);		
 	}
 }

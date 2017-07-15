@@ -9,16 +9,20 @@ import pl.agh.capo.utilities.EnvironmentalConfiguration;
 
 public class RunAllgorytmConfigureRobot {
 
-	public static void RunAllgorytmConfigure(TaskConfig configure) throws Exception {
-
-		EnvironmentalConfiguration.SIMULATION = false;
-		EnvironmentalConfiguration.ADDRESS_SQL = EnvironmentalConfiguration.SIMULATION ? "127.0.0.1" : "192.168.2.101";
+	
+	public static void RunCommunicationConfigure()
+	{
+		EnvironmentalConfiguration.SIMULATION = true;
+		EnvironmentalConfiguration.ADDRESS_SQL = EnvironmentalConfiguration.SIMULATION ? "127.0.0.1" : "192.168.2.101";  //"192.168.2.103";//"SZYMON-KOMPUTER";//"192.168.2.101"; // "SZYMON-KOMPUTER"; //"SZSZ\\SQLEXPRESS"; //"WR-7-BASE-74\\SQLEXPRESS";//"SZSZ\\SQLEXPRESS";////"WR-7-BASE-74\\SQLEXPRESS";//// ServerName = "SZYMON-KOMPUTER";
 		
 		// RabbitMQ connection leads
 		EnvironmentalConfiguration.ADDRESS = EnvironmentalConfiguration.SIMULATION ? "127.0.0.1" : "192.168.2.100";
 		EnvironmentalConfiguration.USERNAME = "panda";
 		EnvironmentalConfiguration.PASSWORD =  "panda";
 		EnvironmentalConfiguration.CHANNEL_NAME = "capoRobotState";
+	}
+	
+	public static void RunAllgorytmConfigure(TaskConfig configure) throws Exception {
 
 		EnvironmentalConfiguration.SIMULATION_TIME_STEP_IN_MS = 200;
 

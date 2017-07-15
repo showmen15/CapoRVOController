@@ -734,12 +734,12 @@ public class RobotController implements Runnable {
 		robot.setVelocity(0.0, 0.0);
 		robot.setVelocity(0.0, 0.0);
 		robot.setVelocity(0.0, 0.0);
-		try {
+		/*try {
 			Thread.sleep(10);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}*/
 		robot.setVelocity(0.0, 0.0);
 		robot.setVelocity(0.0, 0.0);
 	}

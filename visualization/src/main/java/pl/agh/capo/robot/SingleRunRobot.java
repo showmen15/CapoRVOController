@@ -73,8 +73,10 @@ public class SingleRunRobot {
 	    	try {
 		    	
 	    		//RobotIP = "127.0.0.1";//"192.168.2.20" + args[0];  // "192.168.2.200"; // SingleRunRobot.getRobotIP(); //"192.168.2.200"; //TODO do sprawdzenia
-	    		int RobotID = Integer.parseInt(args[0]);//SingleRunRobot.getRobotID(RobotIP); 
-
+	    		int RobotID = Integer.parseInt(args[0]);//SingleRunRobot.getRobotID(RobotIP);
+	    		
+	    		RunAllgorytmConfigureRobot.RunCommunicationConfigure();
+	    		
 				ConnectMSSQLServer log = new ConnectMSSQLServer();
 				int id_config = log.GetConfigRobot();
 

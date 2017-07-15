@@ -37,6 +37,9 @@ public class SingleRun {
 			String mapPath = "./Map.json";
 			MazeMap mazeMap;
 
+			RunAllgorytmConfigureRobot.RunCommunicationConfigure();
+			//RunAllgorytmConfigureSimulation.RunCommunicationConfigure();
+			
 			ConnectMSSQLServer log = new ConnectMSSQLServer();
 
 			configure = log.GetTaskConfig(Integer.parseInt(args[0]));

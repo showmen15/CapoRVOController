@@ -17,8 +17,8 @@ public class RunAllgorytmConfigureRobot {
 		
 		// RabbitMQ connection leads
 		EnvironmentalConfiguration.ADDRESS = EnvironmentalConfiguration.SIMULATION ? "127.0.0.1" : "192.168.2.100";
-		EnvironmentalConfiguration.USERNAME = "panda";
-		EnvironmentalConfiguration.PASSWORD =  "panda";
+		EnvironmentalConfiguration.USERNAME =  EnvironmentalConfiguration.SIMULATION ? "guest" : "panda";
+		EnvironmentalConfiguration.PASSWORD =  EnvironmentalConfiguration.SIMULATION ? "guest" : "panda";
 		EnvironmentalConfiguration.CHANNEL_NAME = "capoRobotState";
 	}
 	

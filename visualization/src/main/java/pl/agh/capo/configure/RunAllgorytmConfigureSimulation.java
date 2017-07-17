@@ -12,7 +12,7 @@ public class RunAllgorytmConfigureSimulation {
 	public static void RunCommunicationConfigure()
 	{
 		EnvironmentalConfiguration.SIMULATION = false;
-		EnvironmentalConfiguration.ADDRESS_SQL =  "127.0.0.1"; // //"192.168.2.103";//"SZYMON-KOMPUTER";//"192.168.2.101"; // "SZYMON-KOMPUTER"; //"SZSZ\\SQLEXPRESS"; //"WR-7-BASE-74\\SQLEXPRESS";//"SZSZ\\SQLEXPRESS";////"WR-7-BASE-74\\SQLEXPRESS";//// ServerName = "SZYMON-KOMPUTER";
+		EnvironmentalConfiguration.ADDRESS_SQL =  "SZSZ\\SQLEXPRESS";//"127.0.0.1"; // //"192.168.2.103";//"SZYMON-KOMPUTER";//"192.168.2.101"; // "SZYMON-KOMPUTER"; //"SZSZ\\SQLEXPRESS"; //"WR-7-BASE-74\\SQLEXPRESS";//"SZSZ\\SQLEXPRESS";////"WR-7-BASE-74\\SQLEXPRESS";//// ServerName = "SZYMON-KOMPUTER";
 		
 		// RabbitMQ connection leads
 		EnvironmentalConfiguration.ADDRESS = "127.0.0.1";

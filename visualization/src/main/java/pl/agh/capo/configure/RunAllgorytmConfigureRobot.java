@@ -140,6 +140,11 @@ public class RunAllgorytmConfigureRobot {
 				EnvironmentalConfiguration.RL_CP = 1.5;
 				break;
 
+				
+				
+				
+				
+				
 			case 17: //Lab PrzejœciePrzezDrzwi
 				
 				EnvironmentalConfiguration.ROBOT_MAX_SPEED = 0.4;
@@ -152,7 +157,7 @@ public class RunAllgorytmConfigureRobot {
 				EnvironmentalConfiguration.POINT_VIA_SELECTION_TYPE = PointViaSelectionType.NONE;
 
 				EnvironmentalConfiguration.ANGULAR_VELOCITY_FACTOR = 3.55;
-				EnvironmentalConfiguration.WALL_COLLISION_MARGIN_FACTOR = 1.6;
+				EnvironmentalConfiguration.WALL_COLLISION_MARGIN_FACTOR = 1.2;
 				
 				EnvironmentalConfiguration.NEIGHBOR_DIST = 2.7f;
 				EnvironmentalConfiguration.MAX_NEIGHBORS = 30;
@@ -166,6 +171,17 @@ public class RunAllgorytmConfigureRobot {
 				EnvironmentalConfiguration.MAX_OBSERVATION_DISTANCE_FF = 0.8;
 				EnvironmentalConfiguration.RL_CP = 1.0;
 				break;
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
 				
 			case 20: //Lab  Mijanka 
 				EnvironmentalConfiguration.ROBOT_MAX_SPEED = 0.4;

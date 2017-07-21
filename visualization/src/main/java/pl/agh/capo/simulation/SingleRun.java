@@ -40,6 +40,8 @@ public class SingleRun {
 			RunAllgorytmConfigureRobot.RunCommunicationConfigure();
 			//RunAllgorytmConfigureSimulation.RunCommunicationConfigure();
 			
+			System.out.println(EnvironmentalConfiguration.ADDRESS_SQL);
+			
 			ConnectMSSQLServer log = new ConnectMSSQLServer();
 
 			configure = log.GetTaskConfig(Integer.parseInt(args[0]));

@@ -12,7 +12,7 @@ public class RunAllgorytmConfigureRobot {
 	
 	public static void RunCommunicationConfigure()
 	{
-		EnvironmentalConfiguration.SIMULATION = true;
+		EnvironmentalConfiguration.SIMULATION = false;
 		EnvironmentalConfiguration.ADDRESS_SQL = EnvironmentalConfiguration.SIMULATION ? "127.0.0.1" : "192.168.2.101";  //"192.168.2.103";//"SZYMON-KOMPUTER";//"192.168.2.101"; // "SZYMON-KOMPUTER"; //"SZSZ\\SQLEXPRESS"; //"WR-7-BASE-74\\SQLEXPRESS";//"SZSZ\\SQLEXPRESS";////"WR-7-BASE-74\\SQLEXPRESS";//// ServerName = "SZYMON-KOMPUTER";
 		
 		// RabbitMQ connection leads
@@ -140,6 +140,11 @@ public class RunAllgorytmConfigureRobot {
 				EnvironmentalConfiguration.RL_CP = 1.5;
 				break;
 
+				
+				
+				
+				
+				
 			case 17: //Lab PrzejœciePrzezDrzwi
 				
 				EnvironmentalConfiguration.ROBOT_MAX_SPEED = 0.4;
@@ -152,7 +157,7 @@ public class RunAllgorytmConfigureRobot {
 				EnvironmentalConfiguration.POINT_VIA_SELECTION_TYPE = PointViaSelectionType.NONE;
 
 				EnvironmentalConfiguration.ANGULAR_VELOCITY_FACTOR = 3.55;
-				EnvironmentalConfiguration.WALL_COLLISION_MARGIN_FACTOR = 1.6;
+				EnvironmentalConfiguration.WALL_COLLISION_MARGIN_FACTOR = 1.2;
 				
 				EnvironmentalConfiguration.NEIGHBOR_DIST = 2.7f;
 				EnvironmentalConfiguration.MAX_NEIGHBORS = 30;
@@ -166,6 +171,17 @@ public class RunAllgorytmConfigureRobot {
 				EnvironmentalConfiguration.MAX_OBSERVATION_DISTANCE_FF = 0.8;
 				EnvironmentalConfiguration.RL_CP = 1.0;
 				break;
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
 				
 			case 20: //Lab  Mijanka 
 				EnvironmentalConfiguration.ROBOT_MAX_SPEED = 0.4;

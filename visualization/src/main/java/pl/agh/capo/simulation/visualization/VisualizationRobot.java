@@ -8,6 +8,8 @@ import java.sql.Timestamp;
 import java.util.Date;
 
 import pl.agh.capo.configure.ConnectMSSQLServer;
+import pl.agh.capo.configure.RunAllgorytmConfigureRobot;
+import pl.agh.capo.configure.RunAllgorytmConfigureSimulation;
 import pl.agh.capo.configure.TaskConfig;
 import pl.agh.capo.utilities.communication.StateCollector;
 import pl.agh.capo.utilities.state.State;
@@ -16,13 +18,16 @@ import pl.agh.capo.utilities.state.State;
 
 public class VisualizationRobot {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 	
 		if (args.length != 2)
 			return;
 
 		String mapPath = "./MapVisualizerRVO.json";
 
+		RunAllgorytmConfigureRobot.RunCommunicationConfigure();
+		//RunAllgorytmConfigureSimulation.RunCommunicationConfigure();
+		
 		ConnectMSSQLServer log = new ConnectMSSQLServer();
 
 		TaskConfig configure = log.GetTaskConfigVisualization(Integer.parseInt(args[0]),Integer.parseInt(args[1]));
@@ -30,9 +35,14 @@ public class VisualizationRobot {
 				+ " Konfiguracja: " + configure.Name_Config;
 
 		try {
+		
+		RunAllgorytmConfigureRobot.RunAllgorytmConfigure(configure);
+		//RunAllgorytmConfigureSimulation.RunAllgorytmConfigure(configure);
+		
+		
 			Files.write(Paths.get(mapPath), configure.Map.getBytes(), StandardOpenOption.CREATE,
 					StandardOpenOption.TRUNCATE_EXISTING);
-		} catch (IOException e1) {
+		} catch (Exception e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}

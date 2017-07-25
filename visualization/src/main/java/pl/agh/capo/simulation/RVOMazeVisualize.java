@@ -9,6 +9,7 @@ import java.nio.file.StandardOpenOption;
 
 import pl.agh.capo.configure.ConnectMSSQLServer;
 import pl.agh.capo.configure.RunAllgorytmConfigureRobot;
+import pl.agh.capo.configure.RunAllgorytmConfigureSimulation;
 import pl.agh.capo.configure.TaskConfig;
 import pl.agh.capo.simulation.visualization.MazeVisualizer;
 import pl.agh.capo.utilities.EnvironmentalConfiguration;
@@ -23,8 +24,8 @@ public class RVOMazeVisualize {
 			return;
 
 		String mapPath = "./MapVisualizerRVO.json";
-		RunAllgorytmConfigureRobot.RunCommunicationConfigure();
-		//RunAllgorytmConfigureSimulation.RunCommunicationConfigure();
+		//RunAllgorytmConfigureRobot.RunCommunicationConfigure();
+		RunAllgorytmConfigureSimulation.RunCommunicationConfigure();
 		
 		ConnectMSSQLServer log = new ConnectMSSQLServer();
 
@@ -34,8 +35,8 @@ public class RVOMazeVisualize {
 
 		try {
 			
-			RunAllgorytmConfigureRobot.RunAllgorytmConfigure(configure);
-			//RunAllgorytmConfigureSimulation.RunAllgorytmConfigure(configure);
+			//RunAllgorytmConfigureRobot.RunAllgorytmConfigure(configure);
+			RunAllgorytmConfigureSimulation.RunAllgorytmConfigure(configure);
 			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

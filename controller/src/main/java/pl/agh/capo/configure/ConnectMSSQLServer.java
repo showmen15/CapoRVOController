@@ -1,6 +1,7 @@
 package pl.agh.capo.configure;
 
 import java.io.InputStream;
+import java.security.Timestamp;
 import java.sql.Array;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -363,5 +364,130 @@ public class ConnectMSSQLServer {
 
 		return result;
 	}
+	
+	
+	public String  FixLogResult(long ID)
+	{
+		ArrayList<State> tempResult = new ArrayList<>();
+		String result = "";
+		
+		try {
+
+			ResultSet rs = null;
+			Statement stmt = null;
+			Connection conn;
+			String sLog;
+			String[] sSplitLog;
+			String[] sSplitState;
+			State tempState;
+			long begin = 0;
+			long stamp = 0;
+
+			String resultTemp;
+			
+			conn = createNewConnection();
+
+			String SQL = "select l.RobotPosition AS RobotPosition  from dbo.LogResult l where l.ID = " + ID;
+
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(SQL);
+
+			while(rs.next()) 
+			{
+				sLog = rs.getString("RobotPosition");
+				sSplitLog = sLog.split("\n");
+				
+				
+				for(int i = 0; i< sSplitLog.length; i++)
+				{
+					sSplitState = sSplitLog[i].split(";");
+						
+					resultTemp = sSplitLog[i].substring(0,sSplitLog[i].length() - (sSplitState[11].length() + 1));	
+					
+					if(i == 0)
+					{					
+						begin = Long.parseLong(sSplitState[11]);
+						resultTemp += "0;\n";
+					}
+					else
+					{
+						stamp += Long.parseLong(sSplitState[11]) - begin;
+						begin = Long.parseLong(sSplitState[11]);
+						resultTemp +=  Long.toString(stamp) + ";\n";
+					}
+					
+					result += resultTemp;
+				}
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+	
+	
+	public void UpdateLogResult(int ID,String robotPositon)
+	{
+		
+		try {
+
+			ResultSet rs = null;
+			Statement stmt = null;
+			Connection conn;
+
+			conn = createNewConnection();
+			
+			//String SQL = "update dbo.LogResult set RobotPosition = '" + robotPositon + "'  where ID = " + ID;
+			
+			//PreparedStatement sta = conn.prepareStatement("update dbo.LogResult set RobotPosition = ? where ID = ? ");
+					
+
+			//stmt = conn.createStatement();
+			
+			//rs = stmt.executeQuery(SQL);
+			
+			//sta.setInt(1, ID);
+			//sta.setString(2, robotPositon);
+			
+			
+			//conn.prepareStatement("INSERT INTO dbo.Result(ID_Case ,ID_Program,ID_Trials, ID_Map,ID_Config,ID_Robot,LoopTime,TimeMilisecond,RobotPosition) VALUES(?,?,?,?,?,?,?,?,?);");
+			/*
+			sta.setInt(1, config.ID_Case);
+			sta.setInt(2, config.ID_Program);
+			sta.setInt(3, config.ID_Trials);
+			sta.setInt(4, config.ID_Map);
+			sta.setInt(5, config.ID_Config);
+			sta.setInt(6, ID_Robot);
+			sta.setInt(7, LoopTime);
+			sta.setLong(8, TimeMilisecond);
+			sta.setString(9, resultRobotPositon);*/
+			
+			//sta.executeUpdate();
+			
+			
+			 PreparedStatement ps = conn.prepareStatement("update DoktoratLog.dbo.LogResult set RobotPosition = ? where ID = ?");
+
+			 
+			 ps.setString(1, robotPositon);
+				ps.setInt(2, ID);
+				
+				    // set the preparedstatement parameters
+				   // ps.setString(1,description);
+				   // ps.setString(2,author);
+				   // ps.setInt(3,id);
+				   // ps.setInt(4,seqNum);
+
+				    // call executeUpdate to execute our sql update statement
+				    ps.executeUpdate();
+				    ps.close();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
 
 }

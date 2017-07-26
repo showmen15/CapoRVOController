@@ -7,6 +7,8 @@ import java.nio.file.StandardOpenOption;
 import java.sql.Timestamp;
 import java.util.Date;
 
+import com.vividsolutions.jts.simplify.TopologyPreservingSimplifier;
+
 import pl.agh.capo.configure.ConnectMSSQLServer;
 import pl.agh.capo.configure.RunAllgorytmConfigureRobot;
 import pl.agh.capo.configure.RunAllgorytmConfigureSimulation;
@@ -60,5 +62,24 @@ public class VisualizationRobot {
 		//	System.exit(1);
 		//}
 	}
-
+	
+	//poprawka danych zle zalogownych
+	public static void mainFix(String[] args) throws IOException {
+			
+		RunAllgorytmConfigureRobot.RunCommunicationConfigure();
+		//RunAllgorytmConfigureSimulation.RunCommunicationConfigure();
+		
+		ConnectMSSQLServer log = new ConnectMSSQLServer();
+		
+		int[] tab = new int[] {1119,1120,1121,1122,1123,1124,1125,1126,1127,1128,1129,1130,1131,1132,1133,1134,1135,1136,1137,1138,1139,1141,1142,1143,1145,1146,1147,1148,1149,1150};
+		
+		for (int i : tab) 
+		{
+			String temp = log.FixLogResult(i);
+			log.UpdateLogResult(i, temp);
+		}
+		
+		int i = 222;
+		i++;
+	}
 }

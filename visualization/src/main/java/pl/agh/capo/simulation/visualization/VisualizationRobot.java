@@ -25,8 +25,8 @@ public class VisualizationRobot {
 
 		String mapPath = "./MapVisualizerRVO.json";
 
-		RunAllgorytmConfigureRobot.RunCommunicationConfigure();
-		//RunAllgorytmConfigureSimulation.RunCommunicationConfigure();
+		//RunAllgorytmConfigureRobot.RunCommunicationConfigure();
+		RunAllgorytmConfigureSimulation.RunCommunicationConfigure();
 		
 		ConnectMSSQLServer log = new ConnectMSSQLServer();
 
@@ -36,8 +36,8 @@ public class VisualizationRobot {
 
 		try {
 		
-		RunAllgorytmConfigureRobot.RunAllgorytmConfigure(configure);
-		//RunAllgorytmConfigureSimulation.RunAllgorytmConfigure(configure);
+		//RunAllgorytmConfigureRobot.RunAllgorytmConfigure(configure);
+		RunAllgorytmConfigureSimulation.RunAllgorytmConfigure(configure);
 		
 		
 			Files.write(Paths.get(mapPath), configure.Map.getBytes(), StandardOpenOption.CREATE,

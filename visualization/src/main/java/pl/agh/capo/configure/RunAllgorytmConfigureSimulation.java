@@ -11,8 +11,8 @@ public class RunAllgorytmConfigureSimulation {
 
 	public static void RunCommunicationConfigure()
 	{
-		EnvironmentalConfiguration.SIMULATION = false;
-		EnvironmentalConfiguration.ADDRESS_SQL =  "SZSZ\\SQLEXPRESS";//"127.0.0.1"; // //"192.168.2.103";//"SZYMON-KOMPUTER";//"192.168.2.101"; // "SZYMON-KOMPUTER"; //"SZSZ\\SQLEXPRESS"; //"WR-7-BASE-74\\SQLEXPRESS";//"SZSZ\\SQLEXPRESS";////"WR-7-BASE-74\\SQLEXPRESS";//// ServerName = "SZYMON-KOMPUTER";
+		EnvironmentalConfiguration.SIMULATION = true;
+		EnvironmentalConfiguration.ADDRESS_SQL =  "WR-7-BASE-74\\SQLEXPRESS";//"127.0.0.1"; // //"192.168.2.103";//"SZYMON-KOMPUTER";//"192.168.2.101"; // "SZYMON-KOMPUTER"; //"SZSZ\\SQLEXPRESS"; //"WR-7-BASE-74\\SQLEXPRESS";//"SZSZ\\SQLEXPRESS";////"WR-7-BASE-74\\SQLEXPRESS";//// ServerName = "SZYMON-KOMPUTER";
 		
 		// RabbitMQ connection leads
 		EnvironmentalConfiguration.ADDRESS = "127.0.0.1";
@@ -259,7 +259,7 @@ public class RunAllgorytmConfigureSimulation {
 				break;	
 				
 			case 16: //Otwarta Przestrzeñ 4 Roboty 4
-				EnvironmentalConfiguration.POINT_VIA_SELECTION_TYPE = PointViaSelectionType.NONE;
+				EnvironmentalConfiguration.POINT_VIA_SELECTION_TYPE = PointViaSelectionType.ONLY_ONCE;
 				
 				EnvironmentalConfiguration.WALL_COLLISION_MARGIN_FACTOR = 1.6;
 				
@@ -322,6 +322,26 @@ public class RunAllgorytmConfigureSimulation {
 			case 14: //W¹skiePrzejœcieMijankaNowa
 			case 15: //Skrzy¿owanieRównorzêdneNowe
 			case 16: //Otwarta Przestrzeñ 4 Roboty 4
+				EnvironmentalConfiguration.POINT_VIA_SELECTION_TYPE = PointViaSelectionType.ONLY_ONCE;
+				
+				EnvironmentalConfiguration.WALL_COLLISION_MARGIN_FACTOR = 1.6;
+				
+				EnvironmentalConfiguration.ROBOT_DIAMETER = 0.3;
+				EnvironmentalConfiguration.ROBOT_WHEELS_HALF_DISTANCE = 0.14;
+				EnvironmentalConfiguration.ROBOT_MAX_SPEED = 0.5;
+				EnvironmentalConfiguration.PREF_ROBOT_SPEED = EnvironmentalConfiguration.ROBOT_MAX_SPEED / 2.0;
+				EnvironmentalConfiguration.ANGULAR_VELOCITY_FACTOR = 3.0;
+				EnvironmentalConfiguration.RECIPROCITY_FACTOR_OPPOSITE = 5.0;
+				EnvironmentalConfiguration.RECIPROCITY_FACTOR_PRIMARY = 1.0;
+				EnvironmentalConfiguration.RECIPROCITY_FACTOR_SUBORDINATED = 10.0;
+				EnvironmentalConfiguration.RECIPROCITY_FACTOR_BEHIND = 3.0;
+				EnvironmentalConfiguration.WALL_COLLISION_MARGIN_FACTOR = 1.6;
+				EnvironmentalConfiguration.VO_ROBOT_RADIUS = 1.6 * EnvironmentalConfiguration.ROBOT_DIAMETER;
+				EnvironmentalConfiguration.ACCEPTABLE_RADIUS = 1 * EnvironmentalConfiguration.VO_ROBOT_RADIUS;
+				EnvironmentalConfiguration.MIN_SPEED_FACTOR = 0.2;
+				break;
+				
+				
 			case 18: //W¹skiePrzejœcieMijankaDuza
 				EnvironmentalConfiguration.POINT_VIA_SELECTION_TYPE = PointViaSelectionType.NONE;
 				
@@ -352,5 +372,4 @@ public class RunAllgorytmConfigureSimulation {
 
 		}
 	}
-	
 }

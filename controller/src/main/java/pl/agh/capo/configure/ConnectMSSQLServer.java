@@ -310,6 +310,10 @@ public class ConnectMSSQLServer {
 				{
 					tempState = new State(sSplitLog[i]);
 					tempState.setTimeStemp(i * 200); //czas sumulacji 200ms;
+					
+					if(i+1 >= sSplitLog.length) //ustaw jako znikanie robota jako ostatni stan
+						tempState.setFinished();
+					
 					tempResult.add(tempState);
 				}
 			}

@@ -81,7 +81,7 @@ public class State implements Serializable {
         return finished;
     }
 
-    private void setFinished(){
+    public void setFinished(){
         finished = true;
     }
 

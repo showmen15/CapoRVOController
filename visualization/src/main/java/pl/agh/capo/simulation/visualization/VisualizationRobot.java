@@ -31,8 +31,8 @@ public class VisualizationRobot {
 		ConnectMSSQLServer log = new ConnectMSSQLServer();
 
 		TaskConfig configure = log.GetTaskConfigVisualization(Integer.parseInt(args[0]),Integer.parseInt(args[1]));
-		String sCaseName = "Algorytm: " + configure.Name_Program + " Mapa: " + configure.Name_Map
-				+ " Konfiguracja: " + configure.Name_Config;
+		String sCaseName = "Algorithm: " + configure.Name_Program + " Map: " + configure.Name_Map
+				+ " Set: " + configure.Name_Config;
 
 		try {
 		

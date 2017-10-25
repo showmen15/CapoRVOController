@@ -43,7 +43,7 @@ public class State implements Serializable {
     	
     	if(sSplitedState.length > 8)
     	{
-    		destination = new Point(Double.parseDouble(sSplitedState[8]), Double.parseDouble(sSplitedState[9])); //currentRobotState.getDestination().getX(), currentRobotState.getDestination().getY()
+    		destination = new Point(-1,-1);//new Point(Double.parseDouble(sSplitedState[8]), Double.parseDouble(sSplitedState[9])); //currentRobotState.getDestination().getX(), currentRobotState.getDestination().getY()
     		finished = Boolean.parseBoolean(sSplitedState[10]); //currentRobotState.isFinished()
     			
     		timeStemp = new Timestamp(Long.parseLong(sSplitedState[11])); //currentRobotState.getTimeStemp()    				

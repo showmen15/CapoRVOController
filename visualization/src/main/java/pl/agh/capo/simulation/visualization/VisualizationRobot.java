@@ -31,9 +31,10 @@ public class VisualizationRobot {
 		ConnectMSSQLServer log = new ConnectMSSQLServer();
 
 		TaskConfig configure = log.GetTaskConfigVisualization(Integer.parseInt(args[0]),Integer.parseInt(args[1]));
-		String sCaseName = "Algorithm: " + configure.Name_Program + " Map: " + configure.Name_Map
-				+ " Set: " + configure.Name_Config;
-
+		//String sCaseName = "Algorithm: " + configure.Name_Program + " Map: " + configure.Name_Map + " Set: " + configure.Name_Config;
+		
+		String sCaseName = "Simulator"; //"Visualiser";
+		
 		try {
 		
 		//RunAllgorytmConfigureRobot.RunAllgorytmConfigure(configure);
@@ -48,6 +49,7 @@ public class VisualizationRobot {
 		}
 
 		MazeVisualizer mazeVisualizer = MazeVisualizer.getInstance();
+		mazeVisualizer.IS_MAX_MODE = true;
 		mazeVisualizer.open(mapPath, sCaseName);
 		
 		State[] tempLog = log.GetVisualizeRobotCaseSimulation(configure.ID_Case,configure.ID_Trials);

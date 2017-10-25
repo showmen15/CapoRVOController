@@ -17,7 +17,7 @@ import java.io.FileReader;
 
 public class MazeVisualizer extends JFrame implements StateReceivedCallback {
 
-	private static boolean IS_MAX_MODE = false;
+	public static boolean IS_MAX_MODE = false;
 
 	private static final Dimension FRAME_SIZE = new Dimension(800, 660);
 	private static final int SPLIT_DIVIDER_LOCATION = 600;
@@ -81,11 +81,10 @@ public class MazeVisualizer extends JFrame implements StateReceivedCallback {
 
 		if (IS_MAX_MODE) {
 
-			setExtendedState(JFrame.MAXIMIZED_BOTH);
+			//setExtendedState(JFrame.MAXIMIZED_BOTH);
 			setResizable(true);
 			repaint();
-			mazePanel.MAZE_SIZE = Math.min(this.getWidth(), this.getHeight()) - 100;
-
+		    mazePanel.MAZE_SIZE = Math.min(this.getWidth(), this.getHeight()) - 100;
 		}
 
 		try {

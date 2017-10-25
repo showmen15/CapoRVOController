@@ -30,7 +30,7 @@ public class State implements Serializable {
 
     public State(String sLogState)
     {
-    	destination = new Point(0, 0);
+    	destination = new Point(-1, -1);
     	
     	String[] sSplitedState =  sLogState.split(";");
     	

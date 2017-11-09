@@ -491,6 +491,41 @@ public class ConnectMSSQLServer {
 			e.printStackTrace();
 		}
 	}
+
+	public TaskConfig GetSimulationConfig(int ID_Case) {
+		TaskConfig result = new TaskConfig();
+		try {
+
+			ResultSet rs = null;
+			Statement stmt = null;
+			Connection conn;
+
+			conn = createNewConnection();
+
+			String SQL = "SELECT * from dbo.SimulationConfig where ID_Case = " + ID_Case;
+
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(SQL);
+
+			if (rs.next()) {
+				result.ID_Case = rs.getInt("ID_Case");
+				result.ID_Map = rs.getInt("ID_Map");
+				
+				
+				result.Map = rs.getString("Map");
+				result.ID_Config = rs.getInt("ID_Config");
+				result.ConfigFile = rs.getString("ConfigFile");
+				
+				result.Name_Map =  rs.getString("Name_Map");
+				result.Name_Config = rs.getString("Name_Config");
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return result;
+	}
 	
 	
 

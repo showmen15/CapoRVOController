@@ -14,11 +14,25 @@ import pl.agh.capo.velocityobstales.VelocityObstacles;
 import pl.agh.capo.velocityobstales.VelocityObstaclesBuilder;
 
 import javax.swing.*;
+///import javax.swing.text.Document;
+
 import java.awt.*;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Line2D;
+import java.io.OutputStreamWriter;
+import java.io.UnsupportedEncodingException;
+import java.io.Writer;
 import java.util.ConcurrentModificationException;
 import java.util.HashMap;
+
+import org.apache.batik.svggen.SVGGraphics2D;
+import org.apache.batik.svggen.SVGGraphics2DIOException;
+import org.apache.batik.dom.GenericDOMImplementation;
+
+import org.w3c.dom.Document.*;
+import org.w3c.dom.DOMImplementation;
+import org.w3c.dom.Document;
+
 
 class MazePanel extends JPanel {
 
@@ -27,6 +41,7 @@ class MazePanel extends JPanel {
     public static double MAZE_SIZE = 500.0;
     public static double START_MAZE_COORDINATE = 5.0;
 
+    
     private MazeMap map;
     private HashMap<Integer, State> robotStates = new HashMap<>();
 
@@ -35,6 +50,9 @@ class MazePanel extends JPanel {
     private double mazeSize;
     private double ratio;
     private double robotHalfDiameter;
+    
+    private double mazeMaxY;
+    private double mazeMaxX;
 
     void addState(State state) {
         if (state.isFinished()){
@@ -58,12 +76,17 @@ class MazePanel extends JPanel {
         }
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
-        drawCoordinateGrid(g2);
+       
+        
+        drawCoordinateGrid2(g2);
         drawGates(g2, map.getGates(), Color.cyan);
         drawWalls(g2, map.getWalls(), Color.gray);
         
-        
-        
+        drawStates(g2);
+       
+        paintComponent(); //save map to file
+        	    
+        	    
       //  drawVelocityObstacles(g2, 0,8,Color.yellow);
 //        drawVelocityObstacles(g2, 8,0,Color.green);
 //        
@@ -81,10 +104,46 @@ class MazePanel extends JPanel {
         
 //        drawVelocityObstacles(g2, 0, 2);
 //        drawVelocityObstacles(g2, 0, 3);
-        drawStates(g2);
+       
 //        test(g2);
     }
 
+    
+    public void paintComponent() 
+    {
+    	 DOMImplementation domImpl = GenericDOMImplementation.getDOMImplementation();
+
+ 	    // Create an instance of org.w3c.dom.Document.
+ 	    String svgNS = "http://www.w3.org/2000/svg";
+ 	    Document document = domImpl.createDocument(svgNS, "svg", null);
+ 
+ 	    SVGGraphics2D svgGenerator = new SVGGraphics2D(document);
+
+ 	    Graphics2D g2d = svgGenerator;
+ 	   
+ 	    drawCoordinateGrid2(g2d);
+        drawGates(g2d, map.getGates(), Color.cyan);
+        drawWalls(g2d, map.getWalls(), Color.gray);
+         
+         drawStates(g2d);
+ 	    
+ 	    boolean useCSS = true; // we want to use CSS style attributes
+ 	    Writer out = null;
+			try {
+				out = new OutputStreamWriter(System.out, "UTF-8");
+			} catch (UnsupportedEncodingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+ 	    try {
+				svgGenerator.stream(out, useCSS);
+			} catch (SVGGraphics2DIOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+    	
+    	
+    }
 
     private void drawStates(Graphics2D g2) {
         try {
@@ -98,7 +157,7 @@ class MazePanel extends JPanel {
     private void drawState(Graphics2D g2, State state) {
         g2.setColor(ROBOT_COLORS[state.getRobotId() % ROBOT_COLORS.length]);
         drawLocation(g2, state.getLocation());
-        drawPoint(g2, state.getDestination());
+       // drawPoint(g2, state.getDestination());
         g2.setColor(Color.RED);
         g2.draw(new Line2D.Double(
         		normalizeCoordinate(state.getLocation().getX(), minX),
@@ -122,7 +181,26 @@ class MazePanel extends JPanel {
 
         //String tempFear = String.format("%.2f/%d", state.getRobotFearFactor(),state.getRobotId()); //  Double.toString();
         
-        g2.drawString(tempFear,x, y);
+        //g2.drawString(tempFear,x, y);
+        
+        g2.setFont(new Font("TimesRoman", Font.BOLD, 20));
+        
+        
+        //otwarta przestrzen
+        // przejscie przez drzwi
+        if(y < 200)
+        	y += 260;
+        else
+        	y -= 300;
+        
+        //waski korytarz
+        /*if(y < 200)
+        	y += 330;
+        else
+        	y -= 355;*/
+        
+        	
+        g2.drawString("X",x -20, y);
         
        /* g2.draw(new Line2D.Double(
         		normalizeCoordinate(state.getLocation().getX(), minX),
@@ -197,6 +275,10 @@ class MazePanel extends JPanel {
         this.minX = minX;
         this.minY = minY;
         this.mazeSize = Math.ceil(Math.max(maxX, maxY));
+        
+        mazeMaxX = maxX;
+        mazeMaxY = maxY;
+
         if (height > width) {
             ratio = MAZE_SIZE / height;
         } else {
@@ -206,7 +288,8 @@ class MazePanel extends JPanel {
     }
 
     private void drawCoordinateGrid(Graphics2D g2) {
-        for (double i = 0; i < mazeSize + 1; i++) {
+        for (double i = 0; i < mazeSize + 1; i++) 
+        {
             g2.setStroke(new BasicStroke(1));
             g2.setColor(Color.lightGray);
             double x1 = normalizeCoordinate(i, minX);
@@ -222,6 +305,34 @@ class MazePanel extends JPanel {
         }
     }
 
+    
+    private void drawCoordinateGrid2(Graphics2D g2) {
+        
+    	  g2.setStroke(new BasicStroke(1));
+          g2.setColor(Color.lightGray);
+          
+          for(double i = 0; i < this.mazeMaxX + 1; i++)
+          {
+              double x1 = normalizeCoordinate(i, minX);
+              double y1 = normalizeCoordinate(0.0, minY);
+              
+              double x2 = normalizeCoordinate(i, minX);
+              double y2 = normalizeCoordinate(this.mazeMaxY, minY);
+              
+              
+              g2.draw(new Line2D.Double(x1, y1, x2, y2));
+          }
+        	  
+          for (double i = 0; i < mazeMaxY + 1; i++) 
+        {
+    		double x1 = normalizeCoordinate(0.0, minX);
+    		double x2 = normalizeCoordinate(this.mazeMaxX, minX);
+    		double y1 = normalizeCoordinate(i, minY);
+    		double y2 = normalizeCoordinate(i, minY);
+            g2.draw(new Line2D.Double(x1, y1, x2, y2));
+        }
+    }
+    
     private void drawVelocityObstacles(Graphics2D g2, int robot1, int robot2,Color col) {
         State first = robotStates.get(robot1);
         State second = robotStates.get(robot2);
